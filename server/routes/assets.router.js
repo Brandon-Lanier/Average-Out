@@ -20,6 +20,24 @@ router.get('/', (req, res) => {
 }
 })
 
+router.get('/details/:coinid', (req, res) => {
+    if (req.isAuthenticated()) {
+      const id = req.params.coinid;
+      console.log('coin id in details assets', id);
+      const qryTxt = `
+      SELECT * FROM assets WHERE "coin_id = $1 and user_id = $2;
+      `
+      pool.query(qryTxt, [id, req.user.id])
+      .then(result => {
+          res.send(result.rows)
+      }).catch(err => {
+          console.log('Error in get asset details', err);
+      })
+    } else {
+        res.sendStatus(403)
+    }
+})
+
 router.post('/', (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.user.id);

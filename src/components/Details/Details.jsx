@@ -14,6 +14,7 @@ function Details() {
 
     useEffect(() => {
         dispatch({ type: 'GET_DETAILS', payload: coinid });
+        dispatch({type: 'GET_ASSET_DETAILs', payload: coinid})
     }, [])
 
     const dispatch = useDispatch();
@@ -30,7 +31,7 @@ function Details() {
     return (
         <>
             <div className="details-container">
-                {<img src={coinDetails?.image} width="75px" height="75px"/>}
+                {<img src={coinDetails?.image} width="60px" height="60px"/>}
                 <LineChart
                     coinid={coinid}
                 />
