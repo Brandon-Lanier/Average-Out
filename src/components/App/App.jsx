@@ -5,24 +5,28 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-
 import { useDispatch, useSelector } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import Portfolio from '../Portfolio/Portfolio';
+import Market from '../Market/Market';
+import Details from '../Details/Details';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 import './App.css';
 
 function App() {
+
   const dispatch = useDispatch();
 
   const user = useSelector(store => store.user);
@@ -59,6 +63,7 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
+         
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -109,7 +114,15 @@ function App() {
               <LandingPage />
             }
           </Route>
-
+          <Route path="/portfolio">
+            <Portfolio />
+          </Route>
+          <Route path="/market">
+            <Market />
+          </Route>
+          <Route path="/details/:coinid">
+            <Details />
+          </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
