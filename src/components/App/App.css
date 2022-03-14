@@ -2,10 +2,11 @@ html,
 body,
 #react-root {
   height: 100%;
+
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
 }
 

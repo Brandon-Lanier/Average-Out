@@ -28,6 +28,15 @@ function Nav() {
               Home
             </Link>
 
+            <Link className="portfolio" to="/portfolio">
+              Portfolio
+            </Link>
+
+            <Link className="marketLink" to="/market">
+
+              Market
+            </Link>
+
             <Link className="navLink" to="/info">
               Info Page
             </Link>

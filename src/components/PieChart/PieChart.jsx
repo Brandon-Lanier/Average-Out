@@ -1,5 +1,7 @@
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react';
+import { Pie } from 'react-chartjs-2';
+import Chart from 'chart.js/auto';
 import './PieChart.css'
 
 

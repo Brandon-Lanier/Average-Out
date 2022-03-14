@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import {useSelector} from 'react-redux';
+import { useSelector } from 'react-redux';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import { Button } from '@mui/material';
+import './LoginForm.css'
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -25,7 +29,37 @@ function LoginForm() {
   }; // end login
 
   return (
-    <form className="formPanel" onSubmit={login}>
+    <div className="login-container">
+      {errors.registrationMessage && (
+        <h3 className="alert" role="alert">
+          {errors.registrationMessage}
+        </h3>)}
+      <TextField
+        id="username"
+        label="Username"
+        variant="standard"
+        value={username}
+        required
+        onChange={(event) => setUsername(event.target.value)}
+      />
+      <TextField
+        id="password"
+        label="Password"
+        variant="standard"
+        type="password"
+        value={password}
+        required
+        onChange={(event) => setPassword(event.target.value)}
+      />
+      <Button onClick={login}>Log In</Button>
+    </div>
+  )
+}
+
+export default LoginForm;
+
+
+{/* <form className="formPanel" onSubmit={login}>
       <h2>Login</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
@@ -59,8 +93,4 @@ function LoginForm() {
       <div>
         <input className="btn" type="submit" name="submit" value="Log In" />
       </div>
-    </form>
-  );
-}
-
-export default LoginForm;
+    </form> */}
