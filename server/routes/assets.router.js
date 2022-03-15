@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
+//Get all the assets a user has stored in the DB
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
         const qryTxt = `
@@ -20,6 +21,7 @@ router.get('/', (req, res) => {
 }
 })
 
+//This will handle getting a single detail for a coin
 router.get('/details/:coinid', (req, res) => {
     if (req.isAuthenticated()) {
       const id = req.params.coinid;
@@ -63,5 +65,7 @@ router.post('/', (req, res) => {
     }
 })
 
+router.get('/alldetails/:id')
+    
 
 module.exports = router;

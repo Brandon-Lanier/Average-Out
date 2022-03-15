@@ -14,6 +14,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
 
+
 function Market() {
 
   const marketData = useSelector(store => store.market);
@@ -45,11 +46,11 @@ function Market() {
     <Table sx={{ minWidth: 300 }} stickyHeader aria-label="simple table">
       <TableHead>
         <TableRow>
-          <TableCell>Image</TableCell>
-          <TableCell align="center">Name</TableCell>
-          <TableCell align="center">Symbol</TableCell>
-          <TableCell align="center">Current Price</TableCell>
-          <TableCell align="center">% Change</TableCell>
+          {/* <TableCell align="left" sx={{width: '10px'}}>Logo</TableCell> */}
+          <TableCell align="left">Name</TableCell>
+          <TableCell align="left">Symbol</TableCell>
+          <TableCell align="left">Current Price</TableCell>
+          <TableCell align="left">% Change</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>

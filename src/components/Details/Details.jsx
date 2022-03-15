@@ -6,6 +6,14 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import LineChart from '../LineChart/LineChart';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import { Box } from '@mui/material';
+import { Typography } from '@mui/material';
+import { Slide } from '@mui/material';
+import { styled } from '@mui/material/styles';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Grid from '@mui/material/Grid';
 import './Details.css'
 
 
@@ -36,17 +44,25 @@ function Details() {
    }
 
     return (
-        <>
+        
+        <Slide direction="up" in="open" mountOnEnter unmountOnExit>
             <div className="details-container">
+                <Box>
+                <ChevronLeftIcon onClick={() => history.goBack()}/>
+                <Typography variant="b1">
+                    {coinDetails?.symbol.toUpperCase()}   |   {coinDetails?.name}
+                </Typography>
+                </Box>
                 {<img src={coinDetails?.image} width="60px" height="60px"/>}
                 <LineChart
                     coinid={coinid}
                 />
-            
-            
-                {coinDetails?.name}
+        
                 <br></br>
-                ${coinDetails?.current_price}
+                <Typography variant="b1">
+                    Current Price: ${coinDetails?.current_price}
+                </Typography>
+                
                 <br></br>
                 {coinDetails?.price_change_percentage_24h.toFixed(2)}%
                 
@@ -58,8 +74,7 @@ function Details() {
                 {/* <input type="text" value={coinQty} onChange={handleUpdate} /> */}
                 <AddCircleIcon onClick={addCoin} />
             </div>
-
-        </>
+            </Slide>
 
     )
 }

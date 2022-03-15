@@ -1,7 +1,7 @@
 function assetDetailsReducer(state = [], action) {
     switch(action.type) {
         case 'SET_ASSET_DETAILS':
-            return action.payload;
+            return [...state, action.payload];
         default:
             return state;
     }
