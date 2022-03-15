@@ -51,8 +51,6 @@ function LineChart({ coinid }) {
                         },
                     }] 
                 }}
-                height={300}
-                width={300}
                 options={{
                     lineHeightAnnotation: {
                         always: true,
@@ -61,6 +59,9 @@ function LineChart({ coinid }) {
                     },
                     animation: {
                         duration: 2000
+                    },
+                    legend: {
+                        display: false
                     },
                     scales: {
                         x: {
@@ -78,8 +79,10 @@ function LineChart({ coinid }) {
                       },
                       maintainAspectRatio: false,
                       responsive: true,
-                    
+                      
                 }}
+                    height={250}
+                    width={300}
                 />
         </div>
 

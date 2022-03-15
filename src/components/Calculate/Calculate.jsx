@@ -13,34 +13,29 @@ function Calculate() {
     const market = useSelector(store => store.market)
     const assetDetails = useSelector(store => store.assetDetails)
 
-    const [availableAssets, setAvailableAssets] = useState([]);
 
     let filteredAssets = []
     
     const dispatch = useDispatch();
 
     useEffect(() => {
-        function getAssets() {
-            for (let coin of assets) {
-            let filtered = market.filter((el) => el.id == coin.coin_id)
-                // setAvailableAssets([...availableAssets, filtered[0]])
-                filteredAssets.push(filtered[0])
-            // this works but try saving it to local state!
-            // dispatch({type: 'SET_ASSET_DETAILS', payload: filtered[0] })
-            }
-        }getAssets()
-    }, []) 
+        dispatch({type: 'GET_ASSETS'})
+    }, []);
 
-    console.log(availableAssets);
+  
     return (
-        <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <div>
+        {/* <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}> */}
             <Typography variant="h5">
                 How much would you like to sell?
             </Typography>
-                
-
-          
-        </Container>
+            
+            {assets.map((coin) => (
+                <p>value: {(coin.quantity * coin.current_price)}</p>
+            ))}
+            
+        {/* </Container> */}
+        </div>
     )
 }
 

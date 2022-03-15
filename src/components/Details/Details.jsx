@@ -11,9 +11,9 @@ import { Box } from '@mui/material';
 import { Typography } from '@mui/material';
 import { Slide } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
+import { Button } from '@mui/material';
 import './Details.css'
 
 
@@ -23,7 +23,7 @@ function Details() {
 
     useEffect(() => {
         dispatch({ type: 'GET_DETAILS', payload: coinid });
-        dispatch({type: 'GET_ASSET_DETAILs', payload: coinid})
+        dispatch({type: 'GET_ASSET_DETAILS', payload: coinid})
     }, [])
 
     const dispatch = useDispatch();
@@ -53,22 +53,31 @@ function Details() {
                     {coinDetails?.symbol.toUpperCase()}   |   {coinDetails?.name}
                 </Typography>
                 </Box>
-                {<img src={coinDetails?.image} width="60px" height="60px"/>}
+                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '80%', alignItems: 'center', mt: 3}}>
+                {<img src={coinDetails?.image} width="40px" height="40px"/>}
+                <Typography variant="h6">
+                    Current Price: ${coinDetails ? (coinDetails?.current_price).toLocaleString(undefined, {maximumFractionDigits:2}) : 0}
+                </Typography>
+                
+                </Box>
                 <LineChart
                     coinid={coinid}
                 />
+                <Box>
+                <Typography>
+                    You Own: {assetDetails ? parseFloat(assetDetails?.quantity) : 0} {coinDetails?.symbol.toUpperCase()} 
+                    <br></br>
+                    Value: ${assetDetails ? (assetDetails?.quantity * coinDetails?.current_price).toLocaleString(undefined, {maximumFractionDigits:2}) : 0}
+                </Typography>
+                </Box>
+                <br></br>
+              
         
                 <br></br>
-                <Typography variant="b1">
-                    Current Price: ${coinDetails?.current_price}
+                <Typography>
+                    24 Percent Change 
+                    {coinDetails?.price_change_percentage_24h.toFixed(2)}%
                 </Typography>
-                
-                <br></br>
-                {coinDetails?.price_change_percentage_24h.toFixed(2)}%
-                
-                
-                <br></br>
-                <br></br>
                 {/* Below Works but want to try updating pricing dynamically */}
                 {/* <input type="number" value={coinQty} onChange={(e) => setCoinQty(e.target.value)} /> */}
                 {/* <input type="text" value={coinQty} onChange={handleUpdate} /> */}

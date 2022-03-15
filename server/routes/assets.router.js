@@ -1,40 +1,48 @@
 const express = require('express');
+const axios = require("axios");
 const pool = require('../modules/pool');
 const router = express.Router();
 
 
-//Get all the assets a user has stored in the DB
-router.get('/', (req, res) => {
+//Get assets stored in DB and merge that with current market data.
+router.get('/', async (req, res) => {
     if (req.isAuthenticated()) {
-        const qryTxt = `
-        SELECT * FROM assets WHERE "user_id" = $1
-    `
-    pool.query(qryTxt, [req.user.id])
-        .then(result => {
-            console.log('Results in get for assets', result.rows);
-            res.send(result.rows)
-        }).catch(err => {
-            console.log('Error in get assets router', err);
+        const dbCoinRes = await pool.query(`SELECT * FROM assets WHERE "user_id" = $1;`, [req.user.id]);
+        let coinIdsToFetch = dbCoinRes.rows.map((coin) => {
+            return coin.coin_id;
         })
-} else {
-    res.sendStatus(403)
-}
+        const coinsToQry = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIdsToFetch.join(',')}&order=gecko_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1d`);
+        const map = new Map();
+        dbCoinRes.rows.forEach(item => map.set(item.coin_id, item));
+        coinsToQry.data.forEach(item => map.set(item.id, {
+            ...map.get(item.id),
+            ...item
+        }));
+        const mergedData = Array.from(map.values());
+        console.log('hopeful output', mergedData);
+        res.send(mergedData);
+    } else {
+        res.sendStatus(403)
+    }
 })
+
+
 
 //This will handle getting a single detail for a coin
 router.get('/details/:coinid', (req, res) => {
     if (req.isAuthenticated()) {
-      const id = req.params.coinid;
-      console.log('coin id in details assets', id);
-      const qryTxt = `
-      SELECT * FROM assets WHERE "coin_id = $1 and user_id = $2;
+        const coinid = req.params.coinid;
+        console.log('coin id in details assets', coinid);
+        const qryTxt = `
+      SELECT * FROM assets WHERE coin_id = $1 AND user_id = $2;
       `
-      pool.query(qryTxt, [id, req.user.id])
-      .then(result => {
-          res.send(result.rows)
-      }).catch(err => {
-          console.log('Error in get asset details', err);
-      })
+        pool.query(qryTxt, [coinid, req.user.id])
+            .then(result => {
+                console.log('result in asset details', result.rows);
+                res.send(result.rows)
+            }).catch(err => {
+                console.log('Error in get asset details', err);
+            })
     } else {
         res.sendStatus(403)
     }
@@ -66,6 +74,6 @@ router.post('/', (req, res) => {
 })
 
 router.get('/alldetails/:id')
-    
+
 
 module.exports = router;
