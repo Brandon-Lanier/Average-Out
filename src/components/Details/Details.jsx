@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import LineChart from '../LineChart/LineChart';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 import './Details.css'
 
 
@@ -20,13 +21,19 @@ function Details() {
     const dispatch = useDispatch();
 
     const history = useHistory();
+
     const [loading, setLoading] = useState(true);
 
-    const coinDetails = useSelector(store => store.details[0]);
-    const chartData = useSelector(store => store.charts)
-    console.log(chartData);
 
-   
+    const assetDetails = useSelector(store => store.assetDetails[0]);
+    const coinDetails = useSelector(store => store.details[0]);
+    const chartData = useSelector(store => store.charts);
+
+    console.log(assetDetails);
+
+   const addCoin = () => {
+        history.push(`/addcoin/${coinid}`)
+   }
 
     return (
         <>
@@ -49,7 +56,7 @@ function Details() {
                 {/* Below Works but want to try updating pricing dynamically */}
                 {/* <input type="number" value={coinQty} onChange={(e) => setCoinQty(e.target.value)} /> */}
                 {/* <input type="text" value={coinQty} onChange={handleUpdate} /> */}
-                {/* <button onClick={addCoin}>Add To Portfolio</button> */}
+                <AddCircleIcon onClick={addCoin} />
             </div>
 
         </>

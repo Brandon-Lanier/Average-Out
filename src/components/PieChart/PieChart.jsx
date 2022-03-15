@@ -26,7 +26,7 @@ function PieChart() {
 
     let nameSplit = () => {
         for (let coin of assets) {
-            graphNames.push(coin.name)
+            graphNames.push(coin.coin_id)
         }
         return graphNames;
     }

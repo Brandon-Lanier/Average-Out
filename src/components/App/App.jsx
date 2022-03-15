@@ -18,6 +18,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import Portfolio from '../Portfolio/Portfolio';
 import Market from '../Market/Market';
 import Details from '../Details/Details';
+import AddCoin from '../AddCoin/AddCoin';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -122,6 +123,9 @@ function App() {
           </Route>
           <Route path="/details/:coinid">
             <Details />
+          </Route>
+          <Route path="/addcoin/:coinid">
+            <AddCoin />
           </Route>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>

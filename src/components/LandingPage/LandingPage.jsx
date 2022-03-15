@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Button from '@mui/material/Button';
 import './LandingPage.css';
+
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
@@ -14,35 +19,16 @@ function LandingPage() {
   };
 
   return (
-    <div className="container">
-      <h2>{heading}</h2>
+    <>
+      
+      <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <h2>{heading}</h2>
+        <RegisterForm />
+        <h4>Already a Member?</h4>
+        <Button variant="outlined" onClick={onLogin} >Login</Button>
+      </Container>
 
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          <p>
-            
-          </p>
-
-          <p>
-           
-          </p>
-
-          <p>
-            
-          </p>
-        </div>
-        <div className="grid-col grid-col_4">
-          <RegisterForm />
-
-          <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 

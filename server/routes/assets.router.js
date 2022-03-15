@@ -48,7 +48,7 @@ router.post('/', (req, res) => {
         const qryTxt = `
         INSERT INTO "assets" ("coin_id", "quantity", "user_id") 
         VALUES ($1, $2, $3)
-        ON CONFLICT ("coinId")
+        ON CONFLICT ("coin_id")
         DO UPDATE SET "quantity" = "assets"."quantity" + $4;`
 
         pool.query(qryTxt, [coinId, qty, userId, qty])

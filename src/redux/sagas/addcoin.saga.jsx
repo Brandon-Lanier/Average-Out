@@ -8,7 +8,7 @@ function* addCoinSaga() {
 
 function* addCoin(action) {
     try {
-        yield axios.post('/api/market', action.payload);
+        yield axios.post('/api/assets', action.payload);
         yield put({type: 'GET_ASSETS'})
     } catch(error) {
         console.log('Error in addCoinSaga', err);

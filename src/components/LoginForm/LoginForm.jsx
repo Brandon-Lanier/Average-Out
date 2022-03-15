@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Stack from '@mui/material/Stack';
 import './LoginForm.css'
 
 function LoginForm() {
@@ -29,30 +32,40 @@ function LoginForm() {
   }; // end login
 
   return (
-    <div className="login-container">
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>)}
-      <TextField
-        id="username"
-        label="Username"
-        variant="standard"
-        value={username}
-        required
-        onChange={(event) => setUsername(event.target.value)}
-      />
-      <TextField
-        id="password"
-        label="Password"
-        variant="standard"
-        type="password"
-        value={password}
-        required
-        onChange={(event) => setPassword(event.target.value)}
-      />
-      <Button onClick={login}>Log In</Button>
-    </div>
+    <>
+      <Card sx={{ width: 350 }}>
+        <CardContent>
+          <h2>Login</h2>
+          {errors.loginMessage && (
+            <h3 className="alert" role="alert">
+              {errors.loginMessage}
+            </h3>
+          )}
+          <Stack spacing={4}>
+            <TextField
+              id="username"
+              label="Username"
+              variant="standard"
+              value={username}
+              required
+              onChange={(event) => setUsername(event.target.value)}
+            />
+            <TextField
+              id="password"
+              label="Password"
+              variant="standard"
+              type="password"
+              value={password}
+              required
+              onChange={(event) => setPassword(event.target.value)}
+            />
+          </Stack>
+        </CardContent>
+        <CardActions className="cardActions" >
+          <Button onClick={login} variant="contained" size="medium" sx={{mb: 2}}>Log In</Button>
+        </CardActions>
+      </Card>
+    </>
   )
 }
 
