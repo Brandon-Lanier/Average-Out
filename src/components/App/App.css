@@ -111,3 +111,8 @@ input {
   margin: 5px;
   margin-bottom: 10px;
 }
+
+.cardActions {
+  display: flex;
+  justify-content: center;
+}

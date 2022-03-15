@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Stack from '@mui/material/Stack';
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
@@ -23,30 +27,46 @@ function RegisterForm() {
   }; // end registerUser
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      {errors.registrationMessage && (
-        <h3 className="alert" role="alert">
-          {errors.registrationMessage}
-        </h3>)}
-      <TextField
-        id="username"
-        label="Username"
-        variant="standard"
-        value={username}
-        required
-        onChange={(event) => setUsername(event.target.value)}
-      />
-      <TextField
-        id="password"
-        label="Password"
-        variant="standard"
-        type="password"
-        value={password}
-        required
-        onChange={(event) => setPassword(event.target.value)}
-      />
-      <Button onClick={registerUser}>Register</Button>
-    </Box>
+
+    <Card sx={{ width: 350 }} >
+      <CardContent>
+        {errors.registrationMessage && (
+          <h3 className="alert" role="alert">
+            {errors.registrationMessage}
+          </h3>)}
+          <Typography variant="h5" sx={{mb:4}}>
+            Register
+          </Typography>
+        <Stack spacing={4}>
+          <TextField
+            id="username"
+            label="Username"
+            variant="standard"
+            value={username}
+            required
+            onChange={(event) => setUsername(event.target.value)}
+          />
+          <TextField
+            id="password"
+            label="Password"
+            variant="standard"
+            type="password"
+            value={password}
+            required
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </Stack>
+      </CardContent>
+      <CardActions className="cardActions" >
+        <Button 
+        onClick={registerUser} 
+        variant="contained" 
+        size="medium"
+        sx={{mb: 3}}>
+        Register
+        </Button>
+      </CardActions>
+    </Card>
   )
 }
 
