@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -34,6 +34,9 @@ function RegisterForm() {
           <h3 className="alert" role="alert">
             {errors.registrationMessage}
           </h3>)}
+          <Typography variant="h5" sx={{mb:4}}>
+            Register
+          </Typography>
         <Stack spacing={4}>
           <TextField
             id="username"

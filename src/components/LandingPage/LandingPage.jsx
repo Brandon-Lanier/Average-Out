@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
+import { Button, Typography } from '@mui/material';
 import './LandingPage.css';
 
 
@@ -22,7 +22,9 @@ function LandingPage() {
     <>
       
       <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-        <h2>{heading}</h2>
+        <Typography variant="h5" sx={{mb: 5}}>
+          Welcome to Average Out
+        </Typography>
         <RegisterForm />
         <h4>Already a Member?</h4>
         <Button variant="outlined" onClick={onLogin} >Login</Button>

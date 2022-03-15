@@ -20,20 +20,24 @@ function Portfolio() {
     
     const assets = useSelector(store => store.assets)
     const market = useSelector(store => store.market)
+    const totalVal = useSelector(store => store.total)
 
     const totalValue = [];
+
     const [value, setValue] = useState([]);
 
     const getValue = (coinid, quantity, market) => {
-        const filteredCoin = market.filter((el) => el.id === coinid)
+        const filteredCoin =  market.filter((el) => el.id === coinid)
         const price = filteredCoin[0].current_price;
         const total = Number(price * quantity).toFixed(2);
         totalValue.push(Number(total))
         // setValue(...value, total)
-        dispatch({type: 'SET_TOTAL', total});
+    
         console.log(value);
         return total;
     }
+
+
         
         // const renderTotal = () => {
         //     const total = totalValue.reduce((a, b) => a + b, 0)
@@ -44,9 +48,9 @@ function Portfolio() {
 
     return (
         <>
-        <CssBaseline />
-        <Container maxWidth="sm">
-            <p>$</p>
+       
+        <Container maxWidth="sm" sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <p>${totalValue}</p>
             <PieChart
             />
             <table>
@@ -58,7 +62,7 @@ function Portfolio() {
                 <tbody>
                     
                         {assets.map((coin) => (
-                          <tr key={coin.coin_id}>
+                          <tr key={coin?.coin_id}>
                             <td>{coin?.coin_id}</td>
                             <td>{coin?.quantity}</td>
                             <td>${getValue(coin.coin_id, coin.quantity, market)}</td>
