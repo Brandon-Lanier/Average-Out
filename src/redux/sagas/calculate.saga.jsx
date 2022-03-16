@@ -9,7 +9,7 @@ function* calculateSaga() {
 function* calculate(action) {
     try {
         const calcResults = yield axios.post('/api/calculate', action.payload);
-        yield put({type: 'CALC_RESULTS', payload: calcResults})
+        yield put({type: 'SET_RESULT', payload: calcResults.data})
     } 
     catch(error) {
         console.log('Error in the calculate Saga', error);
