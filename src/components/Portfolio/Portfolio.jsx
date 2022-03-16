@@ -12,6 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography, Button, IconButton } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import { Slide } from '@mui/material';
 
 
 
@@ -30,12 +31,6 @@ function Portfolio() {
     const assets = useSelector(store => store.assets)
     const market = useSelector(store => store.market)
 
-
-        const columns = [
-            { field: 'coin_id', headerName: 'Coin', width: 140 },
-            { field: 'quantity', headerName: 'Quantity', width: 130 },
-        ]
-
         const handleClick = (coin) => {
             history.push(`/details/${coin.coin_id}`)
         }
@@ -44,7 +39,7 @@ function Portfolio() {
             console.log('You Hit Edit!');
         }
 
-        let totalValue = [];
+        let totalValue = []; // Holding array of all individual coin values before reducing for total
 
         const getSum = () => {
             let runningTotal = 0
@@ -52,13 +47,14 @@ function Portfolio() {
                runningTotal =  coin.quantity * coin.current_price;
                totalValue.push(runningTotal)
             }
-            totalValue =  totalValue.reduce((a,b) => a + b, 0);
+            totalValue = totalValue.reduce((a,b) => a + b, 0);
             return totalValue.toLocaleString(undefined, {maximumFractionDigits:2});
         }
         
 
     return (
         <>
+        <Slide direction="up" in="open" mountOnEnter unmountOnExit>
         <Container maxWidth="sm" sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <Typography variant="h6">
                 Portfolio Value: ${getSum()}
@@ -68,7 +64,7 @@ function Portfolio() {
                 Portfolio Summary
             </Typography>
             <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 400 }} aria-label="simple table">
+      <Table sx={{ minWidth: 390 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="left">Name</TableCell>
@@ -95,6 +91,7 @@ function Portfolio() {
       </Table>
     </TableContainer>
         </Container>
+        </Slide>
         </>
            
         

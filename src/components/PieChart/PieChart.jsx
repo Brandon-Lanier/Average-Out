@@ -7,13 +7,15 @@ import './PieChart.css'
 
 function PieChart() {
 
-
+    // Access the asset data locally from our store
     const assets = useSelector(store => store.assets);
 
-    let graphData = [];
+    
+    let graphData = []; // Array where local asset amounts are stored
 
     const assetSplit = () => {
         for (let coin of assets) {
+          // Looping through each coin in our portfolio and calculating the total value of each
             graphData.push(coin.quantity * coin.current_price).toFixed(2)
         }
         return graphData;
@@ -23,6 +25,7 @@ function PieChart() {
 
     let nameSplit = () => {
         for (let coin of assets) {
+          // Looping through each coin in our portfolio to get the name of each
             graphNames.push(coin.name)
         }
         return graphNames;

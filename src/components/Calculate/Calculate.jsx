@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grow from '@mui/material/Grow';
-import { selectedGridRowsCountSelector } from "@mui/x-data-grid";
+import { Slide } from "@mui/material";
 
 
 
@@ -47,83 +47,85 @@ function Calculate() {
 
     return (
         <div>
-            <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                <Typography variant="h5">
-                    How much would you like to sell?
-                </Typography>
-
-                <TextField
-                    id="amount"
-                    label="Sell Amount"
-                    variant="standard"
-                    value={targetValue}
-                    type="number"
-                    onChange={((e) => setTargetValue(e.target.value))}
-                />
-                <br></br>
-                <Box sx={{ minWidth: 120 }}>
-                    <FormControl fullWidth>
-                        <InputLabel id="duration">Duration</InputLabel>
-                        <Select
-                            labelId="duration"
-                            id="duration"
-                            value={duration}
-                            label="Duration"
-                            onChange={(e) => setDuration(e.target.value)}
-                        >
-                            <MenuItem value={1}>Sell Today</MenuItem>
-                            <MenuItem value={7}>1 Week</MenuItem>
-                            <MenuItem value={14}>2 Weeks</MenuItem>
-                            <MenuItem value={30}>1 Month</MenuItem>
-                            <MenuItem value={60}>2 Months</MenuItem>
-                            <MenuItem value={182}>6 Months</MenuItem>
-                            <MenuItem value={365}>1 Year</MenuItem>
-                        </Select>
-                    </FormControl>
-                </Box>
-                <Box>
-                    <Typography variant="b2">
-                        Which assets would you like to sell?
+            <Slide direction="left" in="open" mountOnEnter unmountOnExit>
+                <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Typography variant="h5">
+                        How much would you like to sell?
                     </Typography>
-                    <Grow
-                        in={open}
-                        style={{ transformOrigin: '0 0 0' }}
-                        {...(open ? { timeout: 1000 } : {})}
-                        >
-                    <Stack spacing={2} sx={{ mt: 2 }}>
 
-                        {coinOptions?.map((coin) => (
-                            <Chip
-                                avatar={<Avatar alt={coin.id} src={coin.image} />}
-                                label={coin.name}
-                                variant="outlined"
-                                onClick={() => handleSelect(coin)}
-                            />
-                        ))}
-                       
-
-                    </Stack>
-                </Grow>
-                <Typography variant="b2">
-                    Selected Assets:
-                </Typography>
-                <Grow
-                        in={open}
-                        style={{ transformOrigin: '0 0 0' }}
-                        {...(open ? { timeout: 1000 } : {})}
+                    <TextField
+                        id="amount"
+                        label="Sell Amount"
+                        variant="standard"
+                        value={targetValue}
+                        type="number"
+                        onChange={((e) => setTargetValue(e.target.value))}
+                    />
+                    <br></br>
+                    <Box sx={{ minWidth: 120 }}>
+                        <FormControl fullWidth>
+                            <InputLabel id="duration">Duration</InputLabel>
+                            <Select
+                                labelId="duration"
+                                id="duration"
+                                value={duration}
+                                label="Duration"
+                                onChange={(e) => setDuration(e.target.value)}
+                            >
+                                <MenuItem value={1}>Sell Today</MenuItem>
+                                <MenuItem value={7}>1 Week</MenuItem>
+                                <MenuItem value={14}>2 Weeks</MenuItem>
+                                <MenuItem value={30}>1 Month</MenuItem>
+                                <MenuItem value={60}>2 Months</MenuItem>
+                                <MenuItem value={182}>6 Months</MenuItem>
+                                <MenuItem value={365}>1 Year</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </Box>
+                    <Box>
+                        <Typography variant="b2">
+                            Which assets would you like to sell?
+                        </Typography>
+                        <Grow
+                            in={open}
+                            style={{ transformOrigin: '0 0 0' }}
+                            {...(open ? { timeout: 1000 } : {})}
                         >
-                <Stack spacing={2} sx={{mt: 3}}>
-                {selectCoin.map((el) => (
-                        <Chip
-                            avatar={<Avatar alt={el.id} src={el.image} />}
-                            label={el.name}
-                            variant="outlined"
-                        />
-                    ))}
-                </Stack>
-                </Grow>
-            </Box>
-        </Container>
+                            <Stack spacing={2} sx={{ mt: 2 }}>
+
+                                {coinOptions?.map((coin) => (
+                                    <Chip
+                                        avatar={<Avatar alt={coin.id} src={coin.image} />}
+                                        label={coin.name}
+                                        variant="outlined"
+                                        onClick={() => handleSelect(coin)}
+                                    />
+                                ))}
+
+
+                            </Stack>
+                        </Grow>
+                        <Typography variant="b2">
+                            Selected Assets:
+                        </Typography>
+                        <Grow
+                            in={open}
+                            style={{ transformOrigin: '0 0 0' }}
+                            {...(open ? { timeout: 1000 } : {})}
+                        >
+                            <Stack spacing={2} sx={{ mt: 3 }}>
+                                {selectCoin.map((el) => (
+                                    <Chip
+                                        avatar={<Avatar alt={el.id} src={el.image} />}
+                                        label={el.name}
+                                        variant="outlined"
+                                    />
+                                ))}
+                            </Stack>
+                        </Grow>
+                    </Box>
+                </Container>
+            </Slide>
         </div >
     )
 }
