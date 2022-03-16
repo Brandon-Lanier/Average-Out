@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Button, Container } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -39,10 +39,21 @@ function Calculate() {
 
 
     const handleSelect = (coin) => {
-        console.log(coin);
         setSelectCoin([...selectCoin, coin])
         setCoinOptions(coinOptions.filter(item => item.id !== coin.coin_id))
         console.log(selectCoin);
+    }
+
+
+
+    const handleCalculate = () => {
+        console.log(targetValue, duration, selectCoin);
+        let calculation = {
+            target: targetValue,
+            days: duration,
+            coins: selectCoin
+        }
+        dispatch({type: 'SEND_CALCULATION', payload: calculation})
     }
 
     return (
@@ -123,6 +134,14 @@ function Calculate() {
                                 ))}
                             </Stack>
                         </Grow>
+                        <Stack direction='row' spacing={3} sx={{ mt: 2 }}>
+                            <Button variant='outlined'>
+                                Cancel
+                            </Button>
+                            <Button variant="contained" onClick={handleCalculate}>
+                                Calculate
+                            </Button>
+                        </Stack>
                     </Box>
                 </Container>
             </Slide>

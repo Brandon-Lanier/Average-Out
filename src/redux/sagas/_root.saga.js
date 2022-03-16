@@ -9,6 +9,7 @@ import getAssetsSaga from './assets.saga';
 import getChartSaga from './chart.saga';
 import getAssetDetailsSaga from './assetdetails.saga';
 import getAllAssetDetailsSaga from './allassets.saga';
+import calculateSaga from './calculate.saga';
 
 
 // rootSaga is the primary saga.
@@ -29,6 +30,7 @@ export default function* rootSaga() {
     getAssetsSaga(),
     getChartSaga(),
     getAssetDetailsSaga(),
-    getAllAssetDetailsSaga()
+    getAllAssetDetailsSaga(),
+    calculateSaga()
   ]);
 }

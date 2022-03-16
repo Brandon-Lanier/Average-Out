@@ -10,7 +10,6 @@ function* fetchMarket() {
     try {
         const market = yield axios.get('/api/market');
         yield put({type: 'SET_MARKET', payload: market.data})
-        yield put({type: 'MATCH_ASSETS', payload: market.data})
     } catch (error) {
         console.log('Failed to get market data in market saga', error);
     }
