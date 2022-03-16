@@ -8,11 +8,13 @@ import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import Avatar from '@mui/material/Avatar';
 import { Box, InputBase } from "@mui/material";
+import InputAdornment from '@mui/material/InputAdornment';
 import TextField from '@mui/material/TextField';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import Grow from '@mui/material/Grow';
 import { Slide } from "@mui/material";
 import { useHistory } from "react-router-dom";
@@ -37,15 +39,14 @@ function Calculate() {
     const [duration, setDuration] = useState('');
     const [coinOptions, setCoinOptions] = useState([]);
     const [selectCoin, setSelectCoin] = useState([]);
-
+    const [runningTotal, setRunningTotal] = useState(0)
 
     const handleSelect = (coin) => {
         setSelectCoin([...selectCoin, coin])
-        setCoinOptions(coinOptions.filter(item => item.id !== coin.coin_id))
-        console.log(selectCoin);
+        setCoinOptions(coinOptions.filter(item => item.id !== coin.coin_id));
+        let totalVal = coin.quantity * coin.current_price
+        setRunningTotal(runningTotal + totalVal)
     }
-
-
 
     const handleCalculate = () => {
         console.log(targetValue, duration, selectCoin);
@@ -58,6 +59,8 @@ function Calculate() {
         history.push('/results');
     }
 
+    console.log(runningTotal);
+
     return (
         <div>
             <Slide direction="left" in="open" mountOnEnter unmountOnExit>
@@ -67,11 +70,19 @@ function Calculate() {
                     </Typography>
 
                     <TextField
+                        error={runningTotal < targetValue}
                         id="amount"
                         label="Sell Amount"
                         variant="standard"
                         value={targetValue}
                         type="number"
+                        InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <MonetizationOnIcon />
+                              </InputAdornment>
+                            ),
+                          }}
                         onChange={((e) => setTargetValue(e.target.value))}
                     />
                     <br></br>

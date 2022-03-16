@@ -34,26 +34,16 @@ function Market() {
   }
 
   return (
-
-    // <div style={{ height: 600, width: '100%' }}>
-    //   <DataGrid
-    //     rows={marketData}
-    //     columns={columns}
-    //     pageSize={10}
-    //     rowsPerPageOptions={[10]}
-    //   />
-    // </div>
     <>
       <Slide direction="right" in="open" mountOnEnter unmountOnExit>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 300 }} stickyHeader aria-label="simple table">
             <TableHead>
               <TableRow>
-                {/* <TableCell align="left" sx={{width: '10px'}}>Logo</TableCell> */}
                 <TableCell align="left">Name</TableCell>
                 <TableCell align="left">Symbol</TableCell>
-                <TableCell align="left">Current Price</TableCell>
-                <TableCell align="left">% Change</TableCell>
+                <TableCell align="left">Price</TableCell>
+                <TableCell align="left">Change</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
