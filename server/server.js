@@ -28,7 +28,7 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/market', marketRouter);
 app.use('/api/assets', assetRouter);
-app.use('/api/calulate', calcRouter)
+app.use('/api/calculate', calcRouter)
 
 // Serve static files
 app.use(express.static('build'));

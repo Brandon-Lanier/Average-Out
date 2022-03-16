@@ -12,13 +12,39 @@ router.post('/', (req, res) => {
     console.log('target', target)
     console.log('days', days);
     console.log('coins', coins);
+    let finalCoins = [];
+    let dailyTargetPrice = (target / days);
+    console.log('daily target', dailyTargetPrice);
+    
+    for (coin of coins) {
+        let total = 0;
+        total = Number(coin.quantity) * Number(coin.current_price);
+        finalCoins.push({
+            coin_id: coin.coin_id,
+            quantity: coin.quantity,
+            totalValue: total
+        });
+    }
+    let totalCoinValue = finalCoins.reduce((accumulator, current) => accumulator + current.totalValue, 0);
+    console.log('total val', totalCoinValue);
+    let percentSplit = (dailyTargetPrice / totalCoinValue);
+    console.log('Percent Split', percentSplit);
+    let splitQuantities = [];
+    
+    for (coin of finalCoins) {
+        let quantityToSell = coin.quantity * percentSplit;
+        let dollarAmount = coin.totalValue * percentSplit;
+        splitQuantities.push({
+            coinid: coin.coin_id,
+            totalQuantity: coin.quantity,
+            qtyToSell: quantityToSell,
+            sellDollarAmount: dollarAmount
+        })
+    }
+    console.log('Final Results', splitQuantities);
+    
     res.sendStatus(200)
-    .catch(err => {
-        console.log('error in calc router', err);
-        
+   
     })
-})
-
-
 
 module.exports = router;
