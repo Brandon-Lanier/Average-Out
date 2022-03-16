@@ -10,7 +10,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Typography } from "@mui/material";
+import { Typography, Button, IconButton } from "@mui/material";
+import EditIcon from '@mui/icons-material/Edit';
+
 
 
 
@@ -18,39 +20,17 @@ function Portfolio() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch({type: 'FETCH_MARKET'})
-      dispatch({type: 'GET_ASSETS'})
+      dispatch({type: 'FETCH_MARKET'});
+      dispatch({type: 'GET_ASSETS'});
+      
     }, [dispatch]);
 
     const history = useHistory()
     
     const assets = useSelector(store => store.assets)
     const market = useSelector(store => store.market)
-    const totalVal = useSelector(store => store.total)
-
-    const totalValue = [];
-
-    const [value, setValue] = useState([]);
-
-    const getValue = (coinid, quantity, market) => {
-        const filteredCoin =  market.filter((el) => el.id === coinid)
-        const price = filteredCoin[0]?.current_price;
-        const total = Number(price * quantity).toFixed(2);
-        totalValue.push(Number(total))
-        // setValue(currentValues => [...currentValues, total])
-        console.log(value);
-        return total;
-    }
-
-    
 
 
-        
-        // const renderTotal = () => {
-        //     const total = totalValue.reduce((a, b) => a + b, 0)
-        //     console.log('total value', total);
-        //     return total;
-        // }
         const columns = [
             { field: 'coin_id', headerName: 'Coin', width: 140 },
             { field: 'quantity', headerName: 'Quantity', width: 130 },
@@ -60,16 +40,29 @@ function Portfolio() {
             history.push(`/details/${coin.coin_id}`)
         }
 
+        const goEdit = (coin) => {
+            console.log('You Hit Edit!');
+        }
+
+        let totalValue = [];
+
         const getSum = () => {
-            let sum = totalValue.reduce((a, b) => 1 + b, 0)
-            return sum;
+            let runningTotal = 0
+            for (let coin of assets) {
+               runningTotal =  coin.quantity * coin.current_price;
+               totalValue.push(runningTotal)
+            }
+            totalValue =  totalValue.reduce((a,b) => a + b, 0);
+            return totalValue.toLocaleString(undefined, {maximumFractionDigits:2});
         }
         
 
     return (
         <>
         <Container maxWidth="sm" sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <p>${}</p>
+            <Typography variant="h6">
+                Portfolio Value: ${getSum()}
+            </Typography>
             <PieChart/>
             <Typography variant="h6">
                 Portfolio Summary
@@ -78,9 +71,10 @@ function Portfolio() {
       <Table sx={{ minWidth: 400 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="Center">Name</TableCell>
-            <TableCell align="Center">Quantity</TableCell>
-            <TableCell align="Center">Value</TableCell>
+            <TableCell align="left">Name</TableCell>
+            <TableCell align="left">Quantity</TableCell>
+            <TableCell align="left">Value</TableCell>
+            <TableCell align="left">% Change</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -90,10 +84,11 @@ function Portfolio() {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               onClick={() => handleClick(coin)}
             >
-              <TableCell align="left">{coin?.coin_id}</TableCell>
+              <TableCell align="left">{coin?.name}</TableCell>
               <TableCell align="left">{coin?.quantity}</TableCell>
-              <TableCell align="left">${getValue(coin.coin_id, coin.quantity, market)}</TableCell>
-             
+              <TableCell align="left">${(coin?.quantity * coin?.current_price).toLocaleString(undefined, {maximumFractionDigits:2})}</TableCell>
+              <TableCell align="left">{coin?.price_change_percentage_24h.toFixed(2)}%</TableCell>
+              <TableCell align="left"><IconButton onClick={goEdit}><EditIcon /></IconButton></TableCell>
             </TableRow>
           ))}
         </TableBody>

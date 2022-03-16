@@ -4,7 +4,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-//Get assets stored in DB and merge that with current market data.
+// Get assets stored in DB and merge that with current market data.
+// This is super cool
 router.get('/', async (req, res) => {
     if (req.isAuthenticated()) {
         const dbCoinRes = await pool.query(`SELECT * FROM assets WHERE "user_id" = $1;`, [req.user.id]);
@@ -18,15 +19,14 @@ router.get('/', async (req, res) => {
             ...map.get(item.id),
             ...item
         }));
-        const mergedData = Array.from(map.values());
+        let mergedData = Array.from(map.values());
+        mergedData = mergedData.sort((a, b) => (a.current_price < b.current_price) ? 1 : -1); // Sort by price DESC
         console.log('hopeful output', mergedData);
         res.send(mergedData);
     } else {
         res.sendStatus(403)
     }
 })
-
-
 
 //This will handle getting a single detail for a coin
 router.get('/details/:coinid', (req, res) => {
@@ -48,22 +48,21 @@ router.get('/details/:coinid', (req, res) => {
     }
 })
 
+// Handles adding new assets to the user's portfolio.  If an asset already exist, it will update the quantity.
 router.post('/', (req, res) => {
     if (req.isAuthenticated()) {
         console.log(req.user.id);
-        const quantity = Number(req.body.quantity)
-        const coinId = req.body.coin.id
-        const qty = quantity.toFixed(4) // Changing to 4 decimals for DB storage
+        const qty = Number(req.body.quantity).toFixed(4)
+        const coinId = req.body.coin.id // Coin id is main reference to live data on DOM
+        // const qty = quantity.toFixed(4) // Changing to 4 decimals for DB storage
         const userId = req.user.id
         const qryTxt = `
         INSERT INTO "assets" ("coin_id", "quantity", "user_id") 
         VALUES ($1, $2, $3)
         ON CONFLICT ("coin_id")
         DO UPDATE SET "quantity" = "assets"."quantity" + $4;`
-
         pool.query(qryTxt, [coinId, qty, userId, qty])
             .then(result => {
-                console.log('You added a coin!');
                 res.sendStatus(201)
             }).catch(err => {
                 console.log('Error in Add Coin POST', err);
@@ -72,8 +71,5 @@ router.post('/', (req, res) => {
         res.sendStatus(403);
     }
 })
-
-router.get('/alldetails/:id')
-
 
 module.exports = router;

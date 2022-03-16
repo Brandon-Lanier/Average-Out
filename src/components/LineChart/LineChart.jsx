@@ -62,7 +62,10 @@ function LineChart({ coinid }) {
                     },
                     legend: {
                         display: false
-                    },
+                     },
+                     tooltips: {
+                        enabled: false
+                     },
                     scales: {
                         x: {
                           type: 'time',

@@ -8,16 +8,13 @@ import './PieChart.css'
 function PieChart() {
 
 
-    const assets = useSelector(store => store.assets)
-    // let test = [{id: 1, name: "Bitcoin", quantity: "17.8200", symbol: "btc", user_id: 1}, {id: 2, name: "Ethereum", quantity: "13.8200", symbol: "eth", user_id: 1}]
+    const assets = useSelector(store => store.assets);
+
     let graphData = [];
 
- 
-   
- 
     const assetSplit = () => {
         for (let coin of assets) {
-            graphData.push(coin.quantity)
+            graphData.push(coin.quantity * coin.current_price).toFixed(2)
         }
         return graphData;
     }
@@ -26,7 +23,7 @@ function PieChart() {
 
     let nameSplit = () => {
         for (let coin of assets) {
-            graphNames.push(coin.coin_id)
+            graphNames.push(coin.name)
         }
         return graphNames;
     }
