@@ -14,6 +14,7 @@ import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Button } from '@mui/material';
+import AddCoin from '../AddCoin/AddCoin';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import Stack from '@mui/material/Stack';
@@ -27,7 +28,7 @@ function Details() {
     useEffect(() => {
         dispatch({ type: 'GET_DETAILS', payload: coinid });
         dispatch({type: 'GET_ASSET_DETAILS', payload: coinid})
-    }, [])
+    }, []);
 
     const dispatch = useDispatch();
 
@@ -41,7 +42,11 @@ function Details() {
 
    
    const addCoin = () => {
-        history.push(`/addcoin/${coinid}`)
+        history.push(`/addcoin/${coinid}`);
+   }
+
+   const handleEdit = () => {
+       history.push(`/edit/${coinid}`);
    }
 
     return (
@@ -76,11 +81,13 @@ function Details() {
                     {coinDetails?.price_change_percentage_24h > 0 ? <ArrowDropUpRoundedIcon /> : <ArrowDropDownRoundedIcon /> }
                     {coinDetails?.price_change_percentage_24h.toFixed(2)}%
                 </Typography>
-                <Stack direction="row" spacing={2}>
-                    <Button variant="contained">Edit</Button>
+            
+                <Stack direction="row" spacing={1}>
+                    <Button variant="outlined" onClick={handleEdit}>Edit</Button>
                     <Button variant="contained" onClick={addCoin}>Add</Button>
 
                 </Stack>
+                
             </div>
             </Slide>
 

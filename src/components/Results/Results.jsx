@@ -64,8 +64,8 @@ function Results() {
             <Typography variant="h6">
                 Amount To Sell Today:
             </Typography>
-            <Typography variant="b1">
-                {result[0].total}
+            <Typography variant="h6">
+                Target Return: ${result[0]?.target}
             </Typography>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 380 }} stickyHeader aria-label="result table">
