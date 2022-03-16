@@ -13,6 +13,8 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import Grow from '@mui/material/Grow';
+import { selectedGridRowsCountSelector } from "@mui/x-data-grid";
 
 
 
@@ -27,11 +29,21 @@ function Calculate() {
 
     useEffect(() => {
         dispatch({ type: 'GET_ASSETS' })
-    }, []);
+        setCoinOptions(assets)
+    }, [dispatch]);
 
     const [targetValue, setTargetValue] = useState('');
-    const [duration, setDuration] = useState('')
+    const [duration, setDuration] = useState('');
+    const [coinOptions, setCoinOptions] = useState([]);
+    const [selectCoin, setSelectCoin] = useState([]);
 
+
+    const handleSelect = (coin) => {
+        console.log(coin);
+        setSelectCoin([...selectCoin, coin])
+        setCoinOptions(coinOptions.filter(item => item.id !== coin.coin_id))
+        console.log(selectCoin);
+    }
 
     return (
         <div>
@@ -51,17 +63,21 @@ function Calculate() {
                 <br></br>
                 <Box sx={{ minWidth: 120 }}>
                     <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+                        <InputLabel id="duration">Duration</InputLabel>
                         <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
+                            labelId="duration"
+                            id="duration"
                             value={duration}
-                            label="Age"
+                            label="Duration"
                             onChange={(e) => setDuration(e.target.value)}
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem value={1}>Sell Today</MenuItem>
+                            <MenuItem value={7}>1 Week</MenuItem>
+                            <MenuItem value={14}>2 Weeks</MenuItem>
+                            <MenuItem value={30}>1 Month</MenuItem>
+                            <MenuItem value={60}>2 Months</MenuItem>
+                            <MenuItem value={182}>6 Months</MenuItem>
+                            <MenuItem value={365}>1 Year</MenuItem>
                         </Select>
                     </FormControl>
                 </Box>
@@ -69,18 +85,46 @@ function Calculate() {
                     <Typography variant="b2">
                         Which assets would you like to sell?
                     </Typography>
-                    <Stack spacing={2}>
-                        {assets.map((coin) => (
+                    <Grow
+                        in={open}
+                        style={{ transformOrigin: '0 0 0' }}
+                        {...(open ? { timeout: 1000 } : {})}
+                        >
+                    <Stack spacing={2} sx={{ mt: 2 }}>
+
+                        {coinOptions?.map((coin) => (
                             <Chip
                                 avatar={<Avatar alt={coin.id} src={coin.image} />}
                                 label={coin.name}
                                 variant="outlined"
+                                onClick={() => handleSelect(coin)}
                             />
                         ))}
+                       
+
                     </Stack>
-                </Box>
-            </Container>
-        </div>
+                </Grow>
+                <Typography variant="b2">
+                    Selected Assets:
+                </Typography>
+                <Grow
+                        in={open}
+                        style={{ transformOrigin: '0 0 0' }}
+                        {...(open ? { timeout: 1000 } : {})}
+                        >
+                <Stack spacing={2} sx={{mt: 3}}>
+                {selectCoin.map((el) => (
+                        <Chip
+                            avatar={<Avatar alt={el.id} src={el.image} />}
+                            label={el.name}
+                            variant="outlined"
+                        />
+                    ))}
+                </Stack>
+                </Grow>
+            </Box>
+        </Container>
+        </div >
     )
 }
 
