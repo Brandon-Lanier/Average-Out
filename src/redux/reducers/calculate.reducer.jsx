@@ -1,8 +1,8 @@
 
 
-function calculateReducer(state = '', action) {
+function calculateReducer(state = [], action) {
     switch(action.type) {
-        case 'CALC_RESULTS':
+        case 'SET_RESULT':
             return action.payload;
         default:
             return state;

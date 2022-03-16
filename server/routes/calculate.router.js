@@ -22,7 +22,8 @@ router.post('/', (req, res) => {
         finalCoins.push({
             coin_id: coin.coin_id,
             quantity: coin.quantity,
-            totalValue: total
+            totalValue: total,
+            user: req.user.id
         });
     }
     let totalCoinValue = finalCoins.reduce((accumulator, current) => accumulator + current.totalValue, 0);
@@ -38,12 +39,13 @@ router.post('/', (req, res) => {
             coinid: coin.coin_id,
             totalQuantity: coin.quantity,
             qtyToSell: quantityToSell,
-            sellDollarAmount: dollarAmount
+            sellDollarAmount: dollarAmount,
+            user: req.user.id
         })
     }
     console.log('Final Results', splitQuantities);
     
-    res.sendStatus(200)
+    res.send(splitQuantities)
    
     })
 

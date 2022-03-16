@@ -15,6 +15,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Grow from '@mui/material/Grow';
 import { Slide } from "@mui/material";
+import { useHistory } from "react-router-dom";
 
 
 
@@ -24,7 +25,7 @@ function Calculate() {
     const market = useSelector(store => store.market)
     const assetDetails = useSelector(store => store.assetDetails)
 
-
+    const history = useHistory();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -54,6 +55,7 @@ function Calculate() {
             coins: selectCoin
         }
         dispatch({type: 'SEND_CALCULATION', payload: calculation})
+        history.push('/results');
     }
 
     return (
