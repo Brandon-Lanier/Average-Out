@@ -96,12 +96,12 @@ router.put('/calc', (req, res) => {
     const qryTxt = `UPDATE assets SET quantity = quantity - $1 WHERE coin_id = $2 AND user_id = $3`
     for (coin of updateCoins) {
         pool.query(qryTxt, [coin.qtyToSell, coin.coinid, req.user.id])
-            .then(result => {
-                res.sendStatus(200)
-            }).catch(err => {
-                console.log('Error in assets/calc update', err); 
-            })
-        }
+        .then(result => {
+            console.log('It worked', result);
+        }).catch(err => {
+            console.log('Error in assets/calc update', err); 
+        })
+    }
     } else {
         res.sendStatus(403)
     }
