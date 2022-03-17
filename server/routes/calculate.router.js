@@ -15,7 +15,7 @@ router.post('/', (req, res) => {
     let finalCoins = [];
     let dailyTargetPrice = (target / days);
     console.log('daily target', dailyTargetPrice);
-    
+
     for (coin of coins) {
         let total = 0;
         total = Number(coin.quantity) * Number(coin.current_price);
@@ -25,7 +25,6 @@ router.post('/', (req, res) => {
             quantity: coin.quantity,
             totalValue: total,
             user: req.user.id
-
         });
     }
     let totalCoinValue = finalCoins.reduce((accumulator, current) => accumulator + current.totalValue, 0);
@@ -33,7 +32,7 @@ router.post('/', (req, res) => {
     let percentSplit = (dailyTargetPrice / totalCoinValue);
     console.log('Percent Split', percentSplit);
     let splitQuantities = [];
-    
+
     for (coin of finalCoins) {
         let quantityToSell = coin.quantity * percentSplit;
         let dollarAmount = coin.totalValue * percentSplit;
@@ -46,14 +45,39 @@ router.post('/', (req, res) => {
             target: target,
             dailyTargetPrice: dailyTargetPrice,
             percentage: percentSplit,
+            days: days,
             user: req.user.id
 
         })
     }
     console.log('Final Results', splitQuantities);
-    
+
     res.send(splitQuantities)
-   
-    })
+
+})
+
+router.post('/save', (req, res) => {
+  console.log('req the body in save', req.body);
+    const coins = req.body.map(function(value) {return value.coinid;});
+    const dailyTarget = req.body[0].dailyTargetPrice;
+    const totalTarget = Number(req.body[0].target)
+    const days = req.body[0].days
+    console.log('days', days);
+    
+        const qryTxt = `
+        INSERT INTO orders (coins, start_date, end_date, daily_target, total_target, user_id)
+        VALUES ($1, CURRENT_DATE, CURRENT_DATE + ${days}, $2, $3, $4)
+        `
+        pool.query(qryTxt, [coins, dailyTarget, totalTarget, req.user.id])
+        .then(result => {
+            console.log('Somehow this worked!');
+            res.sendStatus(201);
+        }).catch(err => {
+            console.log('Error posting the calculation in the orders table', err);
+            res.sendStatus(500)
+        })
+})
+
+
 
 module.exports = router;

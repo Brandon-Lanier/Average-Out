@@ -59,6 +59,7 @@ function Calculate() {
         history.push('/results');
     }
 
+
     console.log(runningTotal);
 
     return (

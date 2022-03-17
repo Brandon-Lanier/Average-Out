@@ -79,14 +79,34 @@ router.delete('/:id', (req, res) => {
         const qryTxt = `
             DELETE FROM "assets" WHERE "id" = $1 and "user_id" = $2;`
         pool.query(qryTxt, [req.params.id, req.user.id])
-            .then(res => {
+            .then(result => {
                 res.sendStatus(200)
             }).catch(err => {
+                console.log('error deleting the asset', err);
                 res.sendStatus(500)
             })
     } else {
         res.sendStatus(403)
     }
 })
+
+router.put('/calc', (req, res) => {
+    if (req.isAuthenticated()) {
+    const updateCoins = req.body
+    const qryTxt = `UPDATE assets SET quantity = quantity - $1 WHERE coin_id = $2 AND user_id = $3`
+    for (coin of updateCoins) {
+        pool.query(qryTxt, [coin.qtyToSell, coin.coinid, req.user.id])
+            .then(result => {
+                res.sendStatus(200)
+            }).catch(err => {
+                console.log('Error in assets/calc update', err); 
+            })
+        }
+    } else {
+        res.sendStatus(403)
+    }
+})
+  
+
 
 module.exports = router;

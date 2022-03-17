@@ -48,7 +48,7 @@ function Results() {
     const handleExecute = () => {
         if
             (confirm('This will actually execute the transaction from your portfolio..blah blah blah')) {
-                console.log('You Have Executed The Order');
+                dispatch({type: 'EXECUTE_CALCULATION', payload: result})
         }
     }
 
