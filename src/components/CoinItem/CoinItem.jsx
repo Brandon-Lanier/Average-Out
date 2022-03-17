@@ -13,9 +13,9 @@ function CoinItem({ coin }) {
             <TableCell align="left">
                 {coin.price_change_percentage_24h > 0
                     ?
-                    <ArrowDropUpRoundedIcon />
+                    <ArrowDropUpRoundedIcon color="success" />
                     :
-                    <ArrowDropDownRoundedIcon />}
+                    <ArrowDropDownRoundedIcon color="error"/>}
                 {coin.price_change_percentage_24h.toFixed(2)}%
             </TableCell>
         </>

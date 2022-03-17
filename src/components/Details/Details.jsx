@@ -8,12 +8,13 @@ import LineChart from '../LineChart/LineChart';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Box } from '@mui/material';
-import { Typography } from '@mui/material';
+import { Typography, Container } from '@mui/material';
 import { Slide } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import { Button } from '@mui/material';
+import AddCoin from '../AddCoin/AddCoin';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import Stack from '@mui/material/Stack';
@@ -27,7 +28,7 @@ function Details() {
     useEffect(() => {
         dispatch({ type: 'GET_DETAILS', payload: coinid });
         dispatch({type: 'GET_ASSET_DETAILS', payload: coinid})
-    }, [])
+    }, []);
 
     const dispatch = useDispatch();
 
@@ -41,25 +42,29 @@ function Details() {
 
    
    const addCoin = () => {
-        history.push(`/addcoin/${coinid}`)
+        history.push(`/addcoin/${coinid}`);
+   }
+
+   const handleEdit = () => {
+       history.push(`/edit/${coinid}`);
    }
 
     return (
         
         <Slide direction="up" in="open" mountOnEnter unmountOnExit>
+            {/* <Container maxWidthSm sx={{display: "flex", flexDirection: "column", alignContent: "space-between"}}> */}
             <div className="details-container">
-                <Box>
+            
                 <ChevronLeftIcon onClick={() => history.goBack()}/>
                 <Typography variant="b1">
                     {coinDetails?.symbol.toUpperCase()}   |   {coinDetails?.name}
                 </Typography>
-                </Box>
-                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '80%', alignItems: 'center', mt: 3}}>
-                {<img src={coinDetails?.image} width="40px" height="40px"/>}
+                
+                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '80%', alignItems: 'center', mt: 3}}>
                 <Typography variant="h6">
                     Current Price: ${coinDetails ? (coinDetails?.current_price).toLocaleString(undefined, {maximumFractionDigits:2}) : 0}
                 </Typography>
-                
+                {<img src={coinDetails?.image} width="40px" height="40px"/>}
                 </Box>
                 <LineChart
                     coinid={coinid}
@@ -76,12 +81,15 @@ function Details() {
                     {coinDetails?.price_change_percentage_24h > 0 ? <ArrowDropUpRoundedIcon /> : <ArrowDropDownRoundedIcon /> }
                     {coinDetails?.price_change_percentage_24h.toFixed(2)}%
                 </Typography>
-                <Stack direction="row" spacing={2}>
-                    <Button variant="contained">Edit</Button>
+            
+                <Stack direction="row" spacing={1}>
+                    <Button variant="outlined" onClick={handleEdit}>Edit</Button>
                     <Button variant="contained" onClick={addCoin}>Add</Button>
 
                 </Stack>
-            </div>
+                
+                {/* </Container> */}
+                </div>
             </Slide>
 
     )

@@ -21,6 +21,7 @@ import Details from '../Details/Details';
 import AddCoin from '../AddCoin/AddCoin';
 import Calculate from '../Calculate/Calculate';
 import Results from '../Results/Results';
+import EditCoin from '../EditCoin/EditCoin'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -129,12 +130,16 @@ function App() {
           <Route path="/addcoin/:coinid">
             <AddCoin />
           </Route>
+          <Route path="/edit/:coinid">
+            <EditCoin />
+          </Route>
           <Route path="/calculate">
             <Calculate />
           </Route>
           <Route path="/results">
             <Results />
           </Route>
+          
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
