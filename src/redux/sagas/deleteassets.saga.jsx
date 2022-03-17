@@ -2,12 +2,12 @@ import axios from 'axios';
 import { put, takeLatest} from 'redux-saga/effects';
 
 function* deleteAssetsSaga() {
-    takeLatest('DELETE_ALL_ASSET', deleteAsset)
+    yield takeLatest('DELETE_ALL_ASSET', deleteAsset)
 }
 
 function* deleteAsset(action) {
+    console.log('IN DELETE SAGA', action.payload);
     try {
-        console.log(action.payload);
         yield axios.delete(`/api/assets/${action.payload}`);
         yield put({type: 'GET_ASSETS'})
     } catch (error) {

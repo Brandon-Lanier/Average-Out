@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
 router.get('/details/:coinid', (req, res) => {
     if (req.isAuthenticated()) {
         const coinid = req.params.coinid;
-        console.log('coin id in details assets', coinid);
+        // console.log('coin id in details assets', coinid);
         const qryTxt = `
       SELECT * FROM assets WHERE coin_id = $1 AND user_id = $2;
       `
