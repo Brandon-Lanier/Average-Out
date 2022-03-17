@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
         }));
         let mergedData = Array.from(map.values());
         mergedData = mergedData.sort((a, b) => (a.current_price < b.current_price) ? 1 : -1); // Sort by price DESC
-        console.log('hopeful output', mergedData);
+        // console.log('hopeful output', mergedData);
         res.send(mergedData);
     } else {
         res.sendStatus(403)
@@ -57,10 +57,10 @@ router.post('/', (req, res) => {
         // const qty = quantity.toFixed(4) // Changing to 4 decimals for DB storage
         const userId = req.user.id
         const qryTxt = `
-        INSERT INTO "assets" ("coin_id", "quantity", "user_id") 
-        VALUES ($1, $2, $3)
-        ON CONFLICT ("coin_id")
-        DO UPDATE SET "quantity" = "assets"."quantity" + $4;`
+            INSERT INTO "assets" ("coin_id", "quantity", "user_id") 
+            VALUES ($1, $2, $3)
+            ON CONFLICT ("coin_id")
+            DO UPDATE SET "quantity" = "assets"."quantity" + $4;`
         pool.query(qryTxt, [coinId, qty, userId, qty])
             .then(result => {
                 res.sendStatus(201)
@@ -69,6 +69,23 @@ router.post('/', (req, res) => {
             })
     } else {
         res.sendStatus(403);
+    }
+})
+
+router.delete('/:id', (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log('coinid to delete', req.params.id);
+        console.log('user', req.user.id);
+        const qryTxt = `
+            DELETE FROM "assets" WHERE "id" = $1 and "user_id" = $2;`
+        pool.query(qryTxt, [req.params.id, req.user.id])
+            .then(res => {
+                res.sendStatus(200)
+            }).catch(err => {
+                res.sendStatus(500)
+            })
+    } else {
+        res.sendStatus(403)
     }
 })
 

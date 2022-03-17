@@ -86,7 +86,7 @@ function Results() {
                                 <TableCell align="left">{coin?.name}</TableCell>
                                 <TableCell align="left">{coin?.qtyToSell.toFixed(4)}</TableCell>
                                 <TableCell align="left">${coin?.sellDollarAmount.toLocaleString(undefined, {maximumFractionDigits:2})}</TableCell>
-                                <TableCell align="left">{coin?.percentage.toFixed(2)}%</TableCell>
+                                <TableCell align="left">{(coin.percentage * 100).toFixed(2)}%</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

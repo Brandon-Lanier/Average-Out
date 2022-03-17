@@ -8,7 +8,7 @@ import LineChart from '../LineChart/LineChart';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Box } from '@mui/material';
-import { Typography } from '@mui/material';
+import { Typography, Container } from '@mui/material';
 import { Slide } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
@@ -52,19 +52,19 @@ function Details() {
     return (
         
         <Slide direction="up" in="open" mountOnEnter unmountOnExit>
+            {/* <Container maxWidthSm sx={{display: "flex", flexDirection: "column", alignContent: "space-between"}}> */}
             <div className="details-container">
-                <Box>
+            
                 <ChevronLeftIcon onClick={() => history.goBack()}/>
                 <Typography variant="b1">
                     {coinDetails?.symbol.toUpperCase()}   |   {coinDetails?.name}
                 </Typography>
-                </Box>
-                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '80%', alignItems: 'center', mt: 3}}>
-                {<img src={coinDetails?.image} width="40px" height="40px"/>}
+                
+                <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '80%', alignItems: 'center', mt: 3}}>
                 <Typography variant="h6">
                     Current Price: ${coinDetails ? (coinDetails?.current_price).toLocaleString(undefined, {maximumFractionDigits:2}) : 0}
                 </Typography>
-                
+                {<img src={coinDetails?.image} width="40px" height="40px"/>}
                 </Box>
                 <LineChart
                     coinid={coinid}
@@ -88,7 +88,8 @@ function Details() {
 
                 </Stack>
                 
-            </div>
+                {/* </Container> */}
+                </div>
             </Slide>
 
     )

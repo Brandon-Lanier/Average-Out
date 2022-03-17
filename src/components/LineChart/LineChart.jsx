@@ -35,7 +35,7 @@ function LineChart({ coinid }) {
 
     return (
 
-        <div>
+   
   
             <Line 
                 data={{
@@ -58,7 +58,7 @@ function LineChart({ coinid }) {
                         lineHeight: 1.5
                     },
                     animation: {
-                        duration: 2000
+                        duration: 1500
                     },
                     legend: {
                         display: false
@@ -80,14 +80,14 @@ function LineChart({ coinid }) {
                         //   },
                         // },
                       },
-                      maintainAspectRatio: false,
+                      maintainAspectRatio: true,
                       responsive: true,
                       
                 }}
-                    height={250}
-                    width={300}
+                    // height={250}
+                    // width={300}
                 />
-        </div>
+       
 
     )
 }

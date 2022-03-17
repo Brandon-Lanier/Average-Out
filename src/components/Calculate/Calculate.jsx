@@ -147,6 +147,7 @@ function Calculate() {
                                 ))}
                             </Stack>
                         </Grow>
+                    
                         <Stack direction='row' spacing={3} sx={{ mt: 2 }}>
                             <Button variant='outlined'>
                                 Cancel
@@ -155,6 +156,7 @@ function Calculate() {
                                 Calculate
                             </Button>
                         </Stack>
+                        
                     </Box>
                 </Container>
             </Slide>
