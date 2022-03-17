@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LogOutButton from '../LogOutButton/LogOutButton';
+import logo from './logo.png'
 import './Nav.css';
 import { useSelector } from 'react-redux';
 
@@ -10,7 +11,7 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/home">
-        <h2 className="nav-title">Average Out</h2>
+        <img id="logo" src={logo} alt="logo" width="60px" />
       </Link>
       <div>
         {/* If no user is logged in, show these links */}
