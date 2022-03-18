@@ -5,6 +5,11 @@ body,
 
 }
 
+@font-face {
+  font-family: 'Gilroy-Bold';
+  src: local('Gilroy-Bold'), url('../fonts/Gilroy-Bold.ttf') format('truetype');
+}
+
 body {
   font-family: Roboto, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;

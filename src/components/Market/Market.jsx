@@ -12,7 +12,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Slide } from '@mui/material';
+import { Slide, Typography } from '@mui/material';
+import { Autocomplete } from '@mui/material';
+import { TextField } from '@mui/material';
+import { Box } from '@mui/system';
+import { Container } from '@mui/material';
 
 
 
@@ -33,9 +37,24 @@ function Market() {
     history.push(`/details/${coin.id}`)
   }
 
+
+
   return (
     <>
       <Slide direction="right" in="open" mountOnEnter unmountOnExit>
+        <Container sx={{display: 'flex', flexDirection: "column", alignItems: 'center'}}>
+          <Typography variant="h5" sx={{mt: 1}}>
+            Crypto Market
+          </Typography>
+          <Autocomplete
+            id="coinsearch"
+            freeSolo
+            fullWidth
+            options={marketData?.map((option) => option.name)}
+            sx={{mt: 1, mb: 3}}
+            renderInput={(params) => <TextField {...params} label="Search Coins" />}
+          />
+        
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 300 }} stickyHeader aria-label="simple table">
             <TableHead>
@@ -61,6 +80,7 @@ function Market() {
             </TableBody>
           </Table>
         </TableContainer>
+        </Container>
       </Slide>
     </>
   )

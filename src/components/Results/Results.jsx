@@ -68,6 +68,9 @@ function Results() {
             <Typography variant="h6">
                 Target Return: ${result[0]?.target}
             </Typography>
+            <Typography variant="b1">
+                Total Duration: {result[0]?.days}
+            </Typography>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 380 }} stickyHeader aria-label="result table">
                     <TableHead>

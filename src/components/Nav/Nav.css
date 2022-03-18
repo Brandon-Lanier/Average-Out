@@ -42,6 +42,9 @@
 }
 
 #logo {
-  width: 60px;
-  margin-left: 10px;
+  width: 50px;
+}
+
+#logo-font {
+  font-family: Gilroy-Bold, Roboto;
 }

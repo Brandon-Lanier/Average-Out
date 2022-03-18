@@ -13,6 +13,8 @@ import Paper from '@mui/material/Paper';
 import { Typography, Button, IconButton } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
 import { Slide } from '@mui/material';
+import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
+import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 
 
 
@@ -56,7 +58,7 @@ function Portfolio() {
         <>
         <Slide direction="up" in="open" mountOnEnter unmountOnExit>
         <Container maxWidth="sm" sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <Typography variant="h6">
+            <Typography variant="h6" sx={{mt: 2, mb: 2}}>
                 Portfolio Value: ${getSum()}
             </Typography>
             <PieChart/>
@@ -64,13 +66,13 @@ function Portfolio() {
                 Portfolio Summary
             </Typography>
             <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 390 }} aria-label="simple table">
+      <Table sx={{ minWidth: 300 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell align="left">Name</TableCell>
             <TableCell align="left">Quantity</TableCell>
             <TableCell align="left">Value</TableCell>
-            <TableCell align="left">% Change</TableCell>
+            <TableCell align="left">Change</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -83,8 +85,12 @@ function Portfolio() {
               <TableCell align="left">{coin?.name}</TableCell>
               <TableCell align="left">{coin?.quantity}</TableCell>
               <TableCell align="left">${(coin?.quantity * coin?.current_price).toLocaleString(undefined, {maximumFractionDigits:2})}</TableCell>
-              <TableCell align="left">{coin?.price_change_percentage_24h.toFixed(2)}%</TableCell>
-              <TableCell align="left"><IconButton onClick={goEdit}><EditIcon /></IconButton></TableCell>
+              <TableCell align="left">{coin?.price_change_percentage_24h > 0
+                    ?
+                    <ArrowDropUpRoundedIcon color="success" />
+                    :
+                    <ArrowDropDownRoundedIcon color="error"/>}
+                {coin.price_change_percentage_24h.toFixed(2)}%</TableCell>
             </TableRow>
           ))}
         </TableBody>

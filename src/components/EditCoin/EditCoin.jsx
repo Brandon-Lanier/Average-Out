@@ -28,6 +28,7 @@ function EditCoin() {
    const handleDelete = () => {
        if(confirm('Are You Sure You Want To Delete This?')) {
         dispatch({type: 'DELETE_ALL_ASSET', payload: asset.id})
+        history.push('/portfolio')
        }
    }
 
