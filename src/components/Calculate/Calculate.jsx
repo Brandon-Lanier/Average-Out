@@ -7,7 +7,6 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 
 
-
 function Calculate() {
 
     const assets = useSelector(store => store.assets)
@@ -52,7 +51,7 @@ function Calculate() {
     return (
         <div>
             <Slide direction="left" in="open" mountOnEnter unmountOnExit>
-                <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <<Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>>
                     <Typography variant="h5" sx={{mt: 3}}>
                         How much would you like to sell?
                     </Typography>
