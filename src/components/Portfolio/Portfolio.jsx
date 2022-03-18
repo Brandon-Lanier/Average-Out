@@ -25,6 +25,7 @@ function Portfolio() {
     useEffect(() => {
       dispatch({type: 'FETCH_MARKET'});
       dispatch({type: 'GET_ASSETS'});
+      dispatch({type: 'GET_ORDERS' })
       
     }, [dispatch]);
 

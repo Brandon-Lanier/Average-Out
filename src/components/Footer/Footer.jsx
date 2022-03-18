@@ -38,11 +38,11 @@ function Footer() {
             <Paper sx={{
                 position: 'fixed', bottom: 0, left: 0, right: 0 , backgroundColor: (theme) =>
                 theme.palette.mode === 'dark' ? '#1A2027' : '#fff'}} elevation={5}>
-                <BottomNavigation showLabels
+                <BottomNavigation showLabels style={{background: '#364f6b',}}
                 >
-                    <BottomNavigationAction label="Market" icon={<AddchartIcon />} onClick={goMarket} />
-                    <BottomNavigationAction label="Portfolio" icon={<PieChartIcon />} onClick={goPortfolio} />
-                    <BottomNavigationAction label="Calculate" icon={<CalculateIcon />} onClick={goCalculate} />
+                    <BottomNavigationAction sx={{color: '#fff'}} label="Market" icon={<AddchartIcon />} onClick={goMarket} />
+                    <BottomNavigationAction sx={{color: '#fff'}} label="Portfolio" icon={<PieChartIcon />} onClick={goPortfolio} />
+                    <BottomNavigationAction sx={{color: '#fff'}} label="Calculate" icon={<CalculateIcon />} onClick={goCalculate} />
                 </BottomNavigation>
             </Paper>
         </Box>

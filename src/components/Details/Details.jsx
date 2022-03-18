@@ -84,11 +84,11 @@ function Details() {
             
                 <Stack direction="row" spacing={1}>
                     <Button variant="outlined" onClick={handleEdit}>Edit</Button>
-                    <Button variant="contained" onClick={addCoin}>Add</Button>
-
+                    {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}
+                    <AddCoin />
                 </Stack>
                 
-                {/* </Container> */}
+             
                 </div>
             </Slide>
 

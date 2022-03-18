@@ -4,8 +4,8 @@ import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Container, Button, Box, Typography, FormControl, TextField, MenuItem, InputLabel, Paper } from '@mui/material';
-import { Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Button, Box, Typography, TextField, Stack } from '@mui/material';
+import Modal from '@mui/material/Modal';
 
 function AddCoin() {
 
@@ -13,10 +13,10 @@ function AddCoin() {
     // const [coinId, setCoinId] = useState('')
     // const [dollarAmount, setDollarAmount] = useState('');
     // const [value, setValue] = useState('')
-    const { coinid } = useParams();
+    // const { coinid } = useParams();
 
     useEffect(() => {
-        dispatch({type: 'GET_ASSET_DETAIlS', payload: coinid})
+        // dispatch({ type: 'GET_ASSET_DETAIlS', payload: coinid })
     }, [])
 
     const coin = useSelector(store => store.details[0]);
@@ -26,15 +26,15 @@ function AddCoin() {
     const dispatch = useDispatch();
 
     // Setting the input and dynamic dollar changing amounts
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState('');
     const [dollarAmount, setDollarAmount] = useState(0)
 
-    
+
 
     // On change of the input field, the state of quantity is updated and the total value is updated.
     const handleUpdate = (e) => {
         setQuantity(e.target.value);
-        setDollarAmount(e.target.value * coin.current_price)
+        setDollarAmount(e.target.value * coin?.current_price)
         console.log(quantity, dollarAmount);
     }
 
@@ -50,22 +50,68 @@ function AddCoin() {
     }
 
 
-    return (
-        <Container>
-            <h2>Add {coin?.name} to your portfolio!</h2>
-            <p>Amount to purchase</p>
-            <input type='number' value={quantity} onChange={handleUpdate} />
-            <p>Market Value: ${(Number(dollarAmount.toFixed(2)))}</p>
-            <button onClick={addCoin}>Add Coin</button>
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
-        </Container>
+    const style = {
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        transform: 'translate(-50%, -50%)',
+        width: '90%',
+        bgcolor: '#f5f5f5',
+        border: '1px solid #47688D',
+        borderRadius: 5,
+        boxShadow: 24,
+        p: 4,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center'
+    };
+
+    return (
+        <div>
+            <Button onClick={handleOpen} variant="contained">Add Coin</Button>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box sx={style}>
+                    <Stack spacing={2}>
+                        {/* <img src={coin?.image} alt={coin?.name} width="60px" height="60px" /> */}
+                    <Typography id="modal-modal-title" variant="h6">
+                        {/* How Much {coin?.name} would you like to add? */}
+                    </Typography>
+                    <Typography id="current_price" variant="h6">
+                        Current Price: ${coin.current_price.toFixed(2)} 
+                    </Typography>
+                    <TextField variant="outlined" type="number" value={quantity} onChange={handleUpdate} />
+                    <Typography variant="h6" sx={{ mt: 2 }}>
+                        Market Value: ${(Number(dollarAmount.toFixed(2)))}
+                    </Typography>
+                    </Stack>
+                   <Button variant="outlined" onClick={handleClose}>Cancel</Button>
+                   <Button variant="contained" onClick={addCoin}>Add Holdings</Button>
+                </Box>
+            </Modal>
+    </div >
 
     )
 }
 
 export default AddCoin;
 
+{/* <Container>
+<h2>Add {coin?.name} to your portfolio!</h2>
+<p>Amount to purchase</p>
+<input type='number' value={quantity} onChange={handleUpdate} />
+<p>Market Value: ${(Number(dollarAmount.toFixed(2)))}</p>
+<button onClick={addCoin}>Add Coin</button>
 
+</Container> */}
 
 // <div>
 //     <h2>Add {coin.name} to your portfolio!</h2>
