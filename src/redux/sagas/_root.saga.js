@@ -11,6 +11,7 @@ import getAssetDetailsSaga from './assetdetails.saga';
 import getAllAssetDetailsSaga from './allassets.saga';
 import calculateSaga from './calculate.saga';
 import deleteAssetsSaga from './deleteassets.saga';
+import getOrdersSaga from './orders.saga';
 
 
 // rootSaga is the primary saga.
@@ -33,6 +34,7 @@ export default function* rootSaga() {
     getAssetDetailsSaga(),
     getAllAssetDetailsSaga(),
     calculateSaga(),
-    deleteAssetsSaga()
+    deleteAssetsSaga(),
+    getOrdersSaga()
   ]);
 }

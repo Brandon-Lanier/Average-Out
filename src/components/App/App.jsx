@@ -22,6 +22,7 @@ import AddCoin from '../AddCoin/AddCoin';
 import Calculate from '../Calculate/Calculate';
 import Results from '../Results/Results';
 import EditCoin from '../EditCoin/EditCoin'
+import ActiveOrders from '../ActiveOrders/ActiveOrders'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -138,6 +139,9 @@ function App() {
           </Route>
           <Route path="/results">
             <Results />
+          </Route>
+          <Route path="/active">
+            <ActiveOrders />
           </Route>
           
           {/* If none of the other routes matched, we will show a 404. */}

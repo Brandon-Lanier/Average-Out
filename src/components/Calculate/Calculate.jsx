@@ -66,7 +66,7 @@ function Calculate() {
         <div>
             <Slide direction="left" in="open" mountOnEnter unmountOnExit>
                 <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                    <Typography variant="h5">
+                    <Typography variant="h5" sx={{mt: 3}}>
                         How much would you like to sell?
                     </Typography>
 
@@ -130,7 +130,7 @@ function Calculate() {
 
                             </Stack>
                         </Grow>
-                        <Typography variant="b2">
+                        <Typography variant="b2" sx={{mt: 2}}>
                             Selected Assets:
                         </Typography>
                         <Grow

@@ -5,18 +5,6 @@ const axios = require("axios");
 const cron = require('node-cron');
 const schedule = require('node-schedule');
 
-// const job = schedule.scheduleJob('* * * * *', async function(){
-//     const orders = await pool.query('SELECT * FROM orders')
-//     console.log('orders', orders.rows);
-//     let coinIdsToFetch = [];
-//     coinIdsToFetch = orders.rows[0].coins;
-//     console.log(coinIdsToFetch);
-//     const coinsToQry = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinIdsToFetch.join(',')}&order=gecko_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1d`);
-//     console.log('coins to query', coinsToQry);
-    
-// })
-    
-
 
 // Not working when i try to send from client
 router.post('/', (req, res) => {

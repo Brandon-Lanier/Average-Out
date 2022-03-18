@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import DropMenu from '../DropMenu/DropMenu'
 
 
 function Nav() {
@@ -24,14 +25,7 @@ function Nav() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, ml: 2 }} id="logo-font">
             average out
           </Typography>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
+          <DropMenu />
         </Toolbar>
       </AppBar>
     </Box>
