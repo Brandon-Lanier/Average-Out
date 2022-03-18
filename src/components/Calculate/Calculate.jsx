@@ -108,7 +108,7 @@ function Calculate() {
                         </FormControl>
                     </Box>
                     <Box>
-                        <Typography variant="b2">
+                        <Typography variant="b2" sx={{ mt: 3}} >
                             Which assets would you like to sell?
                         </Typography>
                         <Grow

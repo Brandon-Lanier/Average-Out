@@ -5,19 +5,17 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import LineChart from '../LineChart/LineChart';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Box } from '@mui/material';
 import { Typography, Container } from '@mui/material';
 import { Slide } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
-import Grid from '@mui/material/Grid';
 import { Button } from '@mui/material';
-import AddCoin from '../AddCoin/AddCoin';
+import AddModal from '../AddModal/AddModal';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import Stack from '@mui/material/Stack';
+import { Modal, TextField } from '@mui/material';
 import './Details.css'
 
 
@@ -85,10 +83,10 @@ function Details() {
                 <Stack direction="row" spacing={1}>
                     <Button variant="outlined" onClick={handleEdit}>Edit</Button>
                     {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}
-                    <AddCoin />
+                    <AddModal coinDetails={coinDetails} />
                 </Stack>
                 
-             
+          
                 </div>
             </Slide>
 
@@ -96,3 +94,9 @@ function Details() {
 }
 
 export default Details;
+
+
+
+
+
+
