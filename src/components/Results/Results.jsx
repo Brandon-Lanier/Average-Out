@@ -44,7 +44,6 @@ function Results() {
 }
 ))
 
-
     const handleExecute = () => {
         if
             (confirm('This will actually execute the transaction from your portfolio..blah blah blah')) {

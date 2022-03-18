@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { Delete } from "@mui/icons-material";
+import DeleteModal from '../DeleteModal/DeleteModal'
 
 
 function EditCoin() {
@@ -21,6 +22,8 @@ function EditCoin() {
     const history = useHistory();
     const dispatch = useDispatch();
 
+
+    const [open, setOpen] = useState(false);
 
    const handleDelete = () => {
        if(confirm('Are You Sure You Want To Delete This?')) {
