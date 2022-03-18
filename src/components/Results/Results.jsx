@@ -49,6 +49,8 @@ function Results() {
         if
             (confirm('This will actually execute the transaction from your portfolio..blah blah blah')) {
                 dispatch({type: 'EXECUTE_CALCULATION', payload: result})
+                dispatch({type: 'ClEAR_RESULT'})
+                history.push('/portfolio')
         }
     }
 
