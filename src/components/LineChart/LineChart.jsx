@@ -60,9 +60,9 @@ function LineChart({ coinid }) {
                     animation: {
                         duration: 1500
                     },
-                    legend: {
-                        display: false
-                     },
+                    plugins: {
+                        legend: false,
+                    },
                      tooltips: {
                         enabled: false
                      },
@@ -84,8 +84,8 @@ function LineChart({ coinid }) {
                       responsive: true,
                       
                 }}
-                    // height={250}
-                    // width={300}
+                    height={250}
+
                 />
        
 
