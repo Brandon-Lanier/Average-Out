@@ -1,23 +1,9 @@
-import { Button, Container } from "@mui/material";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Typography } from "@mui/material";
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Avatar from '@mui/material/Avatar';
-import { Box, InputBase } from "@mui/material";
-import InputAdornment from '@mui/material/InputAdornment';
-import TextField from '@mui/material/TextField';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
+import { Box, Button, Container, Avatar, Stack, Chip, Typography, inputAdornment, TextField, InputLabel, MenuItem, FormControl, Select, Grow, Slide, Grid } from "@mui/material";
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
-import Grow from '@mui/material/Grow';
-import { Slide } from "@mui/material";
-import { useHistory } from "react-router-dom";
 
 
 
@@ -65,7 +51,7 @@ function Calculate() {
     return (
         <div>
             <Slide direction="left" in="open" mountOnEnter unmountOnExit>
-                <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <<Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>>
                     <Typography variant="h5" sx={{mt: 3}}>
                         How much would you like to sell?
                     </Typography>
