@@ -4,6 +4,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { LocalParkingOutlined, LogoutRounded } from '@mui/icons-material';
 
 function DropMenu() {
 
@@ -12,6 +14,8 @@ function DropMenu() {
         const [anchorEl, setAnchorEl] = useState(null);
         const open = Boolean(anchorEl);
     
+        const dispatch = useDispatch();
+
         const handleClick = (event) => {
             setAnchorEl(event.currentTarget);
         }
@@ -37,6 +41,11 @@ function DropMenu() {
         const goAbout = () => {
             history.push('/about')
         }
+
+        const logOut = () => {
+            dispatch({ type: 'LOGOUT' })
+        }
+
         return (
     
             <div>
@@ -66,6 +75,7 @@ function DropMenu() {
                     <MenuItem onClick={goCalculations}>Active Strategies</MenuItem>
                     <MenuItem onClick={goHistory}>History</MenuItem>
                     <MenuItem onClick={goAbout}>About</MenuItem>
+                    <MenuItem onClick={logOut}>Log Out</MenuItem>
                 </Menu>
             </div>
         )

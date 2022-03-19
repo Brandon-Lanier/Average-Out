@@ -44,6 +44,7 @@ function Portfolio() {
 
         let totalValue = []; // Holding array of all individual coin values before reducing for total
 
+        // Add's up all current value's of each holding to display total portfolio value.
         const getSum = () => {
             let runningTotal = 0
             for (let coin of assets) {
@@ -80,7 +81,7 @@ function Portfolio() {
           {assets?.map((coin) => (
             <TableRow
               key={coin.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               onClick={() => handleClick(coin)}
             >
               <TableCell align="left">{coin?.name}</TableCell>
@@ -100,8 +101,7 @@ function Portfolio() {
         </Container>
         </Slide>
         </>
-           
-        
+
 
     )
 }

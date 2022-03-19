@@ -19,6 +19,19 @@ const theme = createTheme({
   }
 });
 
+const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#364f6b',
+      contrastText: '#fff'
+      },
+    secondary: {
+      main: '#67ced4'
+      } ,
+    }
+});
+
 ReactDOM.render(
   <Provider store={store}>
     <ThemeProvider theme={theme}>
