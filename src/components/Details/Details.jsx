@@ -51,7 +51,7 @@ function Details() {
                     <Grid item xs={6}>
                         <ChevronLeftIcon style={{ fontSize: 50 }} onClick={() => history.goBack()} />
                     </Grid>
-                    <Grid item xs={6} sx={{alignItems: 'center'}}>
+                    <Grid item xs={6} sx={{alignContent: 'center'}}>
                         <Typography variant="h6">
                             {coinDetails?.symbol.toUpperCase()}   |   {coinDetails?.name}
                         </Typography>

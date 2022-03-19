@@ -10,7 +10,7 @@ import DeleteModal from '../DeleteModal/DeleteModal'
 function EditCoin() {
 
     const { coinid } = useParams();
-
+  
     useEffect(() => {
         dispatch({ type: 'GET_DETAILS', payload: coinid });
         dispatch({type: 'GET_ASSET_DETAILS', payload: coinid})
@@ -24,6 +24,8 @@ function EditCoin() {
 
 
     const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
    const handleDelete = () => {
        if(confirm('Are You Sure You Want To Delete This?')) {
@@ -31,6 +33,21 @@ function EditCoin() {
         history.push('/portfolio')
        }
    }
+
+   const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '90%',
+    bgcolor: '#f5f5f5',
+    border: '1px solid #47688d',
+    boxShadow: 24,
+    borderRadius: 5,
+    p: 4,
+  };
+
+
 
     return (
         <Container maxWidth="sm" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'left' }}>

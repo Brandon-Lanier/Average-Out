@@ -10,23 +10,26 @@ import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 
 function Calculate() {
 
+    const history = useHistory();
+    const dispatch = useDispatch();
+
     const assets = useSelector(store => store.assets)
     const market = useSelector(store => store.market)
     const assetDetails = useSelector(store => store.assetDetails)
 
-    const history = useHistory();
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch({ type: 'GET_ASSETS' })
-        setCoinOptions(assets)
-    }, [dispatch]);
-
+    
     const [targetValue, setTargetValue] = useState('');
     const [duration, setDuration] = useState('');
     const [coinOptions, setCoinOptions] = useState([]);
     const [selectCoin, setSelectCoin] = useState([]);
     const [runningTotal, setRunningTotal] = useState(0)
+   
+    useEffect(() => {
+        dispatch({ type: 'GET_ASSETS' })
+        setCoinOptions(assets)
+    }, [dispatch]);
+
+   
 
     const handleSelect = (coin) => {
         setSelectCoin([...selectCoin, coin])
@@ -67,7 +70,7 @@ function Calculate() {
                     InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <MonetizationOnIcon />
+                            $
                           </InputAdornment>
                         ),
                       }}

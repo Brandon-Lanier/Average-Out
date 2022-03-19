@@ -1,9 +1,10 @@
-import { Modal, Box, Stack, Typography, Button, TextField } from "@mui/material";
+import { Modal, Box, Stack, Typography, Button, TextField, InputAdornment } from "@mui/material";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Fade from '@mui/material/Fade';
+
 
 
 function AddModal({coinDetails}) {
@@ -13,7 +14,7 @@ function AddModal({coinDetails}) {
     const dispatch = useDispatch();
 
     // Setting the input and dynamic dollar changing amounts
-    const [quantity, setQuantity] = useState(0);
+    const [quantity, setQuantity] = useState('');
     const [dollarAmount, setDollarAmount] = useState(0)
 
     const handleUpdate = (e) => {
