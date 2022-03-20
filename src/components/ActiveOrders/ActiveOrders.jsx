@@ -29,28 +29,28 @@ function ActiveOrders() {
     console.log(daysLeft);
     console.log(endDate);
     console.log(currentDate);
-
+    console.log(orders);
     return (
         <>
+         <Card>
             <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
                   Orders: {startDate}
                 </Typography>
                 <Typography variant="h5" component="div">
                    
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    adjective
+                    
                 </Typography>
                 <Typography variant="body2">
-                    well meaning and kindly.
-                    <br />
-                    {'"a benevolent smile"'}
+                   Target Return: ${orders[0].total_target}
                 </Typography>
             </CardContent>
             <CardActions>
                 <Button size="small">Learn More</Button>
             </CardActions>
+            </Card>
         </>
     )
 }

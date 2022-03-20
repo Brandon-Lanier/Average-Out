@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     if (req.isAuthenticated()) {
         const dbCoinRes = await pool.query(`SELECT * FROM assets WHERE "user_id" = $1;`, [req.user.id]);
+        if (dbCoinRes.rows.length != 0) {
         let coinIdsToFetch = dbCoinRes.rows.map((coin) => {
             return coin.coin_id;
         })
@@ -25,6 +26,9 @@ router.get('/', async (req, res) => {
         mergedData = mergedData.sort((a, b) => (a.current_price < b.current_price) ? 1 : -1); // Sort by price DESC
         // console.log('hopeful output', mergedData);
         res.send(mergedData);
+        }else {
+            res.send(dbCoinRes.rows) // If no assets, send back an empty array
+        }
     } else {
         res.sendStatus(403)
     }
