@@ -4,37 +4,12 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Fade from '@mui/material/Fade';
-import AddNestedModal from "../AddNestedModal/AddNestedModal";
 
-
-
-
-function AddModal({coinDetails}) {
-
+function EditModal({coinDetails, assetDetails}) {
 
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // Setting the input and dynamic dollar changing amounts
-    const [quantity, setQuantity] = useState('');
-    const [dollarAmount, setDollarAmount] = useState(0)
-
-    const handleUpdate = (e) => {
-        setQuantity(e.target.value);
-        setDollarAmount(e.target.value * coinDetails?.current_price)
-        console.log(quantity, dollarAmount);
-    }
-
-    // Sending the coin and quantity to a Saga to handle post to DB.
-    const addCoin = () => {
-  
-        if (confirm(`Add ${quantity} ${coinDetails?.name} for a current value of $${dollarAmount}?`)) {
-            dispatch({ type: 'ADD_COIN', payload: { coin: coinDetails, quantity: quantity } })
-            alert('Coin Added to portfolio');
-            dispatch({ type: 'CLEAR_DETAILS' })
-            history.push('/portfolio')
-        }
-    }
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -53,9 +28,19 @@ function AddModal({coinDetails}) {
         p: 4,
       };
 
+      const handleDelete = () => {
+        if(confirm('Are You Sure You Want To Delete This?')) {
+         dispatch({type: 'DELETE_ALL_ASSET', payload: asset.id})
+         history.push('/portfolio')
+        }
+    }
+
+    const handleRemove = () => {
+        console.log('removed');
+    }
     return (
         <div>
-            <Button onClick={handleOpen} variant="contained">Add Coin</Button>
+            <Button onClick={handleOpen} variant="outlined">Edit Holdings</Button>
             <Fade in={open}>
                 <div>
             <Modal
@@ -68,21 +53,19 @@ function AddModal({coinDetails}) {
                     <Stack spacing={2}>
                         <img src={coinDetails?.image} alt="Coin Logo" width="60px" height="60px" />
                         <Typography id="modal-modal-title" variant="h6">
-                            How Much {coinDetails?.name} would you like to add?
+                            Let's edit your {coinDetails?.name} holdings.
                         </Typography>
                         <Typography id="current_price" variant="h6">
-                            Current Price: ${coinDetails?.current_price.toFixed(2)}
+                            Quantity Owned: {assetDetails?.quantity}
                         </Typography>
-                        <TextField variant="outlined" type="number" value={quantity} onChange={handleUpdate} />
                         <Typography variant="h6" sx={{ mt: 2 }}>
-                            Market Value: ${(Number(dollarAmount.toFixed(2)))}
+                            Current Value: ${(assetDetails?.quantity * coinDetails?.current_price).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </Typography>
                     </Stack>
                     <Stack spacing={2} sx={{mt: 2}}>
-                    <AddNestedModal coinDetails={coinDetails} quantity={quantity} />
+                    <Button variant="contained" onClick={handleDelete}>Remove All</Button>
+                    <Button variant="contained" onClick={handleRemove}>Remove Amount</Button>
                     <Button variant="outlined" onClick={handleClose}>Cancel</Button>
-                    
-                    {/* <Button variant="contained" onClick={addCoin}>Add Holdings</Button> */}
                     </Stack>
                 </Box>
             </Modal>
@@ -93,4 +76,4 @@ function AddModal({coinDetails}) {
         )
     }
 
-    export default AddModal;
+export default EditModal;

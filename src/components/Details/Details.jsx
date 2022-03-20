@@ -10,6 +10,7 @@ import { Typography, Box, Slide, Button, Stack, Grid } from '@mui/material';
 import AddModal from '../AddModal/AddModal';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
+import EditModal from '../EditModal/EditModal';
 
 import './Details.css'
 
@@ -86,7 +87,7 @@ function Details() {
                         </Typography>
                     </Grid>
                     <Grid item justifyContent="center" xs={6}>
-                        {assetDetails?.quantity > 0 && <Button variant="outlined" onClick={handleEdit}>Edit Holdings</Button>}
+                        {assetDetails?.quantity > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
                     </Grid>
                     <Grid item justifyContent="center" xs={6}>
                         {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}
@@ -104,6 +105,8 @@ export default Details;
 
 
 
+
+{/* {assetDetails?.quantity > 0 && <Button variant="outlined" onClick={handleEdit}>Edit Holdings</Button>} */}
 
 
 
