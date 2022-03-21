@@ -58,33 +58,33 @@ const job = schedule.scheduleJob('* * * * *', async function () {
     }
     console.log('No Orders to get');
 
-    let transporter = nodemailer.createTransport({
-        host: "smtp.mailtrap.io",
-        port: 2525,
-        auth: {
-          user: "1ecfec0b678af1",
-          pass: "05da23f6fc8087"
-        }
-      });
+    // let transporter = nodemailer.createTransport({
+    //     host: "smtp.mailtrap.io",
+    //     port: 2525,
+    //     auth: {
+    //       user: "1ecfec0b678af1",
+    //       pass: "05da23f6fc8087"
+    //     }
+    //   });
 
-      let mailOptions = {
-        from: 'test@gmail.co',
-        to: 'test@gmail.com',
-        subject: 'Nodemailer Project',
-        text: 'Hi from your nodemailer project',
-        html: `Daily Summary of your sell order:
-        <div>
+    //   let mailOptions = {
+    //     from: 'test@gmail.co',
+    //     to: 'test@gmail.com',
+    //     subject: 'Nodemailer Project',
+    //     text: 'Hi from your nodemailer project',
+    //     html: `Daily Summary of your sell order:
+    //     <div>
    
-        </div>`
+    //     </div>`
 
-      };
-    transporter.sendMail(mailOptions, function(err, data) {
-        if (err) {
-          console.log("Error " + err);
-        } else {
-          console.log("Email sent successfully");
-        }
-      });
+    //   };
+    // transporter.sendMail(mailOptions, function(err, data) {
+    //     if (err) {
+    //       console.log("Error " + err);
+    //     } else {
+    //       console.log("Email sent successfully");
+    //     }
+    //   });
 
 
 })
