@@ -63,8 +63,8 @@ const job = schedule.scheduleJob('* * * * *', async function () {
         //   });
         
         //   let mailOptions = {
-        //     from: 'brandonjlanier@gmail.com',
-        //     to: 'brandonjlanier@gmail.com',
+        //     from: 'test@gmail.co',
+        //     to: 'test@gmail.com',
         //     subject: 'Nodemailer Project',
         //     text: 'Hi from your nodemailer project',
         //     html: `Daily Summary of your sell order:
