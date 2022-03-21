@@ -20,25 +20,25 @@ import Typography from '@mui/material/Typography';
 
 function OrderDetails() {
 
-    const { orderid } = useParams();
-    const dispatch = useDispatch()
+    const { id } = useParams();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        // dispatch({type: 'GET_ORDER_DETAIlS', payload: orderid })
-    })
+        dispatch({type: 'GET_ORDER_DETAIlS', payload: Number(id) })
+    }, [])
 
     const order = useSelector(store => store.orderDetails)
 
-    console.log(order);
+    console.log(id);
     return (
         <div>
             <Card sx={{ minWidth: 350 }}>
                 <CardContent>
                     <Typography variant="h6">
-                        Target Return: ${order[0].target}
+                        Target Return: ${order[0]?.target}
                     </Typography>
                     <Typography variant="b1">
-                        Days Remaining: {order[0].days_left}
+                        Days Remaining: {order[0]?.days_left}
                     </Typography>
                     <TableContainer component={Paper}>
                         <Table sx={{ minWidth: 340 }} aria-label="order-details-table">
@@ -53,15 +53,15 @@ function OrderDetails() {
                             <TableBody>
                                 {order.map((row) => (
                                     <TableRow
-                                        key={row.name}
+                                        key={row?.name}
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
                                         <TableCell component="th" scope="row">
-                                            {row.name}
+                                            {row?.name}
                                         </TableCell>
-                                        <TableCell align="left">{row.qtyToSell.toFixed(4)}</TableCell>
-                                        <TableCell align="left">${row.sellDollarAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}</TableCell>
-                                        <TableCell align="left">{(row.percentage * 100).toFixed(2)}%</TableCell>
+                                        <TableCell align="left">{row?.qtyToSell.toFixed(4)}</TableCell>
+                                        <TableCell align="left">${row?.sellDollarAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}</TableCell>
+                                        <TableCell align="left">{(row?.percentage * 100).toFixed(2)}%</TableCell>
                                     </TableRow>
                                 ))}
                             </TableBody>
@@ -69,8 +69,8 @@ function OrderDetails() {
                     </TableContainer>
                 </CardContent>
                 <CardActions>
-                    <Button size="small">Skip Today</Button>
-                    <Button size="small">Execute</Button>
+                    <Button size="small" color="secondary" variant="outlined">Skip Today</Button>
+                    <Button size="small" color="secondary" variant="outlined">Execute</Button>
                 </CardActions>
             </Card>
         </div >
