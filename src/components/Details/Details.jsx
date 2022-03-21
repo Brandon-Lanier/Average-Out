@@ -80,16 +80,16 @@ function Details() {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography>
+                        <Typography variant="b1">
                             % Change (24 hrs):
                             {coinDetails?.price_change_percentage_24h > 0 ? <ArrowDropUpRoundedIcon color="success" /> : <ArrowDropDownRoundedIcon color="error" />}
                             {coinDetails?.price_change_percentage_24h.toFixed(2)}%
                         </Typography>
                     </Grid>
-                    <Grid item justifyContent="center" xs={6}>
+                    <Grid item justifyContent="center" xs={12}>
                         {assetDetails?.quantity > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
                     </Grid>
-                    <Grid item justifyContent="center" xs={6}>
+                    <Grid item justifyContent="center" xs={12}>
                         {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}
                         <AddModal coinDetails={coinDetails} />
                     </Grid>

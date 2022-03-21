@@ -32,13 +32,13 @@ function ActiveOrders() {
     console.log(orders);
     return (
         <>
-         <Card>
+         <Card variant="outlined">
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
-                  Orders: {startDate}
+                  Orders: {startDate.toDateString()}
                 </Typography>
                 <Typography variant="h5" component="div">
-                   
+                   Days Remaining: {daysLeft}
                 </Typography>
                 <Typography sx={{ mb: 1.5 }} color="text.secondary">
                     
@@ -48,7 +48,7 @@ function ActiveOrders() {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Learn More</Button>
+                <Button size="small">View</Button>
             </CardActions>
             </Card>
         </>

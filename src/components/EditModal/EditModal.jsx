@@ -30,7 +30,7 @@ function EditModal({coinDetails, assetDetails}) {
 
       const handleDelete = () => {
         if(confirm('Are You Sure You Want To Delete This?')) {
-         dispatch({type: 'DELETE_ALL_ASSET', payload: asset.id})
+         dispatch({type: 'DELETE_ALL_ASSET', payload: assetDetails.id})
          history.push('/portfolio')
         }
     }
@@ -55,10 +55,10 @@ function EditModal({coinDetails, assetDetails}) {
                         <Typography id="modal-modal-title" variant="h6">
                             Let's edit your {coinDetails?.name} holdings.
                         </Typography>
-                        <Typography id="current_price" variant="h6">
+                        <Typography id="current_price" variant="b1">
                             Quantity Owned: {assetDetails?.quantity}
                         </Typography>
-                        <Typography variant="h6" sx={{ mt: 2 }}>
+                        <Typography variant="b1" sx={{ mt: 2 }}>
                             Current Value: ${(assetDetails?.quantity * coinDetails?.current_price).toLocaleString(undefined, { maximumFractionDigits: 2 })}
                         </Typography>
                     </Stack>

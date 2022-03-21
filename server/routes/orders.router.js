@@ -3,6 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const axios = require("axios");
 const schedule = require('node-schedule');
+const nodemailer = require("nodemailer");
 
 const currentDate = new Date();
 

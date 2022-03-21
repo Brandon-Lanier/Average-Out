@@ -55,7 +55,7 @@ function AddModal({coinDetails}) {
 
     return (
         <div>
-            <Button onClick={handleOpen} variant="contained">Add Coin</Button>
+            <Button onClick={handleOpen} variant="contained">Add To Portfolio</Button>
             <Fade in={open}>
                 <div>
             <Modal
@@ -70,11 +70,11 @@ function AddModal({coinDetails}) {
                         <Typography id="modal-modal-title" variant="h6">
                             How Much {coinDetails?.name} would you like to add?
                         </Typography>
-                        <Typography id="current_price" variant="h6">
+                        <Typography id="current_price" variant="b1">
                             Current Price: ${coinDetails?.current_price.toFixed(2)}
                         </Typography>
-                        <TextField variant="outlined" type="number" value={quantity} onChange={handleUpdate} />
-                        <Typography variant="h6" sx={{ mt: 2 }}>
+                        <TextField label="Quantity" variant="filled" type="number" value={quantity} onChange={handleUpdate} />
+                        <Typography variant="b1" sx={{ mt: 2 }}>
                             Market Value: ${(Number(dollarAmount.toFixed(2)))}
                         </Typography>
                     </Stack>

@@ -18,7 +18,6 @@ function AddNestedModal({ coinDetails, quantity }) {
     const addCoin = () => {
         dispatch({ type: 'ADD_COIN', payload: { coin: coinDetails, quantity: quantity } })
         setAlertOpen(true)
-        alert('Coin Added to portfolio');
         dispatch({ type: 'CLEAR_DETAILS' })
         history.push('/portfolio')
 
