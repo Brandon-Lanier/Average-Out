@@ -8,6 +8,8 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import OrderItem from "../OrderItem/OrderItem";
+import './ActiveOrders.css'
 
 
 function ActiveOrders() {
@@ -21,36 +23,22 @@ function ActiveOrders() {
 
     const orders = useSelector(store => store.orders)
 
-    const currentDate = new Date();
-    const endDate = new Date(orders[0]?.end_date);
-    const daysLeft = (endDate - currentDate) / (1000 * 60 * 60 * 24);
-    let startDate = orders[0]?.start_date
 
-    console.log(daysLeft);
-    console.log(endDate);
-    console.log(currentDate);
-    console.log(orders);
+
+
     return (
         <>
-         <Card variant="outlined">
-            <CardContent>
-                <Typography sx={{ fontSize: 14 }} color="text.primary" gutterBottom>
-                  Orders: {startDate.toDateString()}
+            <div className="activeOrders">
+                <Typography variant="h5" sx={{mt: 5, mb: 4}}>
+                    Active Strategies
                 </Typography>
-                <Typography variant="h5" component="div">
-                   Days Remaining: {daysLeft}
-                </Typography>
-                <Typography sx={{ mb: 1.5 }} color="text.secondary">
-                    
-                </Typography>
-                <Typography variant="body2">
-                   Target Return: ${orders[0].total_target}
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button size="small">View</Button>
-            </CardActions>
-            </Card>
+                {orders.map(order => (
+                    <OrderItem
+                        key={order.id}
+                        order={order}
+                    />
+                ))}
+            </div>
         </>
     )
 }

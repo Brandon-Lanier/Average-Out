@@ -15,9 +15,7 @@ const job = schedule.scheduleJob('* * * * *', async function () {
     const endDate = new Date(orders.rows[0].end_date);
     const daysLeft = (endDate - currentDate) / (1000 * 60 * 60 * 24);
     const orderCoins = assets.rows.filter(coin => coinsToFetch.includes(coin.coin_id))
-
     const coinsToQry = await axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=${coinsToFetch.join(',')}&order=gecko_cap_desc&per_page=100&page=1&sparkline=false&price_change_percentage=1d`);
-
     const map = new Map();
     orderCoins.forEach(item => map.set(item.coin_id, item));
     coinsToQry.data.forEach(item => map.set(item.id, {
@@ -36,7 +34,6 @@ const job = schedule.scheduleJob('* * * * *', async function () {
             totalValue: total,
         });
     }
-    
         let totalCoinValue = finalCoins.reduce((accumulator, current) => accumulator + current.totalValue, 0);
 
         let percentSplit = (orders.rows[0].daily_target / totalCoinValue);
@@ -56,6 +53,32 @@ const job = schedule.scheduleJob('* * * * *', async function () {
                 days_left: Math.floor(daysLeft)
             })
         }
+        // let transporter = nodemailer.createTransport({
+        //     host: "smtp.mailtrap.io",
+        //     port: 2525,
+        //     auth: {
+        //       user: "1ecfec0b678af1",
+        //       pass: "05da23f6fc8087"
+        //     }
+        //   });
+        
+        //   let mailOptions = {
+        //     from: 'brandonjlanier@gmail.com',
+        //     to: 'brandonjlanier@gmail.com',
+        //     subject: 'Nodemailer Project',
+        //     text: 'Hi from your nodemailer project',
+        //     html: `Daily Summary of your sell order:
+        //     <div>
+        //     </div>`
+                
+        //   };
+        // transporter.sendMail(mailOptions, function(err, data) {
+        //     if (err) {
+        //       console.log("Error " + err);
+        //     } else {
+        //       console.log("Email sent successfully");
+        //     }
+        //   });
     
     console.log('Final Results', splitQuantities);
 })
@@ -70,6 +93,9 @@ router.get('/', (req, res) => {
             console.log('Error in the orders GET', err);
         })
 })
+
+
+
 
 
 module.exports = router;
