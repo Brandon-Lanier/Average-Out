@@ -10,6 +10,7 @@ const currentDate = new Date();
 // This function handles sending a daily updated calculation on what to sell across multiple assets.
 const job = schedule.scheduleJob('* * * * *', async function () {
     const orders = await pool.query('SELECT * FROM orders')
+    if (orders.rows.length > 0) {
     const assets = await pool.query('SELECT coin_id, quantity FROM assets')
     const coinsToFetch = orders.rows[0].coins
     const endDate = new Date(orders.rows[0].end_date);
@@ -53,6 +54,10 @@ const job = schedule.scheduleJob('* * * * *', async function () {
                 days_left: Math.floor(daysLeft)
             })
         }
+        console.log('Final Results', splitQuantities);
+    } 
+    console.log('No Orders to get');
+    
         // let transporter = nodemailer.createTransport({
         //     host: "smtp.mailtrap.io",
         //     port: 2525,
@@ -80,7 +85,7 @@ const job = schedule.scheduleJob('* * * * *', async function () {
         //     }
         //   });
     
-    console.log('Final Results', splitQuantities);
+  
 })
 
 router.get('/', (req, res) => {
@@ -94,7 +99,15 @@ router.get('/', (req, res) => {
         })
 })
 
-
+router.delete('/:id', (req, res) => {
+    const qryTxt = `DELETE FROM orders WHERE id = $1 and user_id = $2;`;
+    pool.query(qryTxt, [req.params.id, req.user.id])
+    .then(result => {
+        res.sendStatus(201)
+    }).catch(err => {
+        console.log('Error deleting the order', err);
+    })
+})
 
 
 

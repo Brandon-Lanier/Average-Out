@@ -3,8 +3,16 @@ import { CardContent } from "@mui/material";
 import { Typography } from "@mui/material";
 import { CardActions } from "@mui/material";
 import { Button } from "@mui/material";
+import { Modal, Stack, Box, Fade } from "@mui/material";
+import { useState } from "react";
+import DeleteOrderModal from "../DeleteOrderModal/DeleteOrderModal";
+
 
 function OrderItem({order}) {
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
 
     const currentDate = new Date();
     const endDate = new Date(order?.end_date);
@@ -12,6 +20,10 @@ function OrderItem({order}) {
     let startDate = new Date(order?.start_date)
     startDate = startDate.toDateString()
     console.log(startDate);
+
+    const handleDelete = () => {
+        console.log('delete');
+    }
 
     return (
         <>
@@ -31,11 +43,13 @@ function OrderItem({order}) {
                     </Typography>
                     <ul>
                     {order.coins.map(coin => 
-                        (<li>{coin}</li>))}
+                        (<li key={coin}>
+                            {coin}
+                        </li>))}
                     </ul>
                 </CardContent>
                 <CardActions sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button size="medium">Delete</Button>
+                    <DeleteOrderModal order={order} />
                     <Button size="medium">View</Button>
                 </CardActions>
             </Card>

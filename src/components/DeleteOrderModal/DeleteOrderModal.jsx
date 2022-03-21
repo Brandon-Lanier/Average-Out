@@ -5,21 +5,21 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Fade from '@mui/material/Fade';
 import Alert from '@mui/material/Alert';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
-function AddNestedModal({ coinDetails, quantity }) {
+
+function DeleteOrderModal({order}) {
 
 
     const history = useHistory();
     const dispatch = useDispatch();
 
 
-    const addCoin = () => {
-        dispatch({ type: 'ADD_COIN', payload: { coin: coinDetails, quantity: quantity } })
-        dispatch({ type: 'CLEAR_DETAILS' })
+    const handleDelete = () => {
+        dispatch({type: 'DELETE_ORDER', payload: order.id})
         history.push('/portfolio')
-
     }
 
 
@@ -38,29 +38,35 @@ function AddNestedModal({ coinDetails, quantity }) {
         boxShadow: 24,
         borderRadius: 5,
         p: 4,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '5px'
+        
     };
 
     return (
         <div>
-            <Button onClick={handleOpen} variant="contained" fullWidth>Add</Button>
+            <Button onClick={handleOpen} variant="contained" size="medium" startIcon={<DeleteIcon />}>Delete</Button>
             <Fade in={open}>
                 <div>
                     <Modal
                         open={open}
                         onClose={handleClose}
-                        aria-labelledby="Confirm-Add"
-                        aria-describedby="Confirm-Add"
+                        aria-labelledby="Confirm-Delete"
+                        aria-describedby="Confirm-Delete"
                     >
                         <Box sx={style}>
-                            <Stack spacing={2}>
-                                <img src={coinDetails?.image} alt="Coin Logo" width="60px" height="60px" />
-                                <Typography id="modal-modal-title" variant="h6">
-                                    Add {quantity} {coinDetails?.name} to your portfolio?
+                                
+                                <Typography id="Delete" variant="h6">
+                                    Are you sure you would like to remove this calculation?
                                 </Typography>
-                            </Stack>
+                                <Typography variant="b1">
+                                    This action is not reversible!
+                                </Typography>
                             <Stack spacing={2} sx={{ mt: 2 }}>
-                                <Button variant="contained" onClick={addCoin}>Add</Button>
-                                <Button variant="outlined" onClick={handleClose}>Cancel</Button>
+                                <Button variant="contained" onClick={handleDelete} fullWidth>Remove</Button>
+                                <Button variant="outlined" onClick={handleClose} fullWidth>Cancel</Button>
                             </Stack>
                         </Box>
 
@@ -73,4 +79,4 @@ function AddNestedModal({ coinDetails, quantity }) {
     )
 }
 
-export default AddNestedModal;
+export default DeleteOrderModal;
