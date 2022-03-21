@@ -7,7 +7,9 @@ import details from './details.reducer';
 import assetDetails from './assetDetails.reducer'
 import total from './total.reducer';
 import calculate from './calculate.reducer';
-import orders from './orders.reducer'
+import orders from './orders.reducer';
+import orderDetails from './orderDetails.reducer'
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -24,7 +26,8 @@ const rootReducer = combineReducers({
   assetDetails,
   total,
   calculate,
-  orders
+  orders,
+  orderDetails
 });
 
 export default rootReducer;

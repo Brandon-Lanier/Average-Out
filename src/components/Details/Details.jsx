@@ -43,6 +43,8 @@ function Details() {
         history.push(`/edit/${coinid}`);
     }
 
+
+
     return (
 
         <Slide direction="up" in="open" mountOnEnter unmountOnExit>
@@ -87,7 +89,7 @@ function Details() {
                         </Typography>
                     </Grid>
                     <Grid item justifyContent="center" xs={12}>
-                        {assetDetails?.quantity > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
+                        {Number(assetDetails?.quantity) > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
                     </Grid>
                     <Grid item justifyContent="center" xs={12}>
                         {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}

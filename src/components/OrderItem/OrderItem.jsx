@@ -5,6 +5,8 @@ import { CardActions } from "@mui/material";
 import { Button } from "@mui/material";
 import { Modal, Stack, Box, Fade } from "@mui/material";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import DeleteOrderModal from "../DeleteOrderModal/DeleteOrderModal";
 
 
@@ -14,6 +16,9 @@ function OrderItem({order}) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    const history = useHistory();
+    const dispatch = useDispatch();
+
     const currentDate = new Date();
     const endDate = new Date(order?.end_date);
     const daysLeft = (endDate - currentDate) / (1000 * 60 * 60 * 24);
@@ -21,8 +26,11 @@ function OrderItem({order}) {
     startDate = startDate.toDateString()
     console.log(startDate);
 
-    const handleDelete = () => {
-        console.log('delete');
+
+    const handleView = () => {
+        console.log(order.id);
+        dispatch({type: 'GET_ORDER_DETAILS', payload: order.id})
+        history.push(`/orders/details/${order.id}`)
     }
 
     return (
@@ -41,16 +49,21 @@ function OrderItem({order}) {
                     <Typography variant="body2">
                         Days Remaining: {Math.floor(daysLeft)}
                     </Typography>
+                    <Box sx={{mt: 2}}>
+                    <Typography variant="b1">
+                    Selected Coins:
+                    </Typography>
                     <ul>
                     {order.coins.map(coin => 
                         (<li key={coin}>
                             {coin}
                         </li>))}
                     </ul>
+                    </Box>
                 </CardContent>
                 <CardActions sx={{display: 'flex', justifyContent: 'flex-end'}}>
                     <DeleteOrderModal order={order} />
-                    <Button size="medium">View</Button>
+                    <Button size="medium" variant="contained" onClick={handleView}>View</Button>
                 </CardActions>
             </Card>
         </>
