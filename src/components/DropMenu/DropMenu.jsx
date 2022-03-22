@@ -24,8 +24,8 @@ function DropMenu() {
             setAnchorEl(null);
         }
     
-        const goProfile = () => {
-            history.push('/profile');
+        const goPortfolio = () => {
+            history.push('/portfolio');
             handleClose();
         }
     
@@ -44,6 +44,7 @@ function DropMenu() {
 
         const logOut = () => {
             dispatch({ type: 'LOGOUT' })
+            history.push('/login')
         }
 
         return (
@@ -71,9 +72,8 @@ function DropMenu() {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={goProfile}>Home</MenuItem>
+                    <MenuItem onClick={goPortfolio}>Home</MenuItem>
                     <MenuItem onClick={goCalculations}>Active Strategies</MenuItem>
-                    <MenuItem onClick={goHistory}>History</MenuItem>
                     <MenuItem onClick={goAbout}>About</MenuItem>
                     <MenuItem onClick={logOut}>Log Out</MenuItem>
                 </Menu>

@@ -62,17 +62,17 @@ function Calculate() {
     return (
         <div>
             <Slide direction="left" in="open" mountOnEnter unmountOnExit>
-                <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignContent: 'space-around' }}>
-                    <Typography variant="h5" sx={{ mt: 3, mb: 3 }}>
+                <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignContent: 'space-between' }}>
+                    <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
                         How much would you like to sell?
                     </Typography>
-
                     <TextField
                         error={runningTotal < targetValue}
                         id="amount"
-                        label="Sell Amount"
+                        label="Target Return"
                         variant="standard"
                         value={targetValue}
+                        errorText="Target greater than total value"
                         type="number"
                         InputProps={{
                             startAdornment: (
@@ -83,7 +83,7 @@ function Calculate() {
                         }}
                         onChange={((e) => setTargetValue(e.target.value))}
                     />
-                    <Box sx={{ minWidth: 200 }}>
+                    <Box sx={{ minWidth: 150, mt: 3 }}>
                         <FormControl fullWidth>
                             <InputLabel id="duration">Duration</InputLabel>
                             <Select
@@ -91,6 +91,7 @@ function Calculate() {
                                 id="duration"
                                 value={duration}
                                 label="Duration"
+                                variant="standard"
                                 onChange={(e) => setDuration(e.target.value)}
                             >
                                 <MenuItem value={1}>Sell Today</MenuItem>
@@ -103,7 +104,6 @@ function Calculate() {
                             </Select>
                         </FormControl>
                     </Box>
-                   
                         <Typography variant="b2" sx={{ mt: 3, mb: 3 }} >
                             Which assets would you like to sell?
                         </Typography>
@@ -123,9 +123,7 @@ function Calculate() {
                                         key={coin.id}
                                         onClick={() => handleSelect(coin)}
                                     />
-                                ))}
-
-                              
+                                ))} 
                             </Stack>
                             </Box>
                         </Grow>
@@ -151,16 +149,14 @@ function Calculate() {
                             </Box>
                         </Grow>
 
-                        <Box sx={{display: 'flex', justifyContent: "space-around", widthL: "100%", mt: 3}}>
-                            <Button variant='outlined' onClick={clearCalc}>
-                                Reset
-                            </Button>
+                        <Box sx={{display: 'flex', flexDirection: 'column', width: "100%", mt: 2, gap: 1}}>
                             <Button variant="contained" onClick={handleCalculate}>
                                 Calculate
                             </Button>
+                            <Button variant='outlined' onClick={clearCalc}>
+                                Reset
+                            </Button>
                         </Box>
-
-                   
                 </Container>
             </Slide>
         </div >

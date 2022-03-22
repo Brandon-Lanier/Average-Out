@@ -48,9 +48,9 @@ function DeleteOrderModal({order}) {
     return (
         <div>
             <Button onClick={handleOpen} 
-                variant="outlined" 
+                variant="contained" 
                 size="medium" 
-                color="secondary"
+                color="primary"
                 startIcon={<DeleteIcon />}>
                     Delete
             </Button>

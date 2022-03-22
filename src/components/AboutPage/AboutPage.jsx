@@ -1,4 +1,6 @@
 import React from 'react';
+import { Stack, Typography } from '@mui/material';
+import reacticon from './images/icons8-react-50-2.png'
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -8,9 +10,15 @@ import React from 'react';
 function AboutPage() {
   return (
     <div className="container">
-      <div>
-        <p>This about page is for anyone to read!</p>
-      </div>
+      
+        <Typography variant="h5">
+          Built with the following tech stacks:
+        </Typography>
+        <Stack spacing={1}>
+        <img src={reacticon} alt="react" />
+        
+        </Stack>
+ 
     </div>
   );
 }

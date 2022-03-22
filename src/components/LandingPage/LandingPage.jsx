@@ -20,7 +20,6 @@ function LandingPage() {
 
   return (
     <>
-      
       <Container sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
         <Typography variant="h5" sx={{mb: 5}}>
           Welcome to Average Out

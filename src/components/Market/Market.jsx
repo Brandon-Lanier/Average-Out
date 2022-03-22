@@ -18,6 +18,7 @@ import { TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useState } from 'react';
 
 
 
@@ -58,7 +59,11 @@ function Market() {
     },
   }));
 
+  const [selectedCoin, setSelectedCoin] = useState('')
 
+  const handleSearch = (coin) => {
+    history.push(`/details/${coin}`)
+  }
 
   return (
     <>
@@ -71,7 +76,8 @@ function Market() {
             id="coinsearch"
             freeSolo
             fullWidth
-            options={marketData?.map((option) => option.name)}
+            options={marketData?.map((option) => option.id)}
+            onChange={(event, value) => handleSearch(value)}
             sx={{mt: 1, mb: 3}}
             renderInput={(params) => <TextField {...params} label="Search Coins" />}
           />

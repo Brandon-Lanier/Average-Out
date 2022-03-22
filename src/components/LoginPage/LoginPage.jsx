@@ -4,6 +4,8 @@ import { useHistory } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography'
+import loginLogo from './loginlogo.PNG'
 import './LoginPage.css'
 
 function LoginPage() {
@@ -11,17 +13,23 @@ function LoginPage() {
 
   return (
     <>
-      <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <LoginForm />
-
-        <Button 
-        variant="outlined"
-        onClick={() => history.push('/registration')}
-        sx={{mt: 3}}
+      {/* <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignContent: 'center', height: '100%' }}> */}
+      <div className="login-container">
+        <img src={loginLogo} alt="logo" className="login-logo" />
+        <Box>
+          <LoginForm />
+        </Box>
+        <Typography variant="b1" sx={{mt: 2}}>
+          New around here?
+        </Typography>
+        <Button
+          variant="outlined"
+          onClick={() => history.push('/registration')}
+          sx={{ mt: 1 }}
         >
-        Register
+          Register
         </Button>
-        <button
+        {/* <Button
           type="button"
           className="btn btn_asLink"
           onClick={() => {
@@ -29,9 +37,9 @@ function LoginPage() {
           }}
         >
           Register
-        </button>
-
-      </Container>
+        </Button> */}
+      </div>
+      {/* </Container> */}
     </>
   );
 }

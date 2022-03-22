@@ -28,7 +28,7 @@ function RegisterForm() {
 
   return (
 
-    <Card sx={{ width: 350 }} >
+    <Card sx={{ width: 290 }} >
       <CardContent>
         {errors.registrationMessage && (
           <h3 className="alert" role="alert">
@@ -37,11 +37,12 @@ function RegisterForm() {
           <Typography variant="h5" sx={{mb:4}}>
             Register
           </Typography>
-        <Stack spacing={4}>
+        <Stack spacing={2}>
           <TextField
             id="username"
             label="Username"
             variant="standard"
+            autoComplete="off"
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
@@ -51,6 +52,7 @@ function RegisterForm() {
             label="Password"
             variant="standard"
             type="password"
+            autoComplete="off"
             value={password}
             required
             onChange={(event) => setPassword(event.target.value)}

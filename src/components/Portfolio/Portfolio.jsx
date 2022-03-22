@@ -80,7 +80,7 @@ function Portfolio() {
     return (
         <>
         <Slide direction="up" in="open" mountOnEnter unmountOnExit>
-        <Container maxWidth="sm" sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+        <Container maxWidth="sm" sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw'}}>
             <Typography variant="h6" sx={{mt: 2, mb: 2}}>
                 Portfolio Value: ${getSum()}
             </Typography>
@@ -89,7 +89,7 @@ function Portfolio() {
                 Portfolio Summary
             </Typography>
             <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 360, mt: 3, p: 0 }} aria-label="portfolio">
+      <Table sx={{ minWidth: 330, p: 0 }} aria-label="portfolio">
         <TableHead>
           <TableRow sx={{backgroundColor: "#67ced4"}}>
           <StyledTableCell align="center">Name</StyledTableCell>

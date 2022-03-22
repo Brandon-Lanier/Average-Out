@@ -9,6 +9,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import OrderItem from "../OrderItem/OrderItem";
+import GilroyBold from '../fonts/Gilroy-Bold.ttf'
 import './ActiveOrders.css'
 
 
@@ -29,7 +30,7 @@ function ActiveOrders() {
     return (
         <>
             <div className="activeOrders">
-                <Typography variant="h5" sx={{mt: 5, mb: 4}}>
+                <Typography variant="h5" sx={{mt: 5, mb: 4, fontFamily: 'Gilroy-Bold'}}>
                     Active Strategies
                 </Typography>
                 {orders.map(order => (

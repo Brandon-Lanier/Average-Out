@@ -13,6 +13,7 @@ import { Typography } from '@mui/material';
 import { Container, Button, Stack } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import ExecuteModal from '../ExecuteModal/ExecuteModal';
 
 
 
@@ -45,12 +46,9 @@ function Results() {
 ))
 
     const handleExecute = () => {
-        if
-            (confirm('This will actually execute the transaction from your portfolio..blah blah blah')) {
                 dispatch({type: 'EXECUTE_CALCULATION', payload: result})
                 dispatch({type: 'ClEAR_RESULT'})
-                history.push('/portfolio')
-        }
+                history.push('/portfolio')  
     }
 
     const handleCancel = () => {
@@ -61,7 +59,7 @@ function Results() {
 
     console.log(result);
     return (
-        <Container maxWidth="sm" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Container maxWidth="sm" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw' }}>
             <Typography variant="h6">
                 Amount To Sell Today:
             </Typography>
@@ -72,9 +70,9 @@ function Results() {
                 Total Duration: {result[0]?.days}
             </Typography>
             <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 380 }} stickyHeader aria-label="result table">
+                <Table sx={{ minWidth: 350 }} stickyHeader aria-label="result table">
                     <TableHead>
-                        <TableRow>
+                        <TableRow sx={{backgroundColor: "#67ced4"}}>
                             <TableCell align="left">Name</TableCell>
                             <TableCell align="left">Quantity To Sell</TableCell>
                             <TableCell align="left">Dollar Amount</TableCell>
@@ -97,8 +95,9 @@ function Results() {
                 </Table>
             </TableContainer>
             <Stack spacing={3} sx={{mt: 3}}>
-            <Button variant="contained" onClick={handleExecute}>Execute</Button>
-            <Button onClick={handleCancel} color="secondary">Cancel</Button>
+                <ExecuteModal handleExecute={handleExecute} result={result}/>
+            {/* <Button variant="contained" onClick={handleExecute}>Execute</Button> */}
+            <Button onClick={handleCancel} color="primary" variant="outlined">Cancel</Button>
             </Stack>
         </Container>
 

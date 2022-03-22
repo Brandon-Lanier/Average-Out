@@ -23,19 +23,12 @@ function AddModal({coinDetails}) {
         console.log(quantity, dollarAmount);
     }
 
-    // const addCoin = () => {
-  
-    //     if (confirm(`Add ${quantity} ${coinDetails?.name} for a current value of $${dollarAmount}?`)) {
-    //         dispatch({ type: 'ADD_COIN', payload: { coin: coinDetails, quantity: quantity } })
-    //         alert('Coin Added to portfolio');
-    //         dispatch({ type: 'CLEAR_DETAILS' })
-    //         history.push('/portfolio')
-    //     }
-    // }
-
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleClose = () => {
+        setOpen(false);
+        setQuantity('');
+    }
 
     const style = {
         position: 'absolute',
@@ -44,7 +37,7 @@ function AddModal({coinDetails}) {
         transform: 'translate(-50%, -50%)',
         width: '90%',
         bgcolor: '#f5f5f5',
-        border: '1px solid #47688d',
+        border: '3px solid #364f6b',
         boxShadow: 24,
         borderRadius: 5,
         p: 4,
@@ -70,7 +63,7 @@ function AddModal({coinDetails}) {
                         <Typography id="current_price" variant="b1">
                             Current Price: ${coinDetails?.current_price.toFixed(2)}
                         </Typography>
-                        <TextField label="Quantity" variant="filled" type="number" value={quantity} onChange={handleUpdate} />
+                        <TextField label="Quantity" variant="filled" type="number" autoComplete="off" value={quantity} onChange={handleUpdate} />
                         <Typography variant="b1" sx={{ mt: 2 }}>
                             Market Value: ${(Number(dollarAmount.toFixed(2)))}
                         </Typography>

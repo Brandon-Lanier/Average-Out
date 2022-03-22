@@ -52,7 +52,7 @@ function OrderItem({order}) {
                     </Typography>
                     <Box sx={{mt: 2}}>
                     <Typography variant="b1">
-                    Selected Coins:
+                    Selected Assets:
                     </Typography>
                     <ul>
                     {order.coins.map(coin => 
@@ -69,7 +69,7 @@ function OrderItem({order}) {
                     <Button 
                         size="medium" 
                         variant="outlined"
-                        color="secondary" 
+                        color="primary" 
                         startIcon={<SearchIcon />} 
                         onClick={handleView}
                         sx={{m: '5px'}}

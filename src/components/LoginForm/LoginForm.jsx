@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import TextField from '@mui/material/TextField';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
-import './LoginForm.css'
+
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -33,20 +33,21 @@ function LoginForm() {
 
   return (
     <>
-      <Card sx={{ width: 350 }}>
+      <Card sx={{ width: 290 }}>
         <CardContent>
-          <h2>Login</h2>
+          <Typography variant="h5">Login</Typography>
           {errors.loginMessage && (
             <h3 className="alert" role="alert">
               {errors.loginMessage}
             </h3>
           )}
-          <Stack spacing={4}>
+          <Stack spacing={2}>
             <TextField
               id="username"
               label="Username"
               variant="standard"
               value={username}
+              autoComplete="off"
               required
               onChange={(event) => setUsername(event.target.value)}
             />
@@ -55,6 +56,7 @@ function LoginForm() {
               label="Password"
               variant="standard"
               type="password"
+              autoComplete="off"
               value={password}
               required
               onChange={(event) => setPassword(event.target.value)}

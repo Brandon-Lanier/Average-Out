@@ -10,12 +10,14 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import CalculateIcon from '@mui/icons-material/Calculate';
 import AddchartIcon from '@mui/icons-material/Addchart';
 import PieChartIcon from '@mui/icons-material/PieChart';
+import { useSelector } from 'react-redux';
 
 
 
 function Footer() {
 
     const history = useHistory();
+    const user = useSelector(store => store.user);
 
     
     const goMarket = () => {
@@ -38,12 +40,14 @@ function Footer() {
             <Paper sx={{
                 position: 'fixed', bottom: 0, left: 0, right: 0 , backgroundColor: (theme) =>
                 theme.palette.mode === 'dark' ? '#1A2027' : '#fff'}} elevation={5}>
-                <BottomNavigation showLabels style={{background: '#364f6b',}}
-                >
+                 {user.id && <BottomNavigation showLabels style={{background: '#364f6b',}}
+                >  
                     <BottomNavigationAction sx={{color: '#fff'}} label="Market" icon={<AddchartIcon />} onClick={goMarket} />
                     <BottomNavigationAction sx={{color: '#fff'}} label="Portfolio" icon={<PieChartIcon />} onClick={goPortfolio} />
                     <BottomNavigationAction sx={{color: '#fff'}} label="Calculate" icon={<CalculateIcon />} onClick={goCalculate} />
+                    
                 </BottomNavigation>
+                }
             </Paper>
         </Box>
 
