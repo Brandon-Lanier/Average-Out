@@ -43,7 +43,7 @@ function AddModal({coinDetails}) {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: '90%',
-        bgcolor: '#121212',
+        bgcolor: '#f5f5f5',
         border: '1px solid #47688d',
         boxShadow: 24,
         borderRadius: 5,

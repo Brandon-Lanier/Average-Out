@@ -112,19 +112,22 @@ function Calculate() {
                             style={{ transformOrigin: '0 0 0' }}
                             {...(open ? { timeout: 1000 } : {})}
                         >
+                            <Box sx={{display: 'flex', flexDirection: "column", width: "75%"}}>
                             <Stack spacing={2} sx={{ mt: 1 }}>
-
+                            
                                 {coinOptions?.map((coin) => (
                                     <Chip
                                         avatar={<Avatar alt={coin.id} src={coin.image} />}
                                         label={coin.name}
                                         variant="outlined"
+                                        key={coin.id}
                                         onClick={() => handleSelect(coin)}
                                     />
                                 ))}
 
-
+                              
                             </Stack>
+                            </Box>
                         </Grow>
                         <Typography variant="b2" sx={{ mt: 2 }}>
                             Selected Assets:
@@ -134,20 +137,21 @@ function Calculate() {
                             style={{ transformOrigin: '0 0 0' }}
                             {...(open ? { timeout: 1000 } : {})}
                         >
+                            <Box sx={{display: 'flex', flexDirection: "column", width: "75%"}}>
                             <Stack spacing={2} sx={{ mt: 3 }}>
                                 {selectCoin.map((el) => (
                                     <Chip
                                         avatar={<Avatar alt={el.id} src={el.image} />}
                                         label={el.name}
                                         variant="outlined"
-                                        sx={{backgroundColor: '#2f9fa6'}}
                                         key={el.id}
                                     />
                                 ))}
                             </Stack>
+                            </Box>
                         </Grow>
 
-                        <Box sx={{display: 'flex', justifyContent: "space-around", widthL: "100%"}}>
+                        <Box sx={{display: 'flex', justifyContent: "space-around", widthL: "100%", mt: 3}}>
                             <Button variant='outlined' onClick={clearCalc}>
                                 Reset
                             </Button>

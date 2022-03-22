@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Container from '@mui/material/Container';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -32,7 +32,7 @@ function Portfolio() {
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
       [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
+        backgroundColor: "#364f6b",
         color: theme.palette.common.white,
       },
       [`&.${tableCellClasses.body}`]: {
@@ -89,32 +89,32 @@ function Portfolio() {
                 Portfolio Summary
             </Typography>
             <TableContainer component={Paper}>
-      <Table sx={{ maxWidth: 365 }} aria-label="portfolio">
+      <Table sx={{ minWidth: 360, mt: 3, p: 0 }} aria-label="portfolio">
         <TableHead>
           <TableRow sx={{backgroundColor: "#67ced4"}}>
-            <TableCell align="left">Name</TableCell>
-            <TableCell align="left">Quantity</TableCell>
-            <TableCell align="left">Value</TableCell>
-            <TableCell align="left">Change</TableCell>
+          <StyledTableCell align="center">Name</StyledTableCell>
+          <StyledTableCell align="center">Quantity</StyledTableCell>
+          <StyledTableCell align="center">Value</StyledTableCell>
+          <StyledTableCell align="center">Change</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {assets?.map((coin) => (
-            <TableRow
+            <StyledTableRow
               key={coin.id}
               // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               onClick={() => handleClick(coin)}
             >
-              <TableCell align="left">{coin?.name}</TableCell>
-              <TableCell align="left">{coin?.quantity}</TableCell>
-              <TableCell align="left">${(coin?.quantity * coin?.current_price).toLocaleString(undefined, {maximumFractionDigits:2})}</TableCell>
-              <TableCell align="left">{coin?.price_change_percentage_24h > 0
+              <StyledTableCell align="left">{coin?.name}</StyledTableCell>
+              <StyledTableCell align="left">{coin?.quantity}</StyledTableCell>
+              <StyledTableCell align="left">${(coin?.quantity * coin?.current_price).toLocaleString(undefined, {maximumFractionDigits:2})}</StyledTableCell>
+              <StyledTableCell align="left">{coin?.price_change_percentage_24h > 0
                     ?
                     <ArrowDropUpRoundedIcon color="success" />
                     :
                     <ArrowDropDownRoundedIcon color="error"/>}
-                {coin.price_change_percentage_24h.toFixed(2)}%</TableCell>
-            </TableRow>
+                {coin.price_change_percentage_24h.toFixed(2)}%</StyledTableCell>
+              </StyledTableRow>
           ))}
         </TableBody>
       </Table>

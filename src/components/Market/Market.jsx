@@ -7,7 +7,7 @@ import { useHistory } from 'react-router-dom';
 import { DataGrid } from '@mui/x-data-grid';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -17,6 +17,7 @@ import { Autocomplete } from '@mui/material';
 import { TextField } from '@mui/material';
 import { Box } from '@mui/system';
 import { Container } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 
 
@@ -36,6 +37,26 @@ function Market() {
     console.log(coin.id);
     history.push(`/details/${coin.id}`)
   }
+
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: "#364f6b",
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
 
 
 
@@ -58,16 +79,16 @@ function Market() {
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 300 }} stickyHeader aria-label="simple table">
             <TableHead sx={{backgroundColor: "#67ced4"}}>
-              <TableRow>
-                <TableCell align="left">Name</TableCell>
-                <TableCell align="left">Symbol</TableCell>
-                <TableCell align="left">Price</TableCell>
-                <TableCell align="left">Change</TableCell>
-              </TableRow>
+              <StyledTableRow>
+                <StyledTableCell align="center">Name</StyledTableCell>
+                <StyledTableCell align="center">Symbol</StyledTableCell>
+                <StyledTableCell align="center">Price</StyledTableCell>
+                <StyledTableCell align="center">Change</StyledTableCell>
+              </StyledTableRow>
             </TableHead>
             <TableBody>
               {marketData.map((coin) => (
-                <TableRow
+                <StyledTableRow
                   key={coin.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   onClick={() => handleClick(coin)}
@@ -75,7 +96,7 @@ function Market() {
                   <CoinItem
                     coin={coin}
                   />
-                </TableRow>
+                </StyledTableRow>
               ))}
             </TableBody>
           </Table>

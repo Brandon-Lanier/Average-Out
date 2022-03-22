@@ -24,12 +24,14 @@ import Results from '../Results/Results';
 import EditCoin from '../EditCoin/EditCoin'
 import ActiveOrders from '../ActiveOrders/ActiveOrders';
 import OrderDetails from '../OrderDetails/OrderDetails';
+import Scenarios from '../Scenarios/Scenarios';
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
 import './App.css';
+
 
 function App() {
 
@@ -146,6 +148,9 @@ function App() {
           </Route>
           <Route path="/orders/details/:id">
             <OrderDetails />
+          </Route>
+          <Route path="/scenarios">
+            <Scenarios />
           </Route>
           
           {/* If none of the other routes matched, we will show a 404. */}

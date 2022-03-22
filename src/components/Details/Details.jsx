@@ -88,13 +88,14 @@ function Details() {
                             {coinDetails?.price_change_percentage_24h.toFixed(2)}%
                         </Typography>
                     </Grid>
-                    <Grid item justifyContent="center" xs={12}>
+                    <Grid container sx={{display: 'flex', justifyContent: 'center'}}>
+                    <Grid item xs={6}>
                     <AddModal coinDetails={coinDetails} />
-                        
                     </Grid>
-                    <Grid item justifyContent="center" xs={12}>
+                    <Grid item justifyContent="center" xs={6}>
                         {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}
                         {Number(assetDetails?.quantity) > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
+                    </Grid>
                     </Grid>
 
                 </Grid>

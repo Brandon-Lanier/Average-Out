@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Fade from '@mui/material/Fade';
+import DeleteModal from "../DeleteModal/DeleteModal";
 
 function EditModal({coinDetails, assetDetails}) {
 
@@ -40,7 +41,7 @@ function EditModal({coinDetails, assetDetails}) {
     }
     return (
         <div>
-            <Button onClick={handleOpen} variant="outlined" color="secondary">Edit Holdings</Button>
+            <Button onClick={handleOpen} variant="outlined" color="primary">Edit Holdings</Button>
             <Fade in={open}>
                 <div>
             <Modal
@@ -63,7 +64,7 @@ function EditModal({coinDetails, assetDetails}) {
                         </Typography>
                     </Stack>
                     <Stack spacing={2} sx={{mt: 2}}>
-                    <Button variant="contained" onClick={handleDelete}>Remove All</Button>
+                    <DeleteModal assetDetails={assetDetails} coinDetails={coinDetails}/>
                     <Button variant="contained" onClick={handleRemove}>Remove Amount</Button>
                     <Button variant="outlined" onClick={handleClose}>Cancel</Button>
                     </Stack>
