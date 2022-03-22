@@ -89,11 +89,12 @@ function Details() {
                         </Typography>
                     </Grid>
                     <Grid item justifyContent="center" xs={12}>
-                        {Number(assetDetails?.quantity) > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
+                    <AddModal coinDetails={coinDetails} />
+                        
                     </Grid>
                     <Grid item justifyContent="center" xs={12}>
                         {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}
-                        <AddModal coinDetails={coinDetails} />
+                        {Number(assetDetails?.quantity) > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
                     </Grid>
 
                 </Grid>

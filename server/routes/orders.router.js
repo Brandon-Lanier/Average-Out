@@ -8,7 +8,7 @@ const nodemailer = require("nodemailer");
 const currentDate = new Date();
 
 // This function handles sending a daily updated calculation on what to sell across multiple assets.
-const job = schedule.scheduleJob('* * * * *', async function () {
+const job = schedule.scheduleJob('* 30 * * *', async function () {
     const orders = await pool.query('SELECT * FROM orders')
     if (orders.rows.length > 0) {
         const assets = await pool.query('SELECT coin_id, quantity FROM assets')

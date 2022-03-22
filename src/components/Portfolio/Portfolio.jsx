@@ -12,6 +12,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Typography, Button, IconButton } from "@mui/material";
 import EditIcon from '@mui/icons-material/Edit';
+import { styled } from '@mui/material/styles';
 import { Slide } from '@mui/material';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
@@ -28,6 +29,26 @@ function Portfolio() {
       dispatch({type: 'GET_ORDERS' })
       
     }, [dispatch]);
+
+    const StyledTableCell = styled(TableCell)(({ theme }) => ({
+      [`&.${tableCellClasses.head}`]: {
+        backgroundColor: theme.palette.common.black,
+        color: theme.palette.common.white,
+      },
+      [`&.${tableCellClasses.body}`]: {
+        fontSize: 14,
+      },
+    }));
+    
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.action.hover,
+      },
+      // hide last border
+      '&:last-child td, &:last-child th': {
+        border: 0,
+      },
+    }));
 
     const history = useHistory()
     
@@ -68,9 +89,9 @@ function Portfolio() {
                 Portfolio Summary
             </Typography>
             <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 300 }} aria-label="portfolio">
+      <Table sx={{ maxWidth: 365 }} aria-label="portfolio">
         <TableHead>
-          <TableRow>
+          <TableRow sx={{backgroundColor: "#67ced4"}}>
             <TableCell align="left">Name</TableCell>
             <TableCell align="left">Quantity</TableCell>
             <TableCell align="left">Value</TableCell>

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import DeleteOrderModal from "../DeleteOrderModal/DeleteOrderModal";
+import SearchIcon from '@mui/icons-material/Search';
 
 
 function OrderItem({order}) {
@@ -62,8 +63,18 @@ function OrderItem({order}) {
                     </Box>
                 </CardContent>
                 <CardActions sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <DeleteOrderModal order={order} />
-                    <Button size="medium" variant="contained" onClick={handleView}>View</Button>
+                    <DeleteOrderModal 
+                        order={order} 
+                    />
+                    <Button 
+                        size="medium" 
+                        variant="outlined"
+                        color="secondary" 
+                        startIcon={<SearchIcon />} 
+                        onClick={handleView}
+                        sx={{m: '5px'}}
+                        >View
+                    </Button>
                 </CardActions>
             </Card>
         </>

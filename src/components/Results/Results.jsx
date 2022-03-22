@@ -90,7 +90,7 @@ function Results() {
                                 <TableCell align="left">{coin?.name}</TableCell>
                                 <TableCell align="left">{coin?.qtyToSell.toFixed(4)}</TableCell>
                                 <TableCell align="left">${coin?.sellDollarAmount.toLocaleString(undefined, {maximumFractionDigits:2})}</TableCell>
-                                <TableCell align="left">{(coin.percentage * 100).toFixed(2)}%</TableCell>
+                                <TableCell align="left">{(coin?.percentage * 100).toFixed(2)}%</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -98,7 +98,7 @@ function Results() {
             </TableContainer>
             <Stack spacing={3} sx={{mt: 3}}>
             <Button variant="contained" onClick={handleExecute}>Execute</Button>
-                <Button onClick={handleCancel}>Cancel</Button>
+            <Button onClick={handleCancel} color="secondary">Cancel</Button>
             </Stack>
         </Container>
 

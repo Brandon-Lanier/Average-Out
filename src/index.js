@@ -34,7 +34,7 @@ const darkTheme = createTheme({
 
 ReactDOM.render(
   <Provider store={store}>
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={theme}>
     <App />
     </ThemeProvider>
   </Provider>,

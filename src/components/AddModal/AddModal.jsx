@@ -7,8 +7,6 @@ import Fade from '@mui/material/Fade';
 import AddNestedModal from "../AddNestedModal/AddNestedModal";
 
 
-
-
 function AddModal({coinDetails}) {
 
 
@@ -16,8 +14,8 @@ function AddModal({coinDetails}) {
     const dispatch = useDispatch();
 
     // Setting the input and dynamic dollar changing amounts
-    const [quantity, setQuantity] = useState('');
-    const [dollarAmount, setDollarAmount] = useState(0)
+    const [quantity, setQuantity] = useState(''); // 
+    const [dollarAmount, setDollarAmount] = useState(0);
 
     const handleUpdate = (e) => {
         setQuantity(e.target.value);
@@ -25,16 +23,15 @@ function AddModal({coinDetails}) {
         console.log(quantity, dollarAmount);
     }
 
-    // Sending the coin and quantity to a Saga to handle post to DB.
-    const addCoin = () => {
+    // const addCoin = () => {
   
-        if (confirm(`Add ${quantity} ${coinDetails?.name} for a current value of $${dollarAmount}?`)) {
-            dispatch({ type: 'ADD_COIN', payload: { coin: coinDetails, quantity: quantity } })
-            alert('Coin Added to portfolio');
-            dispatch({ type: 'CLEAR_DETAILS' })
-            history.push('/portfolio')
-        }
-    }
+    //     if (confirm(`Add ${quantity} ${coinDetails?.name} for a current value of $${dollarAmount}?`)) {
+    //         dispatch({ type: 'ADD_COIN', payload: { coin: coinDetails, quantity: quantity } })
+    //         alert('Coin Added to portfolio');
+    //         dispatch({ type: 'CLEAR_DETAILS' })
+    //         history.push('/portfolio')
+    //     }
+    // }
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -46,7 +43,7 @@ function AddModal({coinDetails}) {
         left: '50%',
         transform: 'translate(-50%, -50%)',
         width: '90%',
-        bgcolor: '#f5f5f5',
+        bgcolor: '#121212',
         border: '1px solid #47688d',
         boxShadow: 24,
         borderRadius: 5,
@@ -81,7 +78,6 @@ function AddModal({coinDetails}) {
                     <Stack spacing={2} sx={{mt: 2}}>
                     <AddNestedModal coinDetails={coinDetails} quantity={quantity} />
                     <Button variant="outlined" onClick={handleClose}>Cancel</Button>
-                    
                     {/* <Button variant="contained" onClick={addCoin}>Add Holdings</Button> */}
                     </Stack>
                 </Box>

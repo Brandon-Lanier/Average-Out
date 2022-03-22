@@ -40,7 +40,7 @@ function EditModal({coinDetails, assetDetails}) {
     }
     return (
         <div>
-            <Button onClick={handleOpen} variant="outlined">Edit Holdings</Button>
+            <Button onClick={handleOpen} variant="outlined" color="secondary">Edit Holdings</Button>
             <Fade in={open}>
                 <div>
             <Modal

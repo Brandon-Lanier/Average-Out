@@ -30,14 +30,14 @@ function Calculate() {
     }, [dispatch]);
 
 
-
     const handleSelect = (coin) => {
-        setSelectCoin([...selectCoin, coin])
-        setCoinOptions(coinOptions.filter(item => item.id !== coin.coin_id));
-        let totalVal = coin.quantity * coin.current_price
-        setRunningTotal(runningTotal + totalVal)
+        setSelectCoin([...selectCoin, coin]) // Selected coins will live in this state as they are selected
+        setCoinOptions(coinOptions.filter(item => item.id !== coin.coin_id)); // Removes an item from the initial array if they were selected
+        let totalVal = coin.quantity * coin.current_price; // gets total value of the selected crypto stack
+        setRunningTotal(runningTotal + totalVal); // running total to keep track of the value of all selected coins
     }
 
+    // Handles sending the calculation to the database and removes
     const handleCalculate = () => {
         console.log(targetValue, duration, selectCoin);
         let calculation = {
@@ -49,6 +49,7 @@ function Calculate() {
         history.push('/results');
     }
 
+    // This handles resetting the local state of each selection if the user hits reset.
     const clearCalc = () => {
         setCoinOptions(assets);
         setSelectCoin([]);
@@ -57,8 +58,6 @@ function Calculate() {
         setTargetValue('');
     }
 
-
-    console.log(runningTotal);
 
     return (
         <div>
@@ -142,6 +141,7 @@ function Calculate() {
                                         label={el.name}
                                         variant="outlined"
                                         sx={{backgroundColor: '#2f9fa6'}}
+                                        key={el.id}
                                     />
                                 ))}
                             </Stack>

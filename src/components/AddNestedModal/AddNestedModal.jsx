@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Fade from '@mui/material/Fade';
-import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
 
 
 
@@ -27,6 +28,7 @@ function AddNestedModal({ coinDetails, quantity }) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    
     const style = {
         position: 'absolute',
         top: '50%',
