@@ -7,10 +7,15 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
+import './RegisterForm.css'
 
 function RegisterForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+
   const errors = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
@@ -22,21 +27,24 @@ function RegisterForm() {
       payload: {
         username: username,
         password: password,
+        firstname: firstName,
+        lastname: lastName,
+        email: email
       },
     });
   }; // end registerUser
 
   return (
 
-    <Card sx={{ width: 290 }} >
+    <Card sx={{ width: 290}} className="register-card" >
       <CardContent>
         {errors.registrationMessage && (
           <h3 className="alert" role="alert">
             {errors.registrationMessage}
           </h3>)}
-          <Typography variant="h5" sx={{mb:4}}>
-            Register
-          </Typography>
+        <Typography variant="h5" sx={{ mb: 3, textAlign: 'center' }}>
+          New User
+        </Typography>
         <Stack spacing={2}>
           <TextField
             id="username"
@@ -46,6 +54,33 @@ function RegisterForm() {
             value={username}
             required
             onChange={(event) => setUsername(event.target.value)}
+          />
+          <TextField
+            id="firstname"
+            label="First Name"
+            variant="standard"
+            autoComplete="off"
+            value={firstName}
+            required
+            onChange={(event) => setFirstName(event.target.value)}
+          />
+          <TextField
+            id="lastname"
+            label="Last Name"
+            variant="standard"
+            autoComplete="off"
+            value={lastName}
+            required
+            onChange={(event) => setLastName(event.target.value)}
+          />
+          <TextField
+            id="email"
+            label="Email"
+            variant="standard"
+            autoComplete="off"
+            value={email}
+            required
+            onChange={(event) => setEmail(event.target.value)}
           />
           <TextField
             id="password"
@@ -60,12 +95,12 @@ function RegisterForm() {
         </Stack>
       </CardContent>
       <CardActions className="cardActions" >
-        <Button 
-        onClick={registerUser} 
-        variant="contained" 
-        size="medium"
-        sx={{mb: 3}}>
-        Register
+        <Button
+          onClick={registerUser}
+          variant="contained"
+          size="medium"
+          sx={{ mb: 3 }}>
+          Register
         </Button>
       </CardActions>
     </Card>
