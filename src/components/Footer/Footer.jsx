@@ -31,7 +31,7 @@ function Footer() {
 
    
     const goCalculate = () => {
-        history.push('/calculate')
+        history.push('/scenarios')
     }
 
     return (
@@ -44,7 +44,7 @@ function Footer() {
                 >  
                     <BottomNavigationAction sx={{color: '#fff'}} label="Market" icon={<AddchartIcon />} onClick={goMarket} />
                     <BottomNavigationAction sx={{color: '#fff'}} label="Portfolio" icon={<PieChartIcon />} onClick={goPortfolio} />
-                    <BottomNavigationAction sx={{color: '#fff'}} label="Calculate" icon={<CalculateIcon />} onClick={goCalculate} />
+                    <BottomNavigationAction sx={{color: '#fff'}} label="Strategies" icon={<CalculateIcon />} onClick={goCalculate} />
                     
                 </BottomNavigation>
                 }

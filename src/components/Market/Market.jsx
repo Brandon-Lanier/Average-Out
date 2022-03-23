@@ -83,7 +83,7 @@ function Market() {
           />
         
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 300 }} stickyHeader aria-label="simple table">
+          <Table sx={{ minWidth: 300 }} stickyHeader aria-label="market-table">
             <TableHead sx={{backgroundColor: "#67ced4"}}>
               <StyledTableRow>
                 <StyledTableCell align="center">Name</StyledTableCell>

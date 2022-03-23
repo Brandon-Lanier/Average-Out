@@ -30,12 +30,19 @@ function ActiveOrders() {
     return (
         <>
             <div className="activeOrders">
-                {orders.map(order => (
+                {orders.length === 0 
+                ?
+                <Typography variant="b1">
+                    You have no active exit strategies at this time.
+                </Typography>
+                :
+                orders.map(order => (
                     <OrderItem
                         key={order.id}
                         order={order}
                     />
-                ))}
+                ))
+                }
             </div>
         </>
     )
