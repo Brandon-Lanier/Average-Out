@@ -30,9 +30,6 @@ function ActiveOrders() {
     return (
         <>
             <div className="activeOrders">
-                <Typography variant="h5" sx={{mt: 5, mb: 4, fontFamily: 'Gilroy-Bold'}}>
-                    Active Strategies
-                </Typography>
                 {orders.map(order => (
                     <OrderItem
                         key={order.id}

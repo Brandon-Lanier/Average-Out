@@ -7,6 +7,7 @@ import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Stack from '@mui/material/Stack';
+import './LoginForm.css'
 
 
 function LoginForm() {
@@ -33,7 +34,7 @@ function LoginForm() {
 
   return (
     <>
-      <Card sx={{ width: 290 }}>
+      <Card sx={{ width: 290 }} id="login-card">
         <CardContent>
           <Typography variant="h5">Login</Typography>
           {errors.loginMessage && (

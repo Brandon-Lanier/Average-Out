@@ -3,8 +3,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { Box, Button, Container, Avatar, Stack, Chip, Typography, InputAdornment, TextField, InputLabel, MenuItem, FormControl, Select, Grow, Slide, Grid } from "@mui/material";
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import { Box, Button, Container, Avatar, Stack, Chip, Typography, InputAdornment, TextField, InputLabel, MenuItem, FormControl, Select, Grow, Slide, Card, CardContent } from "@mui/material";
+import './Calculate.css'
 
 
 
@@ -60,61 +60,62 @@ function Calculate() {
 
 
     return (
-        <div>
+       
             <Slide direction="left" in="open" mountOnEnter unmountOnExit>
-                <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignContent: 'space-between' }}>
-                    <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
-                        How much would you like to sell?
+                <div id="calculate-container">
+                {/* <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignContent: 'space-around' }}> */}
+                    <Box id="target-inputs">
+                    <Typography variant="h5" sx={{mb: 2}}>
+                        What is your target return?
                     </Typography>
-                    <TextField
-                        error={runningTotal < targetValue}
-                        id="amount"
-                        label="Target Return"
-                        variant="standard"
-                        value={targetValue}
-                        errorText="Target greater than total value"
-                        type="number"
-                        InputProps={{
-                            startAdornment: (
-                                <InputAdornment position="start">
-                                    $
-                                </InputAdornment>
-                            ),
-                        }}
-                        onChange={((e) => setTargetValue(e.target.value))}
-                    />
-                    <Box sx={{ minWidth: 150, mt: 3 }}>
-                        <FormControl fullWidth>
-                            <InputLabel id="duration">Duration</InputLabel>
-                            <Select
-                                labelId="duration"
-                                id="duration"
-                                value={duration}
-                                label="Duration"
-                                variant="standard"
-                                onChange={(e) => setDuration(e.target.value)}
-                            >
-                                <MenuItem value={1}>Sell Today</MenuItem>
-                                <MenuItem value={7}>1 Week</MenuItem>
-                                <MenuItem value={14}>2 Weeks</MenuItem>
-                                <MenuItem value={30}>1 Month</MenuItem>
-                                <MenuItem value={60}>2 Months</MenuItem>
-                                <MenuItem value={182}>6 Months</MenuItem>
-                                <MenuItem value={365}>1 Year</MenuItem>
-                            </Select>
-                        </FormControl>
-                    </Box>
-                        <Typography variant="b2" sx={{ mt: 3, mb: 3 }} >
-                            Which assets would you like to sell?
-                        </Typography>
-                        <Grow
-                            in={open}
-                            style={{ transformOrigin: '0 0 0' }}
-                            {...(open ? { timeout: 1000 } : {})}
+                        <TextField
+                            error={runningTotal < targetValue}
+                            id="target"
+                            label="Target Return"
+                            variant="standard"
+                            value={targetValue}
+                            sx={{ mb: 2, width: '200px' }}
+                            type="number"
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        $
+                                    </InputAdornment>
+                                ),
+                            }}
+                            onChange={((e) => setTargetValue(e.target.value))}
+                        />
+                        <FormControl sx={{width: '200px'}}>
+                        <InputLabel id="duration">Duration</InputLabel>
+                        <Select
+                            labelId="duration"
+                            id="duration"
+                            value={duration}
+                            label="Duration"
+                            variant="standard"
+                            onChange={(e) => setDuration(e.target.value)}
                         >
-                            <Box sx={{display: 'flex', flexDirection: "column", width: "75%"}}>
+                            <MenuItem value={1}>Sell Today</MenuItem>
+                            <MenuItem value={7}>1 Week</MenuItem>
+                            <MenuItem value={14}>2 Weeks</MenuItem>
+                            <MenuItem value={30}>1 Month</MenuItem>
+                            <MenuItem value={60}>2 Months</MenuItem>
+                            <MenuItem value={182}>6 Months</MenuItem>
+                            <MenuItem value={365}>1 Year</MenuItem>
+                        </Select>
+                    </FormControl>
+                    </Box>
+                    <Typography variant="b2" sx={{ mt: 3, mb: 3 }} >
+                        Which assets would you like to sell?
+                    </Typography>
+                    <Grow
+                        in={open}
+                        style={{ transformOrigin: '0 0 0' }}
+                        {...(open ? { timeout: 1000 } : {})}
+                    >
+                        <Box sx={{ display: 'flex', flexDirection: "column", width: "75%" }}>
                             <Stack spacing={2} sx={{ mt: 1 }}>
-                            
+
                                 {coinOptions?.map((coin) => (
                                     <Chip
                                         avatar={<Avatar alt={coin.id} src={coin.image} />}
@@ -123,43 +124,45 @@ function Calculate() {
                                         key={coin.id}
                                         onClick={() => handleSelect(coin)}
                                     />
-                                ))} 
+                                ))}
                             </Stack>
-                            </Box>
-                        </Grow>
-                        <Typography variant="b2" sx={{ mt: 2 }}>
-                            Selected Assets:
-                        </Typography>
-                        <Grow
-                            in={open}
-                            style={{ transformOrigin: '0 0 0' }}
-                            {...(open ? { timeout: 1000 } : {})}
-                        >
-                            <Box sx={{display: 'flex', flexDirection: "column", width: "75%"}}>
+                        </Box>
+                    </Grow>
+                    <Typography variant="b2" sx={{ mt: 2 }}>
+                        Selected Assets:
+                    </Typography>
+                    <Grow
+                        in={open}
+                        style={{ transformOrigin: '0 0 0' }}
+                        {...(open ? { timeout: 1000 } : {})}
+                    >
+                        <Box sx={{ display: 'flex', flexDirection: "column", width: "75%", mb: 5 }}>
                             <Stack spacing={2} sx={{ mt: 3 }}>
                                 {selectCoin.map((el) => (
                                     <Chip
                                         avatar={<Avatar alt={el.id} src={el.image} />}
                                         label={el.name}
                                         variant="outlined"
+                                        sx={{backgroundColor: 'rgba(196, 196, 196, 0.379)'}}
                                         key={el.id}
                                     />
                                 ))}
                             </Stack>
-                            </Box>
-                        </Grow>
-
-                        <Box sx={{display: 'flex', flexDirection: 'column', width: "100%", mt: 2, gap: 1}}>
-                            <Button variant="contained" onClick={handleCalculate}>
-                                Calculate
-                            </Button>
-                            <Button variant='outlined' onClick={clearCalc}>
-                                Reset
-                            </Button>
                         </Box>
-                </Container>
+                    </Grow>
+
+                    <Box sx={{ display: 'flex', flexDirection: 'column', width: "80%", mt: 2, gap: 1 }}>
+                        <Button variant="contained" onClick={handleCalculate}>
+                            Calculate
+                        </Button>
+                        <Button variant='outlined' onClick={clearCalc}>
+                            Reset
+                        </Button>
+                    </Box>
+                {/* </Container> */}
+               </div>
             </Slide>
-        </div >
+        
     )
 }
 

@@ -89,7 +89,7 @@ function Portfolio() {
                 Portfolio Summary
             </Typography>
             <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 330, p: 0 }} aria-label="portfolio">
+      <Table sx={{ minWidth: 300, p: 0, width: '100%' }} aria-label="portfolio">
         <TableHead>
           <TableRow sx={{backgroundColor: "#67ced4"}}>
           <StyledTableCell align="center">Name</StyledTableCell>

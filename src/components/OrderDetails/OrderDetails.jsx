@@ -15,6 +15,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { useHistory } from "react-router-dom";
 
 
 
@@ -24,18 +25,23 @@ function OrderDetails() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch({type: 'GET_ORDER_DETAIlS', payload: Number(id) })
+        dispatch({type: 'GET_ORDER_DETAILS', payload: Number(id) })
     }, [])
 
     const order = useSelector(store => store.orderDetails)
 
+    const handleExecute = () => {
+        dispatch({type: 'EXECUTE_NEW_DAY', payload: order})
+        history.push('/portfolio')
+    }
+
     console.log(id);
     return (
         <div>
-            <Card sx={{ minWidth: 350 }}>
+            <Card sx={{ minWidth: 300 }}>
                 <CardContent>
                     <Typography variant="h6">
-                        Target Return: ${order[0]?.target}
+                        Target Return: ${order[0]?.target.toLocaleString(undefined, {maximumFractionDigits:2})}
                     </Typography>
                     <Typography variant="b1">
                         Days Remaining: {order[0]?.days_left}
@@ -70,7 +76,7 @@ function OrderDetails() {
                 </CardContent>
                 <CardActions>
                     <Button size="small" color="secondary" variant="outlined">Skip Today</Button>
-                    <Button size="small" color="secondary" variant="outlined">Execute</Button>
+                    <Button size="small" color="secondary" variant="outlined" onClick={handleExecute}>Execute</Button>
                 </CardActions>
             </Card>
         </div >

@@ -5,3 +5,11 @@
     align-items: center;
     align-content: center;
 } */
+
+#login-card {
+    background-color: #2f9ea623;
+}
+
+#login-card:hover {
+    background-color: #2f9ea641;
+}

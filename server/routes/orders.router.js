@@ -123,13 +123,12 @@ const job = schedule.scheduleJob('* 12 * * *', async function () {
                 console.log("Email sent successfully");
             }
         });
-
     }
     console.log('No Orders to get');
-
 })
 
 router.get('/', (req, res) => {
+    if (req.isAuthenticated()) {
     const qryTxt = `SELECT * FROM orders WHERE user_id = $1`
     pool.query(qryTxt, [req.user.id])
         .then(result => {
@@ -138,6 +137,9 @@ router.get('/', (req, res) => {
         }).catch(err => {
             console.log('Error in the orders GET', err);
         })
+    } else {
+        res.sendStatus(403);
+    }
 })
 
 router.delete('/:id', (req, res) => {

@@ -1,3 +1,7 @@
-.register-card {
-    background-color: #2f9ea653;
+#register-card {
+    background-color: #2f9ea62e;
+}
+
+#register-card:hover {
+    background-color: #2f9ea680;
 }

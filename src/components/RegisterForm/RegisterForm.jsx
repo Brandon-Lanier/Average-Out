@@ -36,7 +36,7 @@ function RegisterForm() {
 
   return (
 
-    <Card sx={{ width: 290}} className="register-card" >
+    <Card sx={{ width: 290}} id="register-card" >
       <CardContent>
         {errors.registrationMessage && (
           <h3 className="alert" role="alert">

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import RegisterForm from '../RegisterForm/RegisterForm';
 import loginlogo from '../LoginPage/loginlogo.PNG'
 import { Typography, Box } from '@mui/material';
-import './RegisterPage.css'
+import './RegisterPage.css';
 
 function RegisterPage() {
   const history = useHistory();

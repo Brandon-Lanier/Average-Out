@@ -6,17 +6,17 @@ const cron = require('node-cron');
 const schedule = require('node-schedule');
 
 
-// Not working when i try to send from client
+// Handles the initial calculation of the order.  Sends back to DOM before execution
 router.post('/', (req, res) => {
     const target = req.body.target;
     const days = req.body.days;
     const coins = req.body.coins
-    console.log('target', target)
-    console.log('days', days);
-    console.log('coins', coins);
+    // console.log('target', target)
+    // console.log('days', days);
+    // console.log('coins', coins);
     let finalCoins = [];
     let dailyTargetPrice = (target / days);
-    console.log('daily target', dailyTargetPrice);
+    // console.log('daily target', dailyTargetPrice);
 
     for (coin of coins) {
         let total = 0;
@@ -30,9 +30,9 @@ router.post('/', (req, res) => {
         });
     }
     let totalCoinValue = finalCoins.reduce((accumulator, current) => accumulator + current.totalValue, 0);
-    console.log('total val', totalCoinValue);
+    // console.log('total val', totalCoinValue);
     let percentSplit = (dailyTargetPrice / totalCoinValue);
-    console.log('Percent Split', percentSplit);
+    // console.log('Percent Split', percentSplit);
     let splitQuantities = [];
 
     for (coin of finalCoins) {
