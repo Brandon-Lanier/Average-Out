@@ -89,7 +89,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/portfolio" />
               :
               // Otherwise, show the login page
               <LoginPage /> // switched this from landing page
@@ -123,34 +123,34 @@ function App() {
               <LoginPage />
             }
           </Route>
-          <Route path="/portfolio">
+          <Route path="/portfolio" exact>
             <Portfolio />
           </Route>
-          <Route path="/market">
+          <Route path="/market" exact>
             <Market />
           </Route>
-          <Route path="/details/:coinid">
+          <Route path="/details/:coinid" exact>
             <Details />
           </Route>
-          <Route path="/addcoin/:coinid">
+          <Route path="/addcoin/:coinid" exact>
             <AddCoin />
           </Route>
-          <Route path="/edit/:coinid">
+          <Route path="/edit/:coinid" exact>
             <EditCoin />
           </Route>
-          <Route path="/calculate">
+          <Route path="/calculate" exact>
             <Calculate />
           </Route>
-          <Route path="/results">
+          <Route path="/results" exact>
             <Results />
           </Route>
-          <Route path="/active">
+          <Route path="/active" exact>
             <ActiveOrders />
           </Route>
-          <Route path="/orders/details/:id">
+          <Route path="/orders/details/:id" exact>
             <OrderDetails />
           </Route>
-          <Route path="/scenarios">
+          <Route path="/scenarios" exact>
             <Scenarios />
           </Route>
           

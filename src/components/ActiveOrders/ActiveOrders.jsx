@@ -24,9 +24,6 @@ function ActiveOrders() {
 
     const orders = useSelector(store => store.orders)
 
-
-
-
     return (
         <>
             <div className="activeOrders">

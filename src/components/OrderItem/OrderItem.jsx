@@ -47,7 +47,7 @@ function OrderItem({ order }) {
 
     return (
         <>
-            <Card elevation={4} sx={{ mt: 2 }}>
+            <Card elevation={4} sx={{ mt: 2}}>
                 <CardContent>
                     <Typography variant="h5" gutterBottom>
                         Start Date: {startDate}
