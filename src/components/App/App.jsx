@@ -47,7 +47,7 @@ function App() {
     <Router>
       <div>
         {user.id && <Nav />}
-        
+
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -72,7 +72,7 @@ function App() {
           >
             <UserPage />
           </ProtectedRoute>
-         
+
 
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
@@ -89,7 +89,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/portfolio" />
+              <Redirect to="/user" />
               :
               // Otherwise, show the login page
               <LoginPage /> // switched this from landing page
@@ -117,43 +117,43 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/portfolio" /> // switched from user
+              <Redirect to="/user" /> // switched from user
               :
               // Otherwise, show the Landing page
               <LoginPage />
             }
           </Route>
-          <Route path="/portfolio" exact>
+          <ProtectedRoute path="/portfolio" exact>
             <Portfolio />
-          </Route>
-          <Route path="/market" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/market" exact>
             <Market />
-          </Route>
-          <Route path="/details/:coinid" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/details/:coinid" exact>
             <Details />
-          </Route>
-          <Route path="/addcoin/:coinid" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/addcoin/:coinid" exact>
             <AddCoin />
-          </Route>
-          <Route path="/edit/:coinid" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/edit/:coinid" exact>
             <EditCoin />
-          </Route>
-          <Route path="/calculate" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/calculate" exact>
             <Calculate />
-          </Route>
-          <Route path="/results" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/results" exact>
             <Results />
-          </Route>
-          <Route path="/active" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/active" exact>
             <ActiveOrders />
-          </Route>
-          <Route path="/orders/details/:id" exact>
+          </ProtectedRoute>
+          <ProtectedRoute path="/orders/details/:id" exact>
             <OrderDetails />
-          </Route>
-          <Route path="/scenarios" exact>
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/scenarios" >
             <Scenarios />
-          </Route>
-          
+          </ProtectedRoute>
+
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>

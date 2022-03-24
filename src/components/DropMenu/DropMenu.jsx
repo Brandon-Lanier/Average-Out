@@ -43,8 +43,8 @@ function DropMenu() {
         }
 
         const logOut = () => {
-            dispatch({ type: 'LOGOUT' })
             history.push('/login')
+            dispatch({ type: 'LOGOUT' }) 
         }
 
         return (
