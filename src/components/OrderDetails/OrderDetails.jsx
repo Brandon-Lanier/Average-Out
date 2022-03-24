@@ -16,6 +16,7 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { useHistory } from "react-router-dom";
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 
 
@@ -23,6 +24,7 @@ function OrderDetails() {
 
     const { id } = useParams();
     const dispatch = useDispatch();
+    const history = useHistory();
 
     useEffect(() => {
         dispatch({type: 'GET_ORDER_DETAILS', payload: Number(id) })
@@ -38,7 +40,8 @@ function OrderDetails() {
     console.log(id);
     return (
         <div>
-            <Card sx={{ minWidth: 300 }}>
+            <ChevronLeftIcon sx={{ fontSize: 50, mt: 3 }} onClick={() => history.goBack()} />
+            <Card sx={{ minWidth: 300 }} elevation={6}>
                 <CardContent>
                     <Typography variant="h6">
                         Target Return: ${order[0]?.target.toLocaleString(undefined, {maximumFractionDigits:2})}
@@ -47,7 +50,7 @@ function OrderDetails() {
                         Days Remaining: {order[0]?.days_left}
                     </Typography>
                     <TableContainer component={Paper}>
-                        <Table sx={{ minWidth: 340 }} aria-label="order-details-table">
+                        <Table sx={{ minWidth: 300 }} aria-label="order-details-table">
                             <TableHead>
                                 <TableRow>
                                     <TableCell align="left">Asset</TableCell>
@@ -74,9 +77,9 @@ function OrderDetails() {
                         </Table>
                     </TableContainer>
                 </CardContent>
-                <CardActions>
-                    <Button size="small" color="secondary" variant="outlined">Skip Today</Button>
-                    <Button size="small" color="secondary" variant="outlined" onClick={handleExecute}>Execute</Button>
+                <CardActions sx={{display: 'flex', justifyContent: 'flex-end'}}>
+                    <Button size="small" color="primary" variant="outlined">Skip Today</Button>
+                    <Button size="small" color="primary" variant="contained" onClick={handleExecute}>Execute</Button>
                 </CardActions>
             </Card>
         </div >

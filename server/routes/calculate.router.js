@@ -64,16 +64,23 @@ router.post('/save', (req, res) => {
     const dailyTarget = req.body[0].dailyTargetPrice;
     const totalTarget = Number(req.body[0].target)
     const days = req.body[0].days
+    let open = true;
+    if (days == 1) {
+        open = false;
+    }
     console.log('days', days);
     
         const qryTxt = `
-        INSERT INTO orders (coins, start_date, end_date, daily_target, total_target, user_id)
-        VALUES ($1, CURRENT_DATE, CURRENT_DATE + ${days}, $2, $3, $4)
+        INSERT INTO orders (coins, start_date, end_date, daily_target, total_target, open, user_id)
+        VALUES ($1, CURRENT_DATE, CURRENT_DATE + ${days}, $2, $3, $4, $5)
+        RETURNING id;
         `
-        pool.query(qryTxt, [coins, dailyTarget, totalTarget, req.user.id])
+        pool.query(qryTxt, [coins, dailyTarget, totalTarget, open, req.user.id])
         .then(result => {
             console.log('Somehow this worked!');
-            res.sendStatus(201);
+            const orderId = result.rows[0].id; // Want to add an accumulation table and utilize past sales
+            console.log('orderID', orderId);
+            res.sendStatus(201)
         }).catch(err => {
             console.log('Error posting the calculation in the orders table', err);
             res.sendStatus(500)

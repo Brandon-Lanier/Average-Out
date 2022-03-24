@@ -11,6 +11,7 @@ import AddModal from '../AddModal/AddModal';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import EditModal from '../EditModal/EditModal';
+import { Divider } from '@mui/material';
 
 import './Details.css'
 
@@ -62,7 +63,7 @@ function Details() {
                     {/* <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '80%', alignItems: 'center', mt: 3}}> */}
                     <Grid item xs={9}>
                         <Typography variant="h6">
-                            Current Price: ${coinDetails ? (coinDetails?.current_price).toLocaleString(undefined, { maximumFractionDigits: 2 }) : 0}
+                            Current Price: ${coinDetails ? (coinDetails?.current_price).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 }) : 0}
                         </Typography>
                     </Grid>
                     <Grid item xs={3}>
@@ -82,13 +83,28 @@ function Details() {
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
+                    <Divider sx={{m: 0}}/>
+                    </Grid>
+                    <Grid item xs={12} >
+                        <Stack spacing={1}>
                         <Typography variant="b1">
                             % Change (24 hrs):
                             {coinDetails?.price_change_percentage_24h > 0 ? <ArrowDropUpRoundedIcon color="success" /> : <ArrowDropDownRoundedIcon color="error" />}
                             {coinDetails?.price_change_percentage_24h.toFixed(2)}%
                         </Typography>
+                        <Typography variant="b1">
+                            Market Cap: ${coinDetails?.market_cap.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                        </Typography>
+                        <Typography variant="b1">
+                            24 Hour High: ${coinDetails?.high_24h.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
+                        </Typography>
+                        <Typography variant="b1">
+                            24 Hour Low: ${coinDetails?.low_24h.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
+                        </Typography>
+                        </Stack>
                     </Grid>
-                    <Grid container sx={{display: 'flex', justifyContent: 'center'}}>
+
+                    
                     <Grid item xs={6}>
                     <AddModal coinDetails={coinDetails} />
                     </Grid>
@@ -96,7 +112,7 @@ function Details() {
                         {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}
                         {Number(assetDetails?.quantity) > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
                     </Grid>
-                    </Grid>
+                  
 
                 </Grid>
             </Box>

@@ -27,7 +27,9 @@ function Strategies() {
         <AccordionDetails>
           <Typography>
             Sell an evenly split percentage from multiple stacks to hit a target return.
+            </Typography>
             <hr></hr>
+            <Typography>
             Great for quick cash outs using multiple assets!
           </Typography>
         </AccordionDetails>
@@ -46,7 +48,9 @@ function Strategies() {
         <AccordionDetails>
           <Typography>
             Specify a return percentage over a selected duration and we calculate how much to sell daily!
+            </Typography>
             <hr></hr>
+            <Typography>
             Currently under production!
           </Typography>
         </AccordionDetails>
@@ -62,7 +66,9 @@ function Strategies() {
         <AccordionDetails>
           <Typography>
             Sell a percent of total holdings across multiple assets for a specified duration.
+            </Typography>
             <hr></hr>
+            <Typography>
             Currently under production!
           </Typography>
         </AccordionDetails>

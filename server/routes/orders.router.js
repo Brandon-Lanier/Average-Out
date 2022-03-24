@@ -8,8 +8,8 @@ const nodemailer = require("nodemailer");
 const currentDate = new Date();
 
 // This function handles sending a daily updated calculation on what to sell across multiple assets.
-const job = schedule.scheduleJob('* 12 * * *', async function () {
-    const orders = await pool.query('SELECT * FROM orders')
+const job = schedule.scheduleJob('* * * * *', async function () {
+    const orders = await pool.query('SELECT * FROM orders WHERE open = true')
     if (orders.rows.length > 0) {
         const assets = await pool.query('SELECT coin_id, quantity FROM assets')
         const coinsToFetch = orders.rows[0].coins
@@ -112,7 +112,7 @@ const job = schedule.scheduleJob('* 12 * * *', async function () {
                             </tr>
                         </tbody>
                     </table>
-                    <button style="margin: 10px;"><a href="http://localhost:3000/#/active" style="color: black;">Click To View Order</a></button>
+                    <a href="http://localhost:3000/#/active" style="color: black;">Click To View Order</a>
              </div>`
 
         };
@@ -129,7 +129,7 @@ const job = schedule.scheduleJob('* 12 * * *', async function () {
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-    const qryTxt = `SELECT * FROM orders WHERE user_id = $1`
+    const qryTxt = `SELECT * FROM orders WHERE user_id = $1 and open = true`
     pool.query(qryTxt, [req.user.id])
         .then(result => {
             console.log('orders', result.rows);

@@ -19,6 +19,8 @@ import { Box } from '@mui/system';
 import { Container } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
@@ -65,8 +67,22 @@ function Market() {
     history.push(`/details/${coin}`)
   }
 
+  const [open, setOpen] = useState(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
+    {marketData.length === 0 ? 
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      :
       <Slide direction="right" in="open" mountOnEnter unmountOnExit>
         <Container sx={{display: 'flex', flexDirection: "column", alignItems: 'center'}}>
           <Typography variant="h5" sx={{mt: 1}}>
@@ -83,7 +99,7 @@ function Market() {
           />
         
         <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 300 }} stickyHeader aria-label="simple table">
+          <Table sx={{ minWidth: 300 }} stickyHeader aria-label="market-table">
             <TableHead sx={{backgroundColor: "#67ced4"}}>
               <StyledTableRow>
                 <StyledTableCell align="center">Name</StyledTableCell>
@@ -109,6 +125,7 @@ function Market() {
         </TableContainer>
         </Container>
       </Slide>
+  }
     </>
   )
 }

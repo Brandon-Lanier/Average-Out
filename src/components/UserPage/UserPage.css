@@ -1,0 +1,7 @@
+#user-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: space-around;
+    height: 100vh;
+}
