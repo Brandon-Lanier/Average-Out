@@ -14,5 +14,14 @@ router.get('/', (req, res) => {
         })
 })
 
+router.get('/global', (req, res) => {
+    axios.get('https://api.coingecko.com/api/v3/global')
+    .then(result => {
+        res.send(result.data.data)
+    }).catch(err => {
+        console.log('Error getting global market data', err);
+    })
+})
+
 
 module.exports = router;
