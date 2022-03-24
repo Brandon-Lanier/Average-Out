@@ -8,7 +8,8 @@ import assetDetails from './assetDetails.reducer'
 import total from './total.reducer';
 import calculate from './calculate.reducer';
 import orders from './orders.reducer';
-import orderDetails from './orderDetails.reducer'
+import orderDetails from './orderDetails.reducer';
+import global from './global.reducer';
 
 
 // rootReducer is the primary reducer for our entire project
@@ -27,7 +28,8 @@ const rootReducer = combineReducers({
   total,
   calculate,
   orders,
-  orderDetails
+  orderDetails,
+  global
 });
 
 export default rootReducer;

@@ -126,3 +126,8 @@ input {
   opacity: 0.5;
   height: 200px;
 }
+
+.image-icon {
+  height: 50px;
+  width: 50px;
+}

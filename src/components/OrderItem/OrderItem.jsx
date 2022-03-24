@@ -25,14 +25,20 @@ function OrderItem({ order }) {
     const history = useHistory();
     const dispatch = useDispatch();
 
+    // Grab the current date
     const currentDate = new Date();
+    
+    // End date in JS format
     const endDate = new Date(order?.end_date);
-    const daysLeft = (endDate - currentDate) / (1000 * 60 * 60 * 24);
+
+    // Handles calculation of days remaining in a readable format
+    const daysLeft = (endDate - currentDate) / (1000 * 60 * 60 * 24); 
+
+    // Date the strategy began in a readable format for user
     let startDate = new Date(order?.start_date)
     startDate = startDate.toDateString()
-    console.log(startDate);
 
-
+    // Fetching the currently selected order from DB and API info
     const handleView = () => {
         console.log(order.id);
         dispatch({ type: 'GET_ORDER_DETAILS', payload: order.id })
@@ -41,7 +47,7 @@ function OrderItem({ order }) {
 
     return (
         <>
-            <Card elevation={4} sx={{ mt: 2 }}>
+            <Card elevation={4} sx={{ mt: 2}}>
                 <CardContent>
                     <Typography variant="h5" gutterBottom>
                         Start Date: {startDate}

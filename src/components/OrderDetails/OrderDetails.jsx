@@ -37,6 +37,10 @@ function OrderDetails() {
         history.push('/portfolio')
     }
 
+    const handleSkip = () => {
+        console.log('handling skip', order);
+    }
+
     console.log(id);
     return (
         <div>
@@ -78,7 +82,7 @@ function OrderDetails() {
                     </TableContainer>
                 </CardContent>
                 <CardActions sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button size="small" color="primary" variant="outlined">Skip Today</Button>
+                    <Button size="small" color="primary" variant="outlined" onClick={handleSkip}>Skip Today</Button>
                     <Button size="small" color="primary" variant="contained" onClick={handleExecute}>Execute</Button>
                 </CardActions>
             </Card>
