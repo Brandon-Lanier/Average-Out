@@ -92,7 +92,7 @@ function App() {
               <Redirect to="/user" />
               :
               // Otherwise, show the login page
-              <LoginPage />
+              <LoginPage /> // switched this from landing page
             }
           </Route>
 
@@ -117,10 +117,10 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/portfolio" /> // switched from user
               :
               // Otherwise, show the Landing page
-              <LandingPage />
+              <LoginPage />
             }
           </Route>
           <Route path="/portfolio">

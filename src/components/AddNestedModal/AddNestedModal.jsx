@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import Fade from '@mui/material/Fade';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
+import { forwardRef } from "react";
 
 
 
@@ -20,15 +21,15 @@ function AddNestedModal({ coinDetails, quantity }) {
         dispatch({ type: 'ADD_COIN', payload: { coin: coinDetails, quantity: quantity } })
         dispatch({ type: 'CLEAR_DETAILS' })
         history.push('/portfolio')
-
     }
 
-
+ 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    
+  
+
     const style = {
         position: 'absolute',
         top: '50%',
@@ -67,7 +68,7 @@ function AddNestedModal({ coinDetails, quantity }) {
                         </Box>
 
                     </Modal>
-                    
+        
                 </div>
             </Fade>
         </div>

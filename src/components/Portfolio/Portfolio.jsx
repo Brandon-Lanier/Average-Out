@@ -16,12 +16,15 @@ import { styled } from '@mui/material/styles';
 import { Slide } from '@mui/material';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
+import Backdrop from '@mui/material/Backdrop';
+import CircularProgress from '@mui/material/CircularProgress';
 
 
 
 
 function Portfolio() {
-    const dispatch = useDispatch();
+    
+  const dispatch = useDispatch();
 
     useEffect(() => {
       dispatch({type: 'FETCH_MARKET'});
@@ -76,9 +79,22 @@ function Portfolio() {
             return totalValue.toLocaleString(undefined, {maximumFractionDigits:2});
         }
         
+        const [open, setOpen] = useState(true);
+        const handleClose = () => {
+          setOpen(false);
+        };
 
     return (
         <>
+        {assets.length === 0 || market.length === 0 ? 
+        <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={open}
+        onClick={handleClose}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      :
         <Slide direction="up" in="open" mountOnEnter unmountOnExit>
         <Container maxWidth="sm" sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw'}}>
             <Typography variant="h6" sx={{mt: 2, mb: 2}}>
@@ -121,6 +137,7 @@ function Portfolio() {
     </TableContainer>
         </Container>
         </Slide>
+        }
         </>
 
 

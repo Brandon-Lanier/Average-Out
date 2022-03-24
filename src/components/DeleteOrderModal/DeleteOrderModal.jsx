@@ -64,7 +64,7 @@ function DeleteOrderModal({order}) {
                     >
                         <Box sx={style}>
                                 
-                                <Typography id="Delete" variant="h6">
+                                <Typography id="Delete" variant="h6" sx={{textAlign: 'center'}}>
                                     Are you sure you would like to remove this calculation?
                                 </Typography>
                                 <Typography variant="b1">

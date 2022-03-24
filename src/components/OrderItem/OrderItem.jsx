@@ -9,9 +9,14 @@ import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import DeleteOrderModal from "../DeleteOrderModal/DeleteOrderModal";
 import SearchIcon from '@mui/icons-material/Search';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
 
-
-function OrderItem({order}) {
+function OrderItem({ order }) {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
@@ -30,50 +35,51 @@ function OrderItem({order}) {
 
     const handleView = () => {
         console.log(order.id);
-        dispatch({type: 'GET_ORDER_DETAILS', payload: order.id})
+        dispatch({ type: 'GET_ORDER_DETAILS', payload: order.id })
         history.push(`/orders/details/${order.id}`)
     }
 
     return (
         <>
-            <Card>
+            <Card elevation={4} sx={{ mt: 2 }}>
                 <CardContent>
-                    <Typography variant ="h5" color="text.primary" gutterBottom>
+                    <Typography variant="h5" gutterBottom>
                         Start Date: {startDate}
                     </Typography>
                     <Typography variant="h5" component="div">
                         Target Return: ${order.total_target}
                     </Typography>
-                    <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                    <Typography sx={{ mb: 1.5 }}>
 
                     </Typography>
-                    <Typography variant="body2">
+                    <Typography variant="b1">
                         Days Remaining: {Math.floor(daysLeft)}
                     </Typography>
-                    <Box sx={{mt: 2}}>
-                    <Typography variant="b1">
-                    Selected Assets:
-                    </Typography>
-                    <ul>
-                    {order.coins.map(coin => 
-                        (<li key={coin}>
-                            {coin}
-                        </li>))}
-                    </ul>
+                    <Box sx={{ mt: 2 }}>
+                        <Typography variant="b1">
+                            Selected Assets:
+                        </Typography>
+                        <List>
+                            {order.coins.map(coin =>
+                            (<ListItem disablePadding
+                                key={coin}>
+                                {coin}
+                            </ListItem>))}
+                        </List>
                     </Box>
                 </CardContent>
-                <CardActions sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <DeleteOrderModal 
-                        order={order} 
+                <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <DeleteOrderModal
+                        order={order}
                     />
-                    <Button 
-                        size="medium" 
-                        variant="outlined"
-                        color="primary" 
-                        startIcon={<SearchIcon />} 
+                    <Button
+                        size="medium"
+                        variant="contained"
+                        color="primary"
+                        startIcon={<SearchIcon />}
                         onClick={handleView}
-                        sx={{m: '5px'}}
-                        >View
+                        sx={{ m: '5px' }}
+                    >View
                     </Button>
                 </CardActions>
             </Card>

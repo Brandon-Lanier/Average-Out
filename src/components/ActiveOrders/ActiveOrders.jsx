@@ -32,7 +32,7 @@ function ActiveOrders() {
             <div className="activeOrders">
                 {orders.length === 0 
                 ?
-                <Typography variant="b1">
+                <Typography variant="h5" sx={{mt: 5, textAlign: 'center'}}>
                     You have no active exit strategies at this time.
                 </Typography>
                 :

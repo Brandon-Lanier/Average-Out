@@ -61,23 +61,23 @@ function Results() {
     return (
         <Container maxWidth="sm" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw', mt: 3 }}>
             <Typography variant="h5">
-                Amount To Sell Today:
-            </Typography>
-            <Typography variant="h5">
                 Target Return: ${result[0]?.target}
             </Typography>
             <Typography variant="b1">
                 Total Duration: {result[0]?.days} {result[0]?.days > 1 ? <span>days.</span> : <span>time.</span>}
             </Typography>
-            <TableContainer component={Paper}>
+            <Typography variant="h5" sx={{mt: 3}}>
+                Amount To Sell Today:
+            </Typography>
+            <TableContainer component={Paper} sx={{mt: 1}}>
                 <Table sx={{ minWidth: 300 }} aria-label="result-table">
-                    <TableHead>
-                        <TableRow>
-                            <TableCell align="left">Name</TableCell>
-                            <TableCell align="left">Quantity To Sell</TableCell>
-                            <TableCell align="left">Dollar Amount</TableCell>
-                            <TableCell align="left">% Of Asset</TableCell>
-                        </TableRow>
+                    <TableHead >
+                        <StyledTableRow>
+                            <StyledTableCell align="left">Name</StyledTableCell>
+                            <StyledTableCell align="left">Quantity To Sell</StyledTableCell>
+                            <StyledTableCell align="left">Dollar Amount</StyledTableCell>
+                            <StyledTableCell align="left">% Of Asset</StyledTableCell>
+                        </StyledTableRow>
                     </TableHead>
                     <TableBody>
                         {result?.map((coin) => (
@@ -94,7 +94,7 @@ function Results() {
                     </TableBody>
                 </Table>
             </TableContainer>
-            <Stack spacing={3} sx={{mt: 3}}>
+            <Stack spacing={2} sx={{mt: 3}}>
                 <ExecuteModal handleExecute={handleExecute} result={result}/>
             {/* <Button variant="contained" onClick={handleExecute}>Execute</Button> */}
             <Button onClick={handleCancel} color="primary" variant="outlined">Cancel</Button>
