@@ -4,7 +4,17 @@ import { put, takeLatest} from 'redux-saga/effects';
 function* getOrdersSaga() {
     yield takeLatest('GET_ORDERS', getOrders);
     yield takeLatest('DELETE_ORDER', deleteOrder);
-    yield takeLatest('GET_ORDER_DETAILS', getOrderDetails)
+    yield takeLatest('GET_ORDER_DETAILS', getOrderDetails),
+    yield takeLatest('EXECUTE_NEW_DAY', setNewDay)
+}
+
+function* setNewDay(action) {
+    try {
+        yield axios.put(`/api/orders/executeday`, action.payload)
+        yield put({type: 'GET_ORDERS'})
+    } catch (error) {
+        console.log('Error in orders saga at setNewDay', error);
+    }
 }
 
 function* getOrders() {

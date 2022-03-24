@@ -129,14 +129,14 @@ const job = schedule.scheduleJob('* * * * *', async function () {
 
 router.get('/', (req, res) => {
     if (req.isAuthenticated()) {
-    const qryTxt = `SELECT * FROM orders WHERE user_id = $1 and open = true`
-    pool.query(qryTxt, [req.user.id])
-        .then(result => {
-            console.log('orders', result.rows);
-            res.send(result.rows)
-        }).catch(err => {
-            console.log('Error in the orders GET', err);
-        })
+        const qryTxt = `SELECT * FROM orders WHERE user_id = $1 and open = true`
+        pool.query(qryTxt, [req.user.id])
+            .then(result => {
+                console.log('orders', result.rows);
+                res.send(result.rows)
+            }).catch(err => {
+                console.log('Error in the orders GET', err);
+            })
     } else {
         res.sendStatus(403);
     }
@@ -161,6 +161,7 @@ router.get('/details/:id', async (req, res) => {
         const orders = await pool.query(`SELECT * FROM orders WHERE id = $1 and user_id = $2;`, [req.params.id, req.user.id])
         const assets = await pool.query('SELECT coin_id, quantity FROM assets WHERE user_id = $1', [req.user.id])
         console.log('orders.rows', orders.rows);
+        const orderId = orders.rows[0].id
         const coinsToFetch = orders.rows[0].coins
         const endDate = new Date(orders.rows[0].end_date);
         const daysLeft = (endDate - currentDate) / (1000 * 60 * 60 * 24);
@@ -192,6 +193,7 @@ router.get('/details/:id', async (req, res) => {
             let quantityToSell = coin.quantity * percentSplit;
             let dollarAmount = coin.totalValue * percentSplit;
             splitQuantities.push({
+                orderid: orderId,
                 coinid: coin.coin_id,
                 name: coin.name,
                 totalQuantity: coin.quantity,
@@ -210,6 +212,23 @@ router.get('/details/:id', async (req, res) => {
     }
 })
 
-
+router.put(`/executeday`, (req, res) => {
+    console.log('req body', req.body);
+    if (req.isAuthenticated()) {
+        const id = req.body[0].orderid
+        const updateCoins = req.body
+        const qryTxt = `UPDATE assets SET quantity = quantity - $1 WHERE coin_id = $2 AND user_id = $3`
+        for (coin of updateCoins) {
+            pool.query(qryTxt, [coin.qtyToSell, coin.coinid, req.user.id])
+                .then(result => {
+                    console.log('It worked', result);
+                }).catch(err => {
+                    console.log('Error in assets/calc update', err);
+                })
+        }
+    } else {
+        res.sendStatus(403)
+    }
+})
 
 module.exports = router;
