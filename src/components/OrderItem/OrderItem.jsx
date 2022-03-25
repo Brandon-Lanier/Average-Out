@@ -52,7 +52,7 @@ function OrderItem({ order }) {
         <>
             <Accordion elevation={6} sx={{mt: 3}} >
             <AccordionSummary
-                expandIcon={<ExpandMoreIcon sx={{color: '#fff'}}/>}
+                expandIcon={<ExpandMoreIcon sx={{color: '#fff', ml: 4}}/>}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
                 sx={{backgroundColor: '#47688d', color: '#fff', textAlign: 'center', borderRadius: '5px'}}

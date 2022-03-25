@@ -216,7 +216,6 @@ router.get('/details/:id', async (req, res) => {
 })
 
 router.put(`/executeday`, (req, res) => {
-    console.log('req body', req.body);
     if (req.isAuthenticated()) {
         const id = req.body[0].orderid
         const updateCoins = req.body
@@ -225,6 +224,7 @@ router.put(`/executeday`, (req, res) => {
             pool.query(qryTxt, [coin.qtyToSell, coin.coinid, req.user.id])
                 .then(result => {
                     console.log('It worked', result.rows);
+                    res.sendStatus(201)
                 }).catch(err => {
                     console.log('Error in assets/calc update', err);
                 })
@@ -232,6 +232,20 @@ router.put(`/executeday`, (req, res) => {
     } else {
         res.sendStatus(403)
     }
+})
+
+router.put(`/skipday`, (req, res) => {
+    if (req.isAuthenticated()) {
+        const id = req.body[0].orderid;
+        const qryTxt = `UPDATE orders SET end_date = end_date + 1 WHERE id = $1 and user_id = $2`
+        pool.query(qryTxt, [id, req.user.id])
+        .then(result => {
+            res.sendStatus(201)
+        }).catch(err => {
+            console.log('Error in skip day router', err);
+        })
+    }
+    
 })
 
 module.exports = router;
