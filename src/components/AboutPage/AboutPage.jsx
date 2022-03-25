@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Box } from '@mui/material';
+import { Stack, Box, Button } from '@mui/material';
 import reacticon from './images/icons8-react-50-2.png';
 import reduxicon from './images/icons8-redux-50.png';
 import nodeicon from './images/icons8-nodejs-50.png';
@@ -15,6 +15,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import Avatar from '@mui/material/Avatar';
 import Typography from '@mui/material/Typography';
+import { useHistory } from 'react-router-dom';
 
 // This is one of our simplest components
 // It doesn't have local state,
@@ -22,9 +23,12 @@ import Typography from '@mui/material/Typography';
 // or even care what the redux state is'
 
 function AboutPage() {
+
+  const history = useHistory();
+  
   return (
     <Box>
-      <Typography variant="h5">
+      <Typography variant="h5" sx={{textAlign: 'center', mt: 2}}>
         Built with the following tech stacks:
       </Typography>
       <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
@@ -55,6 +59,12 @@ function AboutPage() {
           </ListItemAvatar>
           <ListItemText primary="Node.JS" />
         </ListItem>
+        <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+            <Avatar alt="node" src={nodeicon} />
+          </ListItemAvatar>
+          <ListItemText primary="Node Cron" />
+        </ListItem>
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">
           <ListItemAvatar>
@@ -84,8 +94,8 @@ function AboutPage() {
           <ListItemText primary="CSS" />
         </ListItem>
         <Divider variant="inset" component="li" />
-
       </List>
+      <Button variant="contained" onClick={(() => history.push('/about2'))}>Continue </Button>
     </Box>
   );
 }

@@ -48,7 +48,8 @@ function Results() {
     const handleExecute = () => {
                 dispatch({type: 'EXECUTE_CALCULATION', payload: result})
                 dispatch({type: 'ClEAR_RESULT'})
-                history.push('/portfolio')  
+                dispatch({type: 'GET_ASSETS'})
+                history.push('/active')  
     }
 
     const handleCancel = () => {

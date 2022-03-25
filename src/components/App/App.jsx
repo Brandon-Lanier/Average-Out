@@ -25,6 +25,7 @@ import EditCoin from '../EditCoin/EditCoin'
 import ActiveOrders from '../ActiveOrders/ActiveOrders';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import Scenarios from '../Scenarios/Scenarios';
+import AboutPage2 from '../AboutPage2/AboutPage2'
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
@@ -152,6 +153,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute exact path="/scenarios" >
             <Scenarios />
+          </ProtectedRoute>
+          <ProtectedRoute exact path="/about2" >
+            <AboutPage2 />
           </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}

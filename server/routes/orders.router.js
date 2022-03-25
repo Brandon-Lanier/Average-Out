@@ -8,7 +8,7 @@ const nodemailer = require("nodemailer");
 const currentDate = new Date();
 
 // This function handles sending a daily updated calculation on what to sell across multiple assets.
-const job = schedule.scheduleJob('* * * * *', async function () {
+const job = schedule.scheduleJob('*/30 * * * * *', async function () {
     const orders = await pool.query('SELECT * FROM orders WHERE open = true')
     if (orders.rows.length > 0) {
         const assets = await pool.query('SELECT coin_id, quantity FROM assets')
@@ -66,7 +66,7 @@ const job = schedule.scheduleJob('* * * * *', async function () {
         });
 
         let mailOptions = {
-            from: 'test@gmail.co',
+            from: 'test@gmail.com',
             to: 'test@gmail.com',
             subject: 'Daily Average Out Order',
             text: 'Here is your daily average out details',
@@ -114,8 +114,8 @@ const job = schedule.scheduleJob('* * * * *', async function () {
                         </tbody>
                     </table>
                     <a href="http://localhost:3000/#/orders/details/${orderid}" style="color: black;">Click To View Order</a>
-                    <div>
-                        <a href="">Unsubscribe</a>
+                    <div height="25px">
+                        
                     </div>
              </div>`
 

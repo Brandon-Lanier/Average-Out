@@ -52,17 +52,19 @@ function OrderItem({ order }) {
         <>
             <Accordion elevation={6} sx={{mt: 3}} >
             <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMoreIcon sx={{color: '#fff'}}/>}
                 aria-controls="panel1a-content"
                 id="panel1a-header"
-                sx={{backgroundColor: '#47688d', color: '#fff', textAlign: 'center'}}
+                sx={{backgroundColor: '#47688d', color: '#fff', textAlign: 'center', borderRadius: '5px'}}
                 >
                     <Stack spacing={1}>
                 <Typography variant="h5" gutterBottom>
                         {startDate}
                     </Typography>
                     <Typography variant="h5" component="div">
-                        Target Return: ${order.total_target}
+                        Target Return: 
+                        <br></br>
+                        ${order.total_target}
                     </Typography>
                     <Typography sx={{ mb: 1.5 }}>
 
