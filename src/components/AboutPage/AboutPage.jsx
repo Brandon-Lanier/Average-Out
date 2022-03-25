@@ -25,7 +25,7 @@ import { useHistory } from 'react-router-dom';
 function AboutPage() {
 
   const history = useHistory();
-  
+
   return (
     <Box>
       <Typography variant="h5" sx={{textAlign: 'center', mt: 2}}>
@@ -95,7 +95,9 @@ function AboutPage() {
         </ListItem>
         <Divider variant="inset" component="li" />
       </List>
+      <Box sx={{display: 'flex', justifyContent: 'center', mt: 3}}>
       <Button variant="contained" onClick={(() => history.push('/about2'))}>Continue </Button>
+      </Box>
     </Box>
   );
 }

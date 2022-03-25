@@ -41,7 +41,7 @@ function OrderDetails() {
     }
 
     const handleSkip = () => {
-        console.log('handling skip', order);
+        dispatch({type: 'SKIP_DAY', payload: order})
     }
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({

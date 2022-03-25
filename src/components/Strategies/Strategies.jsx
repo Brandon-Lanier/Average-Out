@@ -18,6 +18,7 @@ function Strategies() {
     const [open, setOpen] = useState(true)
 
     return (
+     
         <div id="strategies-container">
         <Accordion elevation={6} sx={{mt: 3, mb: 2}} >
         <AccordionSummary
@@ -81,7 +82,7 @@ function Strategies() {
       </Accordion>
      
         </div>
-
+     
     )
 }
 

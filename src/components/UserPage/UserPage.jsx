@@ -28,7 +28,7 @@ function UserPage() {
     dispatch({ type: 'FETCH_GLOBAL' })
     dispatch({ type: 'GET_ASSETS' })
     dispatch({ type: 'FETCH_MARKET' })
-    }, [dispatch]);
+    }, []);
 
 
   const totalMarket = () => {

@@ -6,9 +6,9 @@ const schedule = require('node-schedule');
 const nodemailer = require("nodemailer");
 
 const currentDate = new Date();
-
+// '*/30 * * * * *'  30 second cron
 // This function handles sending a daily updated calculation on what to sell across multiple assets.
-const job = schedule.scheduleJob('*/30 * * * * *', async function () {
+const job = schedule.scheduleJob('* 12 * * *', async function () {
     const orders = await pool.query('SELECT * FROM orders WHERE open = true')
     if (orders.rows.length > 0) {
         const assets = await pool.query('SELECT coin_id, quantity FROM assets')
@@ -60,8 +60,8 @@ const job = schedule.scheduleJob('*/30 * * * * *', async function () {
             host: "smtp.mailtrap.io",
             port: 2525,
             auth: {
-                user: "1ecfec0b678af1",
-                pass: "05da23f6fc8087"
+                user: "b51cd96b3e1b35",
+                pass: "77e5418db37802"
             }
         });
 
@@ -77,6 +77,7 @@ const job = schedule.scheduleJob('*/30 * * * * *', async function () {
                 <h3>Target Return: $${splitQuantities[0].target}.</h3>
                 <h4>Daily Target Price: $${splitQuantities[0].dailyTargetPrice}.</h4>
                 <h4>Days Remaining: ${splitQuantities[0].days_left}.</h4>
+                <a href="http://localhost:3000/#/orders/details/${orderid}" style="color: black;">Click To View Order</a>
                     <table style="border: 1px solid;border-collapse: collapse;padding: 5px;">
                         <thead style="background-color: #d4d4d4;border:1px solid;">
                             <tr style="border:1px solid; padding:5px;">
@@ -113,7 +114,6 @@ const job = schedule.scheduleJob('*/30 * * * * *', async function () {
                             </tr>
                         </tbody>
                     </table>
-                    <a href="http://localhost:3000/#/orders/details/${orderid}" style="color: black;">Click To View Order</a>
                     <div height="25px">
                         
                     </div>

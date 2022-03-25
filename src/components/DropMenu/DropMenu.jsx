@@ -36,10 +36,12 @@ function DropMenu() {
     
         const goHistory = () => {
             history.push('/history')
+            handleClose();
         }
         
         const goAbout = () => {
             history.push('/about')
+            handleClose();
         }
 
         const logOut = () => {

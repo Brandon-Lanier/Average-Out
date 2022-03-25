@@ -50,7 +50,7 @@ function Scenarios() {
 
     return (
         <>
-            <Slide direction="left" in="open" mountOnEnter unmountOnExit>
+            <Slide direction="up" in="open" mountOnEnter unmountOnExit>
                 <Box sx={{ width: '100%' }}>
                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>

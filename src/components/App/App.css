@@ -131,3 +131,7 @@ input {
   height: 50px;
   width: 50px;
 }
+
+a:visited {
+  text-decoration: none;
+}
