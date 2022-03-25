@@ -3,27 +3,33 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Fade, Paper } from '@mui/material';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { useHistory } from 'react-router-dom';
+
+import Ticker from 'react-ticker'
 import './UserPage.css'
 
+
 function UserPage() {
-  // this component doesn't do much to start, just renders some user reducer info to the DOM
+
   const user = useSelector((store) => store.user);
   const global = useSelector(store => store.global);
-  const assets = useSelector(store => store.assets)
-  const market = useSelector(store => store.market)
-
+  const assets = useSelector(store => store.assets);
+  const market = useSelector(store => store.market);
+  const [coinTicker, setCoinTicker] = useState([])
+  const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({ type: 'FETCH_GLOBAL' })
     dispatch({ type: 'GET_ASSETS' })
     dispatch({ type: 'FETCH_MARKET' })
-  }, [dispatch]);
+    }, [dispatch]);
+
 
   const totalMarket = () => {
     let values = Object.values(global?.total_market_cap);
@@ -44,8 +50,9 @@ function UserPage() {
     setOpen(false);
   };
 
+
   let totalValue = [];
-  
+  // Displays the users total portfolio value upon login
   const getSum = () => {
     let runningTotal = 0
     for (let coin of assets) {
@@ -56,8 +63,10 @@ function UserPage() {
     return totalValue.toLocaleString(undefined, { maximumFractionDigits: 2 });
   }
 
+  const testData = [125, 123, 3545634, 234, 234, 56345]
 
 
+  console.log('coin ticker', coinTicker);
   return (
 
     <>
@@ -71,18 +80,38 @@ function UserPage() {
         </Backdrop>
         :
         <div id="user-container">
-          <Typography variant="h5">Welcome, {user.firstname}!</Typography>
-          <Button variant="contained">Go To Portfolio</Button>
-          <p>Current Market Data:</p>
-          <p>Portfolio Total: ${getSum()}</p>
-          <p>Total Coins: {global?.active_cryptocurrencies} </p>
-          <p>${totalMarket()}</p>
-          <p>${totalVolume()}</p>
-          <Typography>
-            24 Hour Change:{global?.market_cap_change_percentage_24h_usd > 0 ? <ArrowDropUpRoundedIcon color="success" /> : <ArrowDropDownRoundedIcon color="error" />}
-            {global?.market_cap_change_percentage_24h_usd.toFixed(2)}
-          </Typography>
-          {/* <LogOutButton className="btn" /> */}
+          <Fade in={open}>
+            <Paper elevation={4} sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', alignItems: 'center', p: 2 }}>
+              <Typography variant="h5">
+                Welcome, {user.firstname}!
+              </Typography>
+              <br></br>
+              <Typography variant="h5">
+                Current Market Data
+              </Typography>
+              <br></br>
+              <Typography variant="h5">
+                Your Portfolio Total: ${getSum()}
+              </Typography>
+              <br></br>
+              <Typography variant="h5">
+                Total Market 24 Hour Change:{global?.market_cap_change_percentage_24h_usd > 0 ? <ArrowDropUpRoundedIcon color="success" /> : <ArrowDropDownRoundedIcon color="error" />}
+                {global?.market_cap_change_percentage_24h_usd.toFixed(2)}
+              </Typography>
+              <br></br>
+              <Button variant="contained" onClick={() => history.push('/portfolio')}>Go To Portfolio</Button>
+              {/* <LogOutButton className="btn" /> */}
+              <div className="ticker-container">
+                <div className="ticker-wrapper">
+                  <div className="ticker-transition">
+                    {market.map((coin) => (
+                      <div className="ticker-item">{coin.symbol.toUpperCase()} ${coin.current_price.toFixed(2)}</div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </Paper>
+          </Fade>
         </div>
       }
     </>

@@ -8,10 +8,11 @@ const nodemailer = require("nodemailer");
 const currentDate = new Date();
 
 // This function handles sending a daily updated calculation on what to sell across multiple assets.
-const job = schedule.scheduleJob('* 12 * * *', async function () {
+const job = schedule.scheduleJob('* * * * *', async function () {
     const orders = await pool.query('SELECT * FROM orders WHERE open = true')
     if (orders.rows.length > 0) {
         const assets = await pool.query('SELECT coin_id, quantity FROM assets')
+        const orderid = orders.rows[0].id;
         const coinsToFetch = orders.rows[0].coins
         const endDate = new Date(orders.rows[0].end_date);
         const daysLeft = (endDate - currentDate) / (1000 * 60 * 60 * 24);
@@ -112,7 +113,10 @@ const job = schedule.scheduleJob('* 12 * * *', async function () {
                             </tr>
                         </tbody>
                     </table>
-                    <a href="http://localhost:3000/#/active" style="color: black;">Click To View Order</a>
+                    <a href="http://localhost:3000/#/orders/details/${orderid}" style="color: black;">Click To View Order</a>
+                    <div>
+                        <a href="">Unsubscribe</a>
+                    </div>
              </div>`
 
         };
@@ -132,7 +136,6 @@ router.get('/', (req, res) => {
         const qryTxt = `SELECT * FROM orders WHERE user_id = $1 and open = true`
         pool.query(qryTxt, [req.user.id])
             .then(result => {
-                console.log('orders', result.rows);
                 res.send(result.rows)
             }).catch(err => {
                 console.log('Error in the orders GET', err);
@@ -221,7 +224,7 @@ router.put(`/executeday`, (req, res) => {
         for (coin of updateCoins) {
             pool.query(qryTxt, [coin.qtyToSell, coin.coinid, req.user.id])
                 .then(result => {
-                    console.log('It worked', result);
+                    console.log('It worked', result.rows);
                 }).catch(err => {
                     console.log('Error in assets/calc update', err);
                 })

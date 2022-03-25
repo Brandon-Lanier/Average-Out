@@ -3,10 +3,10 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { forwardRef } from "react";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Box, Button, Container, Avatar, Stack, Chip, Typography, InputAdornment, TextField, InputLabel, MenuItem, FormControl, Select, Grow, Slide, Card, CardContent } from "@mui/material";
 import './Calculate.css'
-
 
 
 function Calculate() {
@@ -23,7 +23,8 @@ function Calculate() {
     const [duration, setDuration] = useState('');
     const [coinOptions, setCoinOptions] = useState([]);
     const [selectCoin, setSelectCoin] = useState([]);
-    const [runningTotal, setRunningTotal] = useState(0)
+    const [runningTotal, setRunningTotal] = useState(0);
+    const [open, setOpen] = useState(true)
 
     useEffect(() => {
         dispatch({ type: 'GET_ASSETS' })
@@ -41,6 +42,7 @@ function Calculate() {
     // Handles sending the calculation to the database and removes
     const handleCalculate = () => {
         console.log(targetValue, duration, selectCoin);
+        if (runningTotal > targetValue) {
         let calculation = {
             target: targetValue,
             days: duration,
@@ -48,6 +50,9 @@ function Calculate() {
         }
         dispatch({ type: 'SEND_CALCULATION', payload: calculation })
         history.push('/results');
+        } else {
+            alert('Target value greater than asset values!')
+        }
     }
 
     // This handles resetting the local state of each selection if the user hits reset.
@@ -62,7 +67,7 @@ function Calculate() {
 
     return (
        
-            <Slide direction="left" in="open" mountOnEnter unmountOnExit>
+            <Slide direction="left" in={open} mountOnEnter unmountOnExit>
                 <div id="calculate-container">
                 {/* <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignContent: 'space-around' }}> */}
                     <Box id="target-inputs">
@@ -73,7 +78,7 @@ function Calculate() {
                             error={runningTotal < targetValue}
                             id="target"
                             label="Target Return"
-                            variant="standard"
+                            variant="outlined"
                             value={targetValue}
                             sx={{ mb: 2, width: '200px' }}
                             type="number"
@@ -93,7 +98,7 @@ function Calculate() {
                             id="duration"
                             value={duration}
                             label="Duration"
-                            variant="standard"
+                            variant="outlined"
                             onChange={(e) => setDuration(e.target.value)}
                         >
                             <MenuItem value={1}>Sell Today</MenuItem>

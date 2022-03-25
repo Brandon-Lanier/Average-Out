@@ -57,7 +57,7 @@ router.get('/details/:coinid', (req, res) => {
 // Handles adding new assets to the user's portfolio.  If an asset already exist, it will update the quantity.
 router.post('/', (req, res) => {
     if (req.isAuthenticated()) {
-        console.log(req.user.id);
+        // console.log(req.user.id);
         const qty = Number(req.body.quantity).toFixed(4)
         const coinId = req.body.coin.id // Coin id is main reference to live data on DOM
         // const qty = quantity.toFixed(4) // Changing to 4 decimals for DB storage

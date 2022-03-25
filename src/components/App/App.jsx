@@ -89,7 +89,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/portfolio" />
               :
               // Otherwise, show the login page
               <LoginPage /> // switched this from landing page
@@ -103,7 +103,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" />
+              <Redirect to="/portfolio" />
               :
               // Otherwise, show the registration page
               <RegisterPage />
@@ -117,7 +117,7 @@ function App() {
             {user.id ?
               // If the user is already logged in, 
               // redirect them to the /user page
-              <Redirect to="/user" /> // switched from user
+              <Redirect to="/portfolio" /> // switched from user
               :
               // Otherwise, show the Landing page
               <LoginPage />

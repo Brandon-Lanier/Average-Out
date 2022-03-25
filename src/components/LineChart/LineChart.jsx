@@ -80,11 +80,11 @@ function LineChart({ coinid }) {
                         //   },
                         // },
                       },
-                      maintainAspectRatio: true,
+                      maintainAspectRatio: false,
                       responsive: true,
                       
                 }}
-                    height={250}
+                    height={200}
 
                 />
        

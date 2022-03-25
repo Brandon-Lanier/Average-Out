@@ -12,6 +12,7 @@ function* setNewDay(action) {
     try {
         yield axios.put(`/api/orders/executeday`, action.payload)
         yield put({type: 'GET_ORDERS'})
+        yield put({trype: 'GET_ASSETS'})
     } catch (error) {
         console.log('Error in orders saga at setNewDay', error);
     }

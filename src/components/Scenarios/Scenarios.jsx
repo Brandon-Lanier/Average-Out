@@ -4,6 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
+import { Slide } from '@mui/material';
 import ActiveOrders from '../ActiveOrders/ActiveOrders'
 import Strategies from '../Strategies/Strategies';
 
@@ -48,20 +49,24 @@ function Scenarios() {
     };
 
     return (
-        <Box sx={{ width: '100%' }}>
-            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
-                    <Tab label="Choose A Strategy" {...a11yProps(0)} />
-                    <Tab label="Active Strategies" {...a11yProps(1)} />
-                </Tabs>
-            </Box>
-            <TabPanel value={value} index={0}>
-                <Strategies />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <ActiveOrders />
-            </TabPanel>
-        </Box>
+        <>
+            <Slide direction="left" in="open" mountOnEnter unmountOnExit>
+                <Box sx={{ width: '100%' }}>
+                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example" centered>
+                            <Tab label="Choose A Strategy" {...a11yProps(0)} />
+                            <Tab label="Active Strategies" {...a11yProps(1)} />
+                        </Tabs>
+                    </Box>
+                    <TabPanel value={value} index={0}>
+                        <Strategies />
+                    </TabPanel>
+                    <TabPanel value={value} index={1}>
+                        <ActiveOrders />
+                    </TabPanel>
+                </Box>
+            </Slide>
+        </>
     );
 }
 

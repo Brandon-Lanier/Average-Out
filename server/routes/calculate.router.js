@@ -52,14 +52,14 @@ router.post('/', (req, res) => {
 
         })
     }
-    console.log('Final Results', splitQuantities);
+    // console.log('Final Results', splitQuantities);
 
     res.send(splitQuantities)
 
 })
 
 router.post('/save', (req, res) => {
-  console.log('req the body in save', req.body);
+//   console.log('req the body in save', req.body);
     const coins = req.body.map(function(value) {return value.coinid;});
     const dailyTarget = req.body[0].dailyTargetPrice;
     const totalTarget = Number(req.body[0].target)
@@ -77,9 +77,9 @@ router.post('/save', (req, res) => {
         `
         pool.query(qryTxt, [coins, dailyTarget, totalTarget, open, req.user.id])
         .then(result => {
-            console.log('Somehow this worked!');
+            // console.log('Somehow this worked!');
             const orderId = result.rows[0].id; // Want to add an accumulation table and utilize past sales
-            console.log('orderID', orderId);
+            // console.log('orderID', orderId);
             res.sendStatus(201)
         }).catch(err => {
             console.log('Error posting the calculation in the orders table', err);

@@ -2,7 +2,6 @@ import Card from "@mui/material/Card";
 import { CardContent } from "@mui/material";
 import { Typography } from "@mui/material";
 import { CardActions } from "@mui/material";
-import { Button } from "@mui/material";
 import { Modal, Stack, Box, Fade } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -13,8 +12,12 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import Divider from '@mui/material/Divider';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { AccordionActions, Button } from '@mui/material';
 
 function OrderItem({ order }) {
 
@@ -47,7 +50,62 @@ function OrderItem({ order }) {
 
     return (
         <>
-            <Card elevation={4} sx={{ mt: 2}}>
+            <Accordion elevation={6} sx={{mt: 3}} >
+            <AccordionSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1a-content"
+                id="panel1a-header"
+                sx={{backgroundColor: '#47688d', color: '#fff', textAlign: 'center'}}
+                >
+                    <Stack spacing={1}>
+                <Typography variant="h5" gutterBottom>
+                        {startDate}
+                    </Typography>
+                    <Typography variant="h5" component="div">
+                        Target Return: ${order.total_target}
+                    </Typography>
+                    <Typography sx={{ mb: 1.5 }}>
+
+                    </Typography>
+                    <Typography variant="h5">
+                        {Math.floor(daysLeft)} Days left
+                    </Typography>
+                    </Stack>
+                </AccordionSummary>
+                <AccordionDetails>
+                <Box>
+                        <Typography variant="b1">
+                            Selected Assets:
+                        </Typography>
+                        <List>
+                            {order.coins.map(coin =>
+                            (<><ListItem disablePadding
+                                key={coin}>
+                                {coin}
+                            </ListItem><Divider /></>))}
+                        </List>
+                    </Box>
+        </AccordionDetails>
+        <AccordionActions>
+        <DeleteOrderModal
+                        order={order}
+                    />
+                    <Button
+                        size="medium"
+                        variant="contained"
+                        color="primary"
+                        startIcon={<SearchIcon />}
+                        onClick={handleView}
+                        sx={{ m: '5px' }}
+                    >View
+                    </Button>
+        </AccordionActions>
+      </Accordion>
+
+
+
+
+            {/* <Card elevation={4} sx={{ mt: 2}}>
                 <CardContent>
                     <Typography variant="h5" gutterBottom>
                         Start Date: {startDate}
@@ -67,10 +125,10 @@ function OrderItem({ order }) {
                         </Typography>
                         <List>
                             {order.coins.map(coin =>
-                            (<ListItem disablePadding
+                            (<><ListItem disablePadding
                                 key={coin}>
                                 {coin}
-                            </ListItem>))}
+                            </ListItem><Divider /></>))}
                         </List>
                     </Box>
                 </CardContent>
@@ -88,7 +146,7 @@ function OrderItem({ order }) {
                     >View
                     </Button>
                 </CardActions>
-            </Card>
+            </Card> */}
         </>
     )
 }

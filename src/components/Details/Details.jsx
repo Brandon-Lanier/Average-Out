@@ -11,7 +11,10 @@ import AddModal from '../AddModal/AddModal';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import EditModal from '../EditModal/EditModal';
-import { Divider } from '@mui/material';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
 
 import './Details.css'
 
@@ -19,32 +22,21 @@ import './Details.css'
 function Details() {
 
     const { coinid } = useParams();
+    const dispatch = useDispatch();
+    const history = useHistory();
 
+    const assetDetails = useSelector(store => store.assetDetails[0]);
+    const coinDetails = useSelector(store => store.details[0]);
+    const chartData = useSelector(store => store.charts);
+    
     useEffect(() => {
         dispatch({ type: 'GET_DETAILS', payload: coinid });
         dispatch({ type: 'GET_ASSET_DETAILS', payload: coinid })
     }, []);
 
-    const dispatch = useDispatch();
-
-    const history = useHistory();
-
-    const [loading, setLoading] = useState(true);
-
-    const assetDetails = useSelector(store => store.assetDetails[0]);
-    const coinDetails = useSelector(store => store.details[0]);
-    const chartData = useSelector(store => store.charts);
-
-
-    //    const addCoin = () => {
-    //         history.push(`/addcoin/${coinid}`);
-    //    }
-
     const handleEdit = () => {
         history.push(`/edit/${coinid}`);
     }
-
-
 
     return (
 
@@ -55,7 +47,7 @@ function Details() {
                     <Grid item xs={6}>
                         <ChevronLeftIcon style={{ fontSize: 50 }} onClick={() => history.goBack()} />
                     </Grid>
-                    <Grid item xs={6} sx={{alignContent: 'center'}}>
+                    <Grid item xs={6} sx={{ alignContent: 'center' }}>
                         <Typography variant="h6">
                             {coinDetails?.symbol.toUpperCase()}   |   {coinDetails?.name}
                         </Typography>
@@ -76,43 +68,45 @@ function Details() {
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <Typography variant="b1">
+                        <Typography variant="button">
                             You Own: {assetDetails ? parseFloat(assetDetails?.quantity) : 0} {coinDetails?.symbol.toUpperCase()}
                             <br></br>
                             Value: ${assetDetails ? (assetDetails?.quantity * coinDetails?.current_price).toLocaleString(undefined, { maximumFractionDigits: 2 }) : 0}
                         </Typography>
                     </Grid>
-                    <Grid item xs={12}>
-                    <Divider sx={{m: 0}}/>
-                    </Grid>
                     <Grid item xs={12} >
-                        <Stack spacing={1}>
-                        <Typography variant="b1">
-                            % Change (24 hrs):
-                            {coinDetails?.price_change_percentage_24h > 0 ? <ArrowDropUpRoundedIcon color="success" /> : <ArrowDropDownRoundedIcon color="error" />}
-                            {coinDetails?.price_change_percentage_24h.toFixed(2)}%
-                        </Typography>
-                        <Typography variant="b1">
-                            Market Cap: ${coinDetails?.market_cap.toLocaleString(undefined, { maximumFractionDigits: 2 })}
-                        </Typography>
-                        <Typography variant="b1">
-                            24 Hour High: ${coinDetails?.high_24h.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
-                        </Typography>
-                        <Typography variant="b1">
-                            24 Hour Low: ${coinDetails?.low_24h.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
-                        </Typography>
-                        </Stack>
+                        <List>
+                            <ListItem>
+                                STATS:
+                            </ListItem>
+                            <Divider />
+                            <ListItem>
+                                % Change (24 hrs):
+                                {coinDetails?.price_change_percentage_24h > 0 ? <ArrowDropUpRoundedIcon color="success" /> : <ArrowDropDownRoundedIcon color="error" />}
+                                {coinDetails?.price_change_percentage_24h.toFixed(2)}%
+                            </ListItem>
+                            <Divider />
+                            <ListItem>
+                                Market Cap: ${coinDetails?.market_cap.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                            </ListItem>
+                            <Divider />
+                            <ListItem>
+                                24 Hour Low: ${coinDetails?.high_24h.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
+                            </ListItem>
+                            <Divider />
+                            <ListItem>
+                                24 Hour Low: ${coinDetails?.low_24h.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
+                            </ListItem>
+                        </List>
                     </Grid>
-
-                    
                     <Grid item xs={6}>
-                    <AddModal coinDetails={coinDetails} />
+                        <AddModal coinDetails={coinDetails} />
                     </Grid>
                     <Grid item justifyContent="center" xs={6}>
                         {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}
                         {Number(assetDetails?.quantity) > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
                     </Grid>
-                  
+
 
                 </Grid>
             </Box>
@@ -126,7 +120,7 @@ export default Details;
 
 
 
-{/* {assetDetails?.quantity > 0 && <Button variant="outlined" onClick={handleEdit}>Edit Holdings</Button>} */}
+{/* {assetDetails?.quantity > 0 && <Button variant="outlined" onClick={handleEdit}>Edit Holdings</Button>} */ }
 
 
 

@@ -31,7 +31,7 @@ function Portfolio() {
       dispatch({type: 'GET_ASSETS'});
       dispatch({type: 'GET_ORDERS' })
       
-    }, [dispatch]);
+    }, []);
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
       [`&.${tableCellClasses.head}`]: {
@@ -86,15 +86,6 @@ function Portfolio() {
 
     return (
         <>
-        {assets.length === 0 || market.length === 0 ? 
-        <Backdrop
-        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
-        onClick={handleClose}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      :
         <Slide direction="up" in="open" mountOnEnter unmountOnExit>
         <Container maxWidth="sm" sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw'}}>
             <Typography variant="h6" sx={{mt: 2, mb: 2}}>
@@ -137,7 +128,7 @@ function Portfolio() {
     </TableContainer>
         </Container>
         </Slide>
-        }
+        
         </>
 
 

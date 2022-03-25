@@ -19,9 +19,8 @@ function DeleteOrderModal({order}) {
 
     const handleDelete = () => {
         dispatch({type: 'DELETE_ORDER', payload: order.id})
-        history.push('/portfolio')
+        history.push('/scenarios')
     }
-
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
