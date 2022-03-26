@@ -1,9 +1,7 @@
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import LineChart from '../LineChart/LineChart';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import { Typography, Box, Slide, Button, Stack, Grid } from '@mui/material';

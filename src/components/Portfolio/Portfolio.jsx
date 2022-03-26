@@ -30,7 +30,7 @@ function Portfolio() {
       dispatch({type: 'FETCH_MARKET'});
       dispatch({type: 'GET_ASSETS'});
       dispatch({type: 'GET_ORDERS' })
-      
+      dispatch({type: 'FETCH_GLOBAL'})
     }, []);
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({

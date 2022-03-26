@@ -30,12 +30,12 @@ function OrderItem({ order }) {
 
     // Grab the current date
     const currentDate = new Date();
-    
+
     // End date in JS format
     const endDate = new Date(order?.end_date);
 
     // Handles calculation of days remaining in a readable format
-    const daysLeft = (endDate - currentDate) / (1000 * 60 * 60 * 24); 
+    const daysLeft = (endDate - currentDate) / (1000 * 60 * 60 * 24);
 
     // Date the strategy began in a readable format for user
     let startDate = new Date(order?.start_date)
@@ -50,32 +50,32 @@ function OrderItem({ order }) {
 
     return (
         <>
-            <Accordion elevation={6} sx={{mt: 3}} >
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon sx={{color: '#fff', ml: 4}}/>}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
-                sx={{backgroundColor: '#47688d', color: '#fff', textAlign: 'center', borderRadius: '5px'}}
+            <Accordion elevation={6} sx={{ mt: 3 }} >
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon sx={{ color: '#fff', ml: 4 }} />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                    sx={{ backgroundColor: '#47688d', color: '#fff', textAlign: 'center', borderRadius: '5px' }}
                 >
                     <Stack spacing={1}>
-                <Typography variant="h5" gutterBottom>
-                        {startDate}
-                    </Typography>
-                    <Typography variant="h5" component="div">
-                        Target Return: 
-                        <br></br>
-                        ${order.total_target}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }}>
+                        <Typography variant="h5" gutterBottom>
+                            {startDate}
+                        </Typography>
+                        <Typography variant="h5" component="div">
+                            Target Return:
+                            <br></br>
+                            ${order.total_target.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                        </Typography>
+                        <Typography sx={{ mb: 1.5 }}>
 
-                    </Typography>
-                    <Typography variant="h5">
-                        {Math.floor(daysLeft)} Days left
-                    </Typography>
+                        </Typography>
+                        <Typography variant="h5">
+                            {Math.floor(daysLeft)} Days left
+                        </Typography>
                     </Stack>
                 </AccordionSummary>
                 <AccordionDetails>
-                <Box>
+                    <Box>
                         <Typography variant="b1">
                             Selected Assets:
                         </Typography>
@@ -87,54 +87,8 @@ function OrderItem({ order }) {
                             </ListItem><Divider /></>))}
                         </List>
                     </Box>
-        </AccordionDetails>
-        <AccordionActions>
-        <DeleteOrderModal
-                        order={order}
-                    />
-                    <Button
-                        size="medium"
-                        variant="contained"
-                        color="primary"
-                        startIcon={<SearchIcon />}
-                        onClick={handleView}
-                        sx={{ m: '5px' }}
-                    >View
-                    </Button>
-        </AccordionActions>
-      </Accordion>
-
-
-
-
-            {/* <Card elevation={4} sx={{ mt: 2}}>
-                <CardContent>
-                    <Typography variant="h5" gutterBottom>
-                        Start Date: {startDate}
-                    </Typography>
-                    <Typography variant="h5" component="div">
-                        Target Return: ${order.total_target}
-                    </Typography>
-                    <Typography sx={{ mb: 1.5 }}>
-
-                    </Typography>
-                    <Typography variant="b1">
-                        Days Remaining: {Math.floor(daysLeft)}
-                    </Typography>
-                    <Box sx={{ mt: 2 }}>
-                        <Typography variant="b1">
-                            Selected Assets:
-                        </Typography>
-                        <List>
-                            {order.coins.map(coin =>
-                            (<><ListItem disablePadding
-                                key={coin}>
-                                {coin}
-                            </ListItem><Divider /></>))}
-                        </List>
-                    </Box>
-                </CardContent>
-                <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                </AccordionDetails>
+                <AccordionActions>
                     <DeleteOrderModal
                         order={order}
                     />
@@ -147,8 +101,8 @@ function OrderItem({ order }) {
                         sx={{ m: '5px' }}
                     >View
                     </Button>
-                </CardActions>
-            </Card> */}
+                </AccordionActions>
+            </Accordion>
         </>
     )
 }

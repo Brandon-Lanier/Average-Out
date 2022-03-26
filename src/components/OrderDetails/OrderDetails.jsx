@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
+import { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
@@ -20,6 +21,7 @@ import { styled } from '@mui/material/styles';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
+import { Stack, Snackbar, Alert } from '@mui/material';
 
 
 
@@ -30,99 +32,126 @@ function OrderDetails() {
     const history = useHistory();
 
     useEffect(() => {
-        dispatch({type: 'GET_ORDER_DETAILS', payload: Number(id) })
+        dispatch({ type: 'GET_ORDER_DETAILS', payload: Number(id) });
+        dispatch({type: 'FETCH_GLOBAL'})
     }, [])
 
-    const order = useSelector(store => store.orderDetails)
+    const order = useSelector(store => store.orderDetails);
+    const global = useSelector(store => store.global);
 
     const handleExecute = () => {
-        dispatch({type: 'EXECUTE_NEW_DAY', payload: order})
+        dispatch({ type: 'EXECUTE_NEW_DAY', payload: order })
         history.push('/portfolio')
     }
 
     const handleSkip = () => {
-        dispatch({type: 'SKIP_DAY', payload: order})
+        dispatch({ type: 'SKIP_DAY', payload: order });
+        setOpenAlert(true);
+        history.push('/portfolio')
     }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+
+    const handleCloseAlert = () => {
+        setOpenAlert(false)
+    }
+
+    
+    const [openAlert, setOpenAlert] = useState(false)
+
+    const [open, setOpen] = useState(true)
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
         [`&.${tableCellClasses.head}`]: {
-          backgroundColor: "#364f6b",
-          color: theme.palette.common.white,
+            backgroundColor: "#364f6b",
+            color: theme.palette.common.white,
         },
         [`&.${tableCellClasses.body}`]: {
-          fontSize: 14,
+            fontSize: 14,
         },
-      }));
-      
-      const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    }));
+
+    const StyledTableRow = styled(TableRow)(({ theme }) => ({
         '&:nth-of-type(odd)': {
-          backgroundColor: theme.palette.action.hover,
+            backgroundColor: theme.palette.action.hover,
         },
         // hide last border
         '&:last-child td, &:last-child th': {
-          border: 0,
+            border: 0,
         },
-      }));
-    
+    }));
+
 
     console.log(id);
     return (
         <>
-        {order === {} ?
-            <Backdrop
-            sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={open}
-            onClick={handleClose}
-          >
-            <CircularProgress color="inherit" />
-          </Backdrop>
-          :
-       
-        <div>
-            <ChevronLeftIcon sx={{ fontSize: 50, mt: 3 }} onClick={() => history.goBack()} />
-            <Card sx={{ minWidth: 300 }} elevation={6}>
-                <CardContent>
-                    <Typography variant="h6">
-                        Target Return: ${order[0]?.target.toLocaleString(undefined, {maximumFractionDigits:2})}
-                    </Typography>
-                    <Typography variant="b2">
-                        Days Remaining: {order[0]?.days_left}
-                    </Typography>
-                    <TableContainer component={Paper} sx={{mt: 2}}>
-                        <Table sx={{ minWidth: 200 }} aria-label="order-details-table">
-                            <TableHead>
-                                <StyledTableRow>
-                                    <StyledTableCell align="left">Asset</StyledTableCell>
-                                    <StyledTableCell align="left">Qty To Sell Today</StyledTableCell>
-                                    <StyledTableCell align="left">Dollar Amount</StyledTableCell>
-                                    <StyledTableCell align="left">% Of Asset</StyledTableCell>
-                                </StyledTableRow>
-                            </TableHead>
-                            <TableBody>
-                                {order.map((row) => (
-                                    <StyledTableRow
-                                        key={row?.name}
-                                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                                    >
-                                        <StyledTableCell component="th" scope="row">
-                                            {row?.name}
-                                        </StyledTableCell>
-                                        <StyledTableCell align="left">{row?.qtyToSell.toFixed(4)}</StyledTableCell>
-                                        <StyledTableCell align="left">${row?.sellDollarAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}</StyledTableCell>
-                                        <StyledTableCell align="left">{(row?.percentage * 100).toFixed(2)}%</StyledTableCell>
-                                    </StyledTableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </CardContent>
-                <CardActions sx={{display: 'flex', justifyContent: 'flex-end'}}>
-                    <Button size="small" color="primary" variant="outlined" onClick={handleSkip}>Skip Today</Button>
-                    <Button size="small" color="primary" variant="contained" onClick={handleExecute}>Execute</Button>
-                </CardActions>
-            </Card>
-        </div >
-         }
+            {order.length === 0 ?
+                <Backdrop
+                    sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                    open={open}
+                    onClick={handleClose}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
+                :
+
+                <div>
+                    <ChevronLeftIcon sx={{ fontSize: 50, mt: 3 }} onClick={() => history.goBack()} />
+                    <Card sx={{ minWidth: 300 }} elevation={6}>
+                        <CardContent>
+                            <Stack spacing={1}>
+                                <Typography variant="h6">
+                                    Target Return: ${order[0]?.target.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+                                </Typography>
+                                <Typography variant="b1">
+                                    Days Remaining: {order[0]?.days_left}
+                                </Typography>
+                                <Typography variant="b1">
+                                    Total Market Cap Change 24 Hrs: {global.market_cap_change_percentage_24h_usd?.toFixed(2)}
+                                </Typography>
+                            </Stack>
+                            <TableContainer component={Paper} sx={{ mt: 2 }}>
+                                <Table sx={{ minWidth: 200 }} aria-label="order-details-table">
+                                    <TableHead>
+                                        <StyledTableRow>
+                                            <StyledTableCell align="left">Asset</StyledTableCell>
+                                            <StyledTableCell align="left">Qty To Sell Today</StyledTableCell>
+                                            <StyledTableCell align="left">Dollar Amount</StyledTableCell>
+                                            <StyledTableCell align="left">% Of Asset</StyledTableCell>
+                                        </StyledTableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {order.map((row) => (
+                                            <StyledTableRow
+                                                key={row?.name}
+                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            >
+                                                <StyledTableCell component="th" scope="row">
+                                                    {row?.name}
+                                                </StyledTableCell>
+                                                <StyledTableCell align="left">{row?.qtyToSell.toFixed(4)}</StyledTableCell>
+                                                <StyledTableCell align="left">${row?.sellDollarAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}</StyledTableCell>
+                                                <StyledTableCell align="left">{(row?.percentage * 100).toFixed(2)}%</StyledTableCell>
+                                            </StyledTableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                        </CardContent>
+                        <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+                            <Button size="small" color="primary" variant="outlined" onClick={handleSkip}>Skip Today</Button>
+                            <Button size="small" color="primary" variant="contained" onClick={handleExecute}>Execute</Button>
+                        </CardActions>
+                    </Card>
+                    <Snackbar open={openAlert} autoHideDuration={4000} onClose={handleCloseAlert}>
+                        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
+                            This is a success message!
+                        </Alert>
+                    </Snackbar>
+                </div >
+            }
         </>
     )
 }

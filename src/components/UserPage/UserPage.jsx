@@ -3,13 +3,13 @@ import LogOutButton from '../LogOutButton/LogOutButton';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Typography, Button, Fade, Paper } from '@mui/material';
+import { Typography, Button, Fade, Paper, Box } from '@mui/material';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useHistory } from 'react-router-dom';
-
+import Slider from '@mui/material/Slider';
 import Ticker from 'react-ticker'
 import './UserPage.css'
 
@@ -28,7 +28,7 @@ function UserPage() {
     dispatch({ type: 'FETCH_GLOBAL' })
     dispatch({ type: 'GET_ASSETS' })
     dispatch({ type: 'FETCH_MARKET' })
-    }, []);
+  }, []);
 
 
   const totalMarket = () => {
@@ -70,50 +70,40 @@ function UserPage() {
   return (
 
     <>
-      {global.length === 0 || assets.length === 0 || market.length === 0 ?
-        <Backdrop
-          sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={open}
-          onClick={handleClose}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
-        :
-        <div id="user-container">
-          <Fade in={open}>
-            <Paper elevation={4} sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', alignItems: 'center', p: 2 }}>
-              <Typography variant="h5">
-                Welcome, {user.firstname}!
-              </Typography>
-              <br></br>
-              <Typography variant="h5">
-                Current Market Data
-              </Typography>
-              <br></br>
-              <Typography variant="h5">
-                Your Portfolio Total: ${getSum()}
-              </Typography>
-              <br></br>
-              <Typography variant="h5">
-                Total Market 24 Hour Change:{global?.market_cap_change_percentage_24h_usd > 0 ? <ArrowDropUpRoundedIcon color="success" /> : <ArrowDropDownRoundedIcon color="error" />}
-                {global?.market_cap_change_percentage_24h_usd.toFixed(2)}
-              </Typography>
-              <br></br>
-              <Button variant="contained" onClick={() => history.push('/portfolio')}>Go To Portfolio</Button>
-              {/* <LogOutButton className="btn" /> */}
-              <div className="ticker-container">
-                <div className="ticker-wrapper">
-                  <div className="ticker-transition">
-                    {market.map((coin) => (
-                      <div className="ticker-item">{coin.symbol.toUpperCase()} ${coin.current_price.toFixed(2)}</div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </Paper>
-          </Fade>
-        </div>
-      }
+      <div id="user-container">
+          <Paper elevation={4} sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', alignItems: 'center', p: 2 }}>
+            <Typography variant="h5">
+              Welcome, {user.firstname}!
+            </Typography>
+            <br></br>
+            <Typography variant="h5">
+              Current Market Data
+            </Typography>
+            <br></br>
+            <Typography variant="h5">
+              Your Portfolio Total: ${getSum()}
+            </Typography>
+            <br></br>
+            <Typography variant="h5">
+              Total Market 24 Hour Change:{global?.market_cap_change_percentage_24h_usd > 0 ? <ArrowDropUpRoundedIcon color="success" /> : <ArrowDropDownRoundedIcon color="error" />}
+              {global?.market_cap_change_percentage_24h_usd.toFixed(2)}
+            </Typography>
+            <br></br>
+            <Button variant="contained" onClick={() => history.push('/portfolio')}>Go To Portfolio</Button>
+            <LogOutButton className="btn" />
+            
+          </Paper>
+          <Box width={300}>
+            
+            <Slider
+              size="small"
+              defaultValue={70}
+              aria-label="Small"
+              valueLabelDisplay="auto"
+            />
+          
+          </Box>
+      </div>
     </>
 
   );
