@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import ExecuteModal from '../ExecuteModal/ExecuteModal';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
+import summary from './summary.png'
 
 
 
@@ -61,7 +62,8 @@ function Results() {
     console.log(result);
     return (
         <Container maxWidth="sm" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw', mt: 3 }}>
-            <Typography variant="h5">
+            <img src={summary} />
+            <Typography variant="h5" sx={{mt: 1}}>
                 Target Return: ${result[0]?.target}
             </Typography>
             <Typography variant="b1">

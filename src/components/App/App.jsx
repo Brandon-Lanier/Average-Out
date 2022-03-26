@@ -136,9 +136,6 @@ function App() {
           <ProtectedRoute path="/addcoin/:coinid" exact>
             <AddCoin />
           </ProtectedRoute>
-          <ProtectedRoute path="/edit/:coinid" exact>
-            <EditCoin />
-          </ProtectedRoute>
           <ProtectedRoute path="/calculate" exact>
             <Calculate />
           </ProtectedRoute>

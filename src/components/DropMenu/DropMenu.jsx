@@ -33,11 +33,6 @@ function DropMenu() {
             history.push('/active')
             handleClose();
         }
-    
-        const goHistory = () => {
-            history.push('/history')
-            handleClose();
-        }
         
         const goAbout = () => {
             history.push('/about')

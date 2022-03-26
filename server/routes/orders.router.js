@@ -186,6 +186,8 @@ router.get('/details/:id', async (req, res) => {
                 name: coin.name,
                 quantity: coin.quantity,
                 totalValue: total,
+                current_price: coin.current_price,
+                change: coin.price_change_percentage_24h
             });
         }
         let totalCoinValue = finalCoins.reduce((accumulator, current) => accumulator + current.totalValue, 0);
@@ -205,7 +207,9 @@ router.get('/details/:id', async (req, res) => {
                 target: orders.rows[0].total_target,
                 dailyTargetPrice: orders.rows[0].daily_target,
                 percentage: percentSplit,
-                days_left: Math.floor(daysLeft)
+                days_left: Math.floor(daysLeft),
+                current_price: coin.current_price,
+                change: coin.change
             })
         }
         res.send(splitQuantities)

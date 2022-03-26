@@ -27,14 +27,14 @@ function Strategies() {
           id="panel1a-header"
           sx={{backgroundColor: '#47688d', color: '#fff'}}
         >
-          <Typography variant="h5">Equal Parts Sale</Typography>
+          <Typography variant="h5" component="span">Equal Parts Sale</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography variant="b1" sx={{mt: 1}}>
+          <Typography variant="b1" component="span" sx={{mt: 1}}>
             Sell an evenly split percentage from multiple stacks to hit a target return.
             </Typography>
-            <hr></hr>
-            <Typography variant="b1"sx={{mt: 1}} >
+            <span> </span>
+            <Typography variant="b1"sx={{mt: 1}} component="span" >
             Great for quick cash outs using multiple assets!
           </Typography>
         </AccordionDetails>
@@ -49,10 +49,10 @@ function Strategies() {
           id="panel2a-header"
           sx={{backgroundColor: '#47688d', color: '#fff'}}
         >
-          <Typography variant="h5">Target Return %</Typography>
+          <Typography variant="h5" component="span">Target Return %</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography component="span">
             Specify a return percentage over a selected duration and we calculate how much to sell daily!
             </Typography >
         </AccordionDetails>
@@ -67,10 +67,10 @@ function Strategies() {
           id="panel3a-header"
           sx={{backgroundColor: '#47688d', color: '#fff'}}
         >
-          <Typography variant="h5">Sell % Of Holdings</Typography>
+          <Typography variant="h5" component="span">Sell % Of Holdings</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
+          <Typography component="span">
             Sell a percent of total holdings across multiple assets for a specified duration.
             </Typography>
           <AccordionActions>
