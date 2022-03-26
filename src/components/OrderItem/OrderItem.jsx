@@ -70,7 +70,7 @@ function OrderItem({ order }) {
 
                         </Typography>
                         <Typography variant="h5">
-                            {Math.floor(daysLeft)} Days left
+                            {Math.floor(daysLeft)} Days Left
                         </Typography>
                     </Stack>
                 </AccordionSummary>

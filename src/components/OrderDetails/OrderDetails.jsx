@@ -141,7 +141,6 @@ function OrderDetails() {
                                                 <StyledTableCell align="left">{row?.qtyToSell.toFixed(4)}</StyledTableCell>
                                                 <StyledTableCell align="left">${row?.sellDollarAmount.toLocaleString(undefined, { maximumFractionDigits: 2 })}</StyledTableCell>
                                                 <StyledTableCell align="left">{(row?.percentage * 100).toFixed(2)}%</StyledTableCell>
-
                                             </StyledTableRow>
                                         ))}
                                     </TableBody>
@@ -156,7 +155,8 @@ function OrderDetails() {
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', alignItems: 'center', mt: 3 }}>
                         <Button variant="outlined" onClick={toggleMarket}>Market Data</Button>
                         {openMarket &&
-                            <TableContainer component={Paper} sx={{ mt: 2, width: 280 }}>
+                        <Paper elevation={4} sx={{mt:1, p: 2}}>
+                            <TableContainer component={Paper} sx={{width: 300 }}>
                                 <Table sx={{ minWidth: 270 }} aria-label="market-detail-table">
                                     <TableHead>
                                         <StyledTableRow>
@@ -184,6 +184,7 @@ function OrderDetails() {
                                     </TableBody>
                                 </Table>
                             </TableContainer>
+                            </Paper>
                         }
                     </Box>
                 </div >
