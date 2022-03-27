@@ -69,11 +69,11 @@ function Portfolio() {
     <>
       <Slide direction="up" in="open" mountOnEnter unmountOnExit>
         <Container maxWidth="sm" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw' }}>
-          <Typography variant="h6" sx={{ mt: 2, mb: 2 }}>
+          <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
             Portfolio Value: ${getSum()}
           </Typography>
           <PieChart />
-          <Typography variant="h6">
+          <Typography variant="h6" sx={{mt: 1}}>
             Portfolio Summary
           </Typography>
           <TableContainer component={Paper}>

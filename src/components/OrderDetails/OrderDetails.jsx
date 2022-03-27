@@ -25,6 +25,7 @@ import { Stack, Snackbar, Alert } from '@mui/material';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import orderpic from './OrderDetails.png'
+import ExecuteModal from '../ExecuteModal/ExecuteModal';
 
 
 
@@ -147,9 +148,10 @@ function OrderDetails() {
                                 </Table>
                             </TableContainer>
                         </CardContent>
-                        <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                            <Button size="small" color="primary" variant="outlined" onClick={handleSkip}>Skip Today</Button>
-                            <Button size="small" color="primary" variant="contained" onClick={handleExecute}>Execute</Button>
+                        <CardActions sx={{ display: 'flex', justifyContent: 'space-around' }}>
+                            <Button size="medium" color="primary" variant="outlined" onClick={handleSkip}>Skip Today</Button>
+                            {/* <Button size="small" color="primary" variant="contained" onClick={handleExecute}>Execute</Button> */}
+                            <ExecuteModal handleExecute={handleExecute}/>
                         </CardActions>
                     </Card>
                     <Box sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', alignItems: 'center', mt: 3 }}>
@@ -173,12 +175,12 @@ function OrderDetails() {
                                             >
                                                 <StyledTableCell component="th" scope="row">{row?.name}</StyledTableCell>
                                                 <StyledTableCell align="left">${row?.current_price.toLocaleString(undefined, { maximumFractionDigits: 2 })}</StyledTableCell>
-                                                <StyledTableCell align="left">{row.change > 0
+                                                <StyledTableCell align="left">{row?.change > 0
                                                     ?
                                                     <ArrowDropUpRoundedIcon color="success" />
                                                     :
                                                     <ArrowDropDownRoundedIcon color="error" />}
-                                                    {row.change.toFixed(2)}%</StyledTableCell>
+                                                    {row?.change.toFixed(2)}%</StyledTableCell>
                                             </StyledTableRow>
                                         ))}
                                     </TableBody>
