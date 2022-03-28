@@ -7,9 +7,11 @@ const nodemailer = require("nodemailer");
 
 const currentDate = new Date();
 // '*/30 * * * * *'  30 second cron
+// 00 00 09 * * * Every day run at 9 AM
 // This function handles sending a daily updated calculation on what to sell across multiple assets.
-const job = schedule.scheduleJob('*/20 * * * * *', async function () {
+const job = schedule.scheduleJob('* * * * *', async function () {
     const orders = await pool.query('SELECT * FROM orders WHERE open = true')
+    console.log('orders', orders.rows);
     if (orders.rows.length > 0) {
         const assets = await pool.query('SELECT coin_id, quantity FROM assets')
         const orderid = orders.rows[0].id;
@@ -37,7 +39,7 @@ const job = schedule.scheduleJob('*/20 * * * * *', async function () {
             });
         }
         let totalCoinValue = finalCoins.reduce((accumulator, current) => accumulator + current.totalValue, 0);
-
+        
         let percentSplit = (orders.rows[0].daily_target / totalCoinValue);
         let splitQuantities = [];
         for (coin of finalCoins) {
@@ -60,8 +62,8 @@ const job = schedule.scheduleJob('*/20 * * * * *', async function () {
             host: "smtp.mailtrap.io",
             port: 2525,
             auth: {
-                user: "b51cd96b3e1b35",
-                pass: "77e5418db37802"
+                user: process.env.MAILTRAP_USERNAME,
+                pass: process.env.MAILTRAP_PASSWORD
             }
         });
 
@@ -129,6 +131,7 @@ const job = schedule.scheduleJob('*/20 * * * * *', async function () {
         });
     }
     console.log('No Orders to get');
+     //End loop through users
 })
 
 router.get('/', (req, res) => {
