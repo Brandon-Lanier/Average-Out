@@ -69,7 +69,7 @@ function Market() {
         <CircularProgress color="inherit" />
       </Backdrop>
       :
-      <Slide direction="up" in="open" mountOnEnter unmountOnExit>
+      <Slide direction="right" in="open" mountOnEnter unmountOnExit>
         <Container sx={{display: 'flex', flexDirection: "column", alignItems: 'center'}}>
           <Typography variant="h5" sx={{mt: 1}}>
             Crypto Market

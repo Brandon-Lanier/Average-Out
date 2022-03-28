@@ -49,7 +49,7 @@ function LoginForm() {
     <>
       <Card sx={{ width: 290 }} id="login-card">
         <CardContent>
-          <Typography variant="h5">Login</Typography>
+          <Typography variant="h5" sx={{mb: 2, textAlign: 'center'}}>Login</Typography>
           {errors.loginMessage && (
             <h3 className="alert" role="alert">
               {errors.loginMessage}

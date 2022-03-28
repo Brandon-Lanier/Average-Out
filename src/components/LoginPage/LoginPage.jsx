@@ -15,8 +15,9 @@ function LoginPage() {
     <>
       {/* <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignContent: 'center', height: '100%' }}> */}
       <div className="login-container" >
+      <Box sx={{mt: 15}}>
         <img src={loginLogo} alt="logo" className="login-logo" />
-        <Box sx={{mt: 15}}>
+        
           <LoginForm />
         </Box>
         <Typography variant="b1" sx={{mt: 2}}>
