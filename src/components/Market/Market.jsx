@@ -1,27 +1,10 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import CoinItem from '../CoinItem/CoinItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { DataGrid } from '@mui/x-data-grid';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
+import CoinItem from '../CoinItem/CoinItem';
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { Slide, Typography } from '@mui/material';
-import { Autocomplete } from '@mui/material';
-import { TextField } from '@mui/material';
-import { Box } from '@mui/system';
-import { Container } from '@mui/material';
+import { Slide, TableRow, TableHead, TableContainer, TableBody, Table, Typography, Autocomplete, TextField, Backdrop, CircularProgress, Container, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { useState } from 'react';
-import Backdrop from '@mui/material/Backdrop';
-import CircularProgress from '@mui/material/CircularProgress';
-
 
 
 function Market() {
@@ -32,15 +15,27 @@ function Market() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_MARKET' })
+    dispatch({ type: 'FETCH_MARKET' }) // Get all the market data upon loading page.
   }, [])
 
 
+  // Go to Coin details page
   const handleClick = (coin) => {
-    console.log(coin.id);
     history.push(`/details/${coin.id}`)
   }
 
+  // Handles when a search item is clicked on, go to details page
+  const handleSearch = (coin) => {
+    history.push(`/details/${coin}`)
+  }
+
+  // Handles opening and closing the backdrop when loading
+  const [open, setOpen] = useState(true);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  // Styled table classes
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: "#364f6b",
@@ -51,6 +46,7 @@ function Market() {
     },
   }));
   
+   // Styled table classes
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
@@ -61,16 +57,6 @@ function Market() {
     },
   }));
 
-  const [selectedCoin, setSelectedCoin] = useState('')
-
-  const handleSearch = (coin) => {
-    history.push(`/details/${coin}`)
-  }
-
-  const [open, setOpen] = useState(true);
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <>
@@ -83,7 +69,7 @@ function Market() {
         <CircularProgress color="inherit" />
       </Backdrop>
       :
-      <Slide direction="up" in="open" mountOnEnter unmountOnExit>
+      <Slide direction="right" in="open" mountOnEnter unmountOnExit>
         <Container sx={{display: 'flex', flexDirection: "column", alignItems: 'center'}}>
           <Typography variant="h5" sx={{mt: 1}}>
             Crypto Market
@@ -97,7 +83,6 @@ function Market() {
             sx={{mt: 1, mb: 3}}
             renderInput={(params) => <TextField {...params} label="Search Coins" />}
           />
-        
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 300 }} stickyHeader aria-label="market-table">
             <TableHead sx={{backgroundColor: "#67ced4"}}>

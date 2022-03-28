@@ -8,6 +8,7 @@ import postgresql from './images/icons8-postgresql-50.png';
 import muiicon from './images/icons8-material-ui-50.png';
 import htmlicon from './images/icons8-html-50.png';
 import cssicon from './images/icons8-css-50.png'
+import coingecko from './images/coingecko.png'
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import Divider from '@mui/material/Divider';
@@ -50,7 +51,7 @@ function AboutPage() {
           <ListItemAvatar>
             <Avatar alt="redix" src={reduxicon} />
           </ListItemAvatar>
-          <ListItemText primary="Redux" />
+          <ListItemText primary="Redux / Sagas" />
         </ListItem>
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">
@@ -78,6 +79,13 @@ function AboutPage() {
             <Avatar alt="MaterialUI" src={muiicon} />
           </ListItemAvatar>
           <ListItemText primary="Material UI" />
+        </ListItem>
+        <Divider variant="inset" component="li" />
+        <ListItem alignItems="flex-start">
+          <ListItemAvatar>
+            <Avatar alt="Coingecko" src={coingecko} />
+          </ListItemAvatar>
+          <ListItemText primary="CoinGecko API" />
         </ListItem>
         <Divider variant="inset" component="li" />
         <ListItem alignItems="flex-start">

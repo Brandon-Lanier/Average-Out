@@ -1,20 +1,15 @@
-import { useState, useEffect } from 'react';
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useHistory } from "react-router-dom";
 import LineChart from '../LineChart/LineChart';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import { Typography, Box, Slide, Button, Stack, Grid } from '@mui/material';
-import AddModal from '../AddModal/AddModal';
+import { Typography, Box, Slide, Grid, Divider, List, ListItem } from '@mui/material';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
 import EditModal from '../EditModal/EditModal';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-
+import AddModal from '../AddModal/AddModal';
 import './Details.css'
+
 
 
 function Details() {
@@ -23,23 +18,22 @@ function Details() {
     const dispatch = useDispatch();
     const history = useHistory();
 
+
+    // Reducer World //
     const assetDetails = useSelector(store => store.assetDetails[0]);
     const coinDetails = useSelector(store => store.details[0]);
     const chartData = useSelector(store => store.charts);
     
+
     useEffect(() => {
         dispatch({ type: 'GET_DETAILS', payload: coinid });
         dispatch({ type: 'GET_ASSET_DETAILS', payload: coinid })
     }, []);
 
-    const handleEdit = () => {
-        history.push(`/edit/${coinid}`);
-    }
 
     return (
 
         <Slide direction="up" in="open" mountOnEnter unmountOnExit>
-            {/* <Container maxWidthSm sx={{display: "flex", flexDirection: "column", alignContent: "space-between"}}> */}
             <Box sx={{ flexGrow: 1, p: 3 }}>
                 <Grid container spacing={2} >
                     <Grid item xs={6}>
@@ -50,7 +44,6 @@ function Details() {
                             {coinDetails?.symbol.toUpperCase()}   |   {coinDetails?.name}
                         </Typography>
                     </Grid>
-                    {/* <Box sx={{display: 'flex', flexDirection: 'row', justifyContent: 'space-around', width: '80%', alignItems: 'center', mt: 3}}> */}
                     <Grid item xs={9}>
                         <Typography variant="h6">
                             Current Price: ${coinDetails ? (coinDetails?.current_price).toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 }) : 0}
@@ -59,7 +52,6 @@ function Details() {
                     <Grid item xs={3}>
                         {<img src={coinDetails?.image} width="40px" height="40px" />}
                     </Grid>
-                    {/* </Box> */}
                     <Grid item xs={12}>
                         <LineChart
                             coinid={coinid}
@@ -101,11 +93,8 @@ function Details() {
                         <AddModal coinDetails={coinDetails} />
                     </Grid>
                     <Grid item justifyContent="center" xs={6}>
-                        {/* <Button variant="contained" onClick={addCoin}>Add</Button> */}
                         {Number(assetDetails?.quantity) > 0 && <EditModal assetDetails={assetDetails} coinDetails={coinDetails} />}
                     </Grid>
-
-
                 </Grid>
             </Box>
         </Slide>
@@ -114,11 +103,4 @@ function Details() {
 }
 
 export default Details;
-
-
-
-
-{/* {assetDetails?.quantity > 0 && <Button variant="outlined" onClick={handleEdit}>Edit Holdings</Button>} */ }
-
-
 

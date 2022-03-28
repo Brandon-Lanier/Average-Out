@@ -22,6 +22,10 @@ import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import Backdrop from '@mui/material/Backdrop';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Stack, Snackbar, Alert } from '@mui/material';
+import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
+import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
+import orderpic from './OrderDetails.png'
+import ExecuteModal from '../ExecuteModal/ExecuteModal';
 
 
 
@@ -33,11 +37,12 @@ function OrderDetails() {
 
     useEffect(() => {
         dispatch({ type: 'GET_ORDER_DETAILS', payload: Number(id) });
-        dispatch({type: 'FETCH_GLOBAL'})
+        dispatch({ type: 'FETCH_MARKET' })
     }, [])
 
     const order = useSelector(store => store.orderDetails);
     const global = useSelector(store => store.global);
+    const market = useSelector(store => store.market)
 
     const handleExecute = () => {
         dispatch({ type: 'EXECUTE_NEW_DAY', payload: order })
@@ -46,7 +51,6 @@ function OrderDetails() {
 
     const handleSkip = () => {
         dispatch({ type: 'SKIP_DAY', payload: order });
-        setOpenAlert(true);
         history.push('/portfolio')
     }
 
@@ -54,12 +58,16 @@ function OrderDetails() {
         setOpen(false)
     }
 
-    const handleCloseAlert = () => {
-        setOpenAlert(false)
+    const handleOpen = () => {
+        setOpen(true);
     }
 
-    
-    const [openAlert, setOpenAlert] = useState(false)
+    const toggleMarket = () => {
+        setOpenMarket(!openMarket)
+    }
+
+
+    const [openMarket, setOpenMarket] = useState(false)
 
     const [open, setOpen] = useState(true)
 
@@ -96,10 +104,10 @@ function OrderDetails() {
                     <CircularProgress color="inherit" />
                 </Backdrop>
                 :
-
                 <div>
                     <ChevronLeftIcon sx={{ fontSize: 50, mt: 3 }} onClick={() => history.goBack()} />
-                    <Card sx={{ minWidth: 300 }} elevation={6}>
+                    <img src={orderpic} />
+                    <Card sx={{ minWidth: 300, mt: 1 }} elevation={6}>
                         <CardContent>
                             <Stack spacing={1}>
                                 <Typography variant="h6">
@@ -108,9 +116,9 @@ function OrderDetails() {
                                 <Typography variant="b1">
                                     Days Remaining: {order[0]?.days_left}
                                 </Typography>
-                                <Typography variant="b1">
+                                {/* <Typography variant="b1">
                                     Total Market Cap Change 24 Hrs: {global.market_cap_change_percentage_24h_usd?.toFixed(2)}
-                                </Typography>
+                                </Typography> */}
                             </Stack>
                             <TableContainer component={Paper} sx={{ mt: 2 }}>
                                 <Table sx={{ minWidth: 200 }} aria-label="order-details-table">
@@ -140,16 +148,47 @@ function OrderDetails() {
                                 </Table>
                             </TableContainer>
                         </CardContent>
-                        <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                            <Button size="small" color="primary" variant="outlined" onClick={handleSkip}>Skip Today</Button>
-                            <Button size="small" color="primary" variant="contained" onClick={handleExecute}>Execute</Button>
+                        <CardActions sx={{ display: 'flex', justifyContent: 'space-around' }}>
+                            <Button size="medium" color="primary" variant="outlined" onClick={handleSkip}>Skip Today</Button>
+                            {/* <Button size="small" color="primary" variant="contained" onClick={handleExecute}>Execute</Button> */}
+                            <ExecuteModal handleExecute={handleExecute}/>
                         </CardActions>
                     </Card>
-                    <Snackbar open={openAlert} autoHideDuration={4000} onClose={handleCloseAlert}>
-                        <Alert onClose={handleCloseAlert} severity="success" sx={{ width: '100%' }}>
-                            This is a success message!
-                        </Alert>
-                    </Snackbar>
+                    <Box sx={{ display: 'flex', flexDirection: 'column', alignContent: 'center', alignItems: 'center', mt: 3 }}>
+                        <Button variant="outlined" onClick={toggleMarket}>Market Data</Button>
+                        {openMarket &&
+                        <Paper elevation={4} sx={{mt:1, p: 2}}>
+                            <TableContainer component={Paper} sx={{width: 300 }}>
+                                <Table sx={{ minWidth: 270 }} aria-label="market-detail-table">
+                                    <TableHead>
+                                        <StyledTableRow>
+                                            <StyledTableCell align="left">Coin</StyledTableCell>
+                                            <StyledTableCell align="left">Current Price</StyledTableCell>
+                                            <StyledTableCell align="left">24 HR Change</StyledTableCell>
+                                        </StyledTableRow>
+                                    </TableHead>
+                                    <TableBody>
+                                        {order.map((row) => (
+                                            <StyledTableRow
+                                                key={row?.name}
+                                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                            >
+                                                <StyledTableCell component="th" scope="row">{row?.name}</StyledTableCell>
+                                                <StyledTableCell align="left">${row?.current_price.toLocaleString(undefined, { maximumFractionDigits: 2 })}</StyledTableCell>
+                                                <StyledTableCell align="left">{row?.change > 0
+                                                    ?
+                                                    <ArrowDropUpRoundedIcon color="success" />
+                                                    :
+                                                    <ArrowDropDownRoundedIcon color="error" />}
+                                                    {row?.change.toFixed(2)}%</StyledTableCell>
+                                            </StyledTableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </TableContainer>
+                            </Paper>
+                        }
+                    </Box>
                 </div >
             }
         </>

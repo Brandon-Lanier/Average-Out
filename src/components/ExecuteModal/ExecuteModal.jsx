@@ -8,7 +8,7 @@ import AddNestedModal from "../AddNestedModal/AddNestedModal";
 
 
 
-function ExecuteModal({handleExecute, result}) {
+function ExecuteModal({handleExecute}) {
 
 
     const history = useHistory();
