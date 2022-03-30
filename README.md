@@ -24,6 +24,10 @@ Please note that Average Out is a work in progress and features are being added 
 
 ### Prerequisites
 
+####<a href="https://average-out.herokuapp.com/">Average Out On Heroku</a>
+
+#### For installing on local machine:
+
 - Internet Browser
 - Node.js
 - Express
