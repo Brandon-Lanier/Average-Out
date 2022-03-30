@@ -21,8 +21,7 @@ Please note that Average Out is a work in progress and features are being added 
 
 ## Screen Capture
 
-![screen-recording](./public/images/screenrecording.gif){ height=50% }
-
+![screen-recording](./public/images/screenrecording.gif)
 ### Prerequisites
 
 #### Deployed Version
