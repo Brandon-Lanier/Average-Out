@@ -1,121 +1,80 @@
+# Average Out ![logo](./public/images/logo.png)
 
-# Prime Solo Project Starting Repo
-This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
+## A cryptocurrency portfolio tracker and strategic exit application for selling across multiple assets.
 
-We **STRONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+## Description
 
-## Use the Template for This Repository (Don't Clone)
+_Duration: 2 Week Sprint_
 
-- Don't Fork or Clone. Instead, click the `Use this Template` button, and make a copy to your personal account.
+Average out is an all-in-one cryptocurrency portfolio tracker and strategic exit application that allows users to calculate different selling scenarios across multiple assets.  
+
+With the massive rise in popularity of cryptocurrency, the world has become saturated with a countless number of exchanges, platforms and applications that allow people to get involved in the crypto scene.  What these platforms all lack is the ability to help an investor exit their positions in a strategic way.
+
+Average Out was built with the seller in mind.  
+
+Looking to hit a target return selling across multiple assets?  Let us handle the calculations and tell you EXACTLY how much to sell of each asset based on live market data.  
+
+Want to extend your sale over a set duration and not try to time the market?  Average out can handle running your active exit strategies for whatever duration you choose.
+
+Please note that Average Out is a work in progress and features are being added all the time!  If you have any questions or concerns, please feel free to reach out to me in the contact section at the bottom of the readme.
+
+## Screen Shot
+
+![screen recording](./public/images/screenrecording.gif)
+
+### Prerequisites
+
+- Internet Browser
+- Node.js
+- Express
+- Database GUI (e.g. Postico)
+- PostgreSQL
 
 
-## Prerequisites
+## Installation
 
-Before you get started, make sure you have the following software installed on your computer:
+- Run npm install --yes in terminal to install all necessary dependencies.
+- To setup the database locally, please see the database.sql file for instructions.
 
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+## Usage
 
-## Create database and table
+1. Scroll through the movie list on the home page.
+2. If a movie interests you, click on it for more details!
+3. Click the "Edit Movie" button to change the title or description
+4. Click the "Add To Watchlist" button to save the movie to your watchlist.
+5. Click on a specific genre in the movie details view to see other movies that share that genre.
+6. Add a movie by clicking on the plus button at the bottom of the app.
+7. View your watchlist by clicking on the watchlist icon at the bottom of the app.
 
-Create a new database called `prime_app` and create a `user` table:
+## Built With
 
-```SQL
-CREATE TABLE "user" (
-    "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (80) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL
-);
-```
+><a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original.svg" height="40px" width="40px" /></a><a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original.svg" height="40px" width="40px" /></a><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" height="40px" width="40px" /></a><a href="https://material-ui.com/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/materialui/materialui-original.svg" height="40px" width="40px" /></a><a href="https://nodejs.org/en/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original.svg" height="40px" width="40px" /></a><a href="https://www.postgresql.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/postgresql/postgresql-original.svg" height="40px" width="40px" /></a><a href="https://reactjs.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" height="40px" width="40px" /></a><a href="https://redux.js.org/"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg" height="40px" width="40px" /></a>
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+- Javascript
+- React
+- Redux
+- Sagas
+- Node.js
+- Express
+- PostgreSQL
+- Material UI
+- HTML
+- CSS
 
-## Development Setup Instructions
+## Acknowledgement
 
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
+Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. 
 
-## Debugging
+Thanks to everyone in the Adam's Cohort for your continued support during our third week of tier 2!
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run client`. Start the debugging server by selecting the Debug button.
+## Support
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+If you have suggestions or issues, please feel free to contact me!
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
+<a href="https://www.linkedin.com/in/brandon-lanier-b5678b26/"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" /></a>  <a href="mailto:brandonjlanier@gmail.com"><img src=https://raw.githubusercontent.com/johnturner4004/readme-generator/master/src/components/assets/images/email_me_button_icon_151852.svg /></a>
 
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
 
-## Testing Routes with Postman
 
-To use Postman with this repo, you will need to set up requests in Postman to register a user and login a user at a minimum.
 
-Keep in mind that once you using the login route, Postman will manage your session cookie for you just like a browser, ensuring it is sent with each subsequent request. If you delete the `localhost` cookie in Postman, it will effectively log you out.
-
-1. Start the server - `npm run server`
-2. Import the sample routes JSON file [v2](./PostmanPrimeSoloRoutesv2.json) by clicking `Import` in Postman. Select the file.
-3. Click `Collections` and `Send` the following three calls in order:
-   1. `POST /api/user/register` registers a new user, see body to change username/password
-   2. `POST /api/user/login` will login a user, see body to change username/password
-   3. `GET /api/user` will get user information, by default it's not very much
-
-After running the login route above, you can try any other route you've created that requires a logged in user!
-
-## Production Build
-
-Before pushing to Heroku, run `npm run build` in terminal. This will create a build folder that contains the code Heroku will be pointed at. You can test this build by typing `npm start`. Keep in mind that `npm start` will let you preview the production build but will **not** auto update.
-
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm start`
-- Navigate to `localhost:5000`
-
-## Lay of the Land
-
-There are a few videos linked below that show a walkthrough the client and sever setup to help acclimatize to the boilerplate. Please take some time to watch the videos in order to get a better understanding of what the boilerplate is like.
-
-- [Initial Set](https://vimeo.com/453297271)
-- [Server Walkthrough](https://vimeo.com/453297212)
-- [Client Walkthrough](https://vimeo.com/453297124)
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
-
-This code is also heavily commented. We recommend reading through the comments, getting a lay of the land, and becoming comfortable with how the code works before you start making too many changes. If you're wondering where to start, consider reading through component file comments in the following order:
-
-- src/components
-  - App/App
-  - Footer/Footer
-  - Nav/Nav
-  - AboutPage/AboutPage
-  - InfoPage/InfoPage
-  - UserPage/UserPage
-  - LoginPage/LoginPage
-  - RegisterPage/RegisterPage
-  - LogOutButton/LogOutButton
-  - ProtectedRoute/ProtectedRoute
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Heroku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
-
-## Update Documentation
-
-Customize this ReadMe and the code comments in this project to read less like a starter repo and more like a project. Here is an example: https://gist.github.com/PurpleBooth/109311bb0361f32d87a2
+![REPO SIZE](https://img.shields.io/github/repo-size/brandon-lanier/weekend-movie-sagas.svg?style=flat-square)
+![TOP_LANGUAGE](https://img.shields.io/github/languages/top/brandon-lanier/weekend-movie-sagas.svg?style=flat-square)
