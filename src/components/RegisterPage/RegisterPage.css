@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     align-content: center;
-    flex-flow: column wrap;
+    flex-flow: column nowrap;
     height: 100vh;
     /* background-color: #364f6b; */
 }
