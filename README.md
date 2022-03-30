@@ -24,7 +24,10 @@ Please note that Average Out is a work in progress and features are being added 
 
 ### Prerequisites
 
-####<a href="https://average-out.herokuapp.com/">Average Out On Heroku</a>
+#### Deployed Version
+- Please note this app was created for mobile, so if using a desktop I would recommend using chrome dev tools and resizing your browser window to iPhoneXR or iPhone12.
+
+<a href="https://average-out.herokuapp.com/">Average Out On Heroku</a>
 
 #### For installing on local machine:
 
