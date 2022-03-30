@@ -1,4 +1,5 @@
-# Average Out ![logo](./public/images/logo.png)
+![logo](./public/images/logo.png)
+# Average Out
 
 ## A cryptocurrency portfolio tracker and strategic exit application for selling across multiple assets.
 
@@ -18,9 +19,9 @@ Want to extend your sale over a set duration and not try to time the market?  Av
 
 Please note that Average Out is a work in progress and features are being added all the time!  If you have any questions or concerns, please feel free to reach out to me in the contact section at the bottom of the readme.
 
-## Screen Shot
+## Screen Capture
 
-![screen recording](./public/images/screenrecording.gif)
+
 
 ### Prerequisites
 
@@ -72,7 +73,9 @@ Please note that Average Out is a work in progress and features are being added 
 
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality. 
 
-Thanks to everyone in the Adam's Cohort for your continued support during our third week of tier 2!
+Thanks to everyone in the Adam's Cohort for being such a great group of individuals!
+
+Special thanks to my wife, Allison, for being my UI tester!
 
 ## Support
 
@@ -83,5 +86,5 @@ If you have suggestions or issues, please feel free to contact me!
 
 
 
-![REPO SIZE](https://img.shields.io/github/repo-size/brandon-lanier/weekend-movie-sagas.svg?style=flat-square)
-![TOP_LANGUAGE](https://img.shields.io/github/languages/top/brandon-lanier/weekend-movie-sagas.svg?style=flat-square)
+![REPO SIZE](https://img.shields.io/github/repo-size/brandon-lanier/average-out.svg?style=flat-square)
+![TOP_LANGUAGE](https://img.shields.io/github/languages/top/brandon-lanier/average-out.svg?style=flat-square)
