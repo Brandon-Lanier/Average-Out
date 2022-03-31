@@ -3,7 +3,7 @@ import { useState, useEffect } from "react"
 import PieChart from "../PieChart/PieChart.jsx"
 import { useHistory } from "react-router-dom";
 import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import { Typography, Paper, TableRow, TableHead, TableContainer, TableBody, Table, Container, Slide } from "@mui/material";
+import { Typography, Paper, TableRow, TableHead, TableContainer, TableBody, Table, Container, Slide, Link } from "@mui/material";
 import { styled } from '@mui/material/styles';
 import ArrowDropUpRoundedIcon from '@mui/icons-material/ArrowDropUpRounded';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
@@ -47,6 +47,7 @@ function Portfolio() {
   // Reducer Central //
   const assets = useSelector(store => store.assets)
   const market = useSelector(store => store.market)
+  const user = useSelector(store => store.user)
 
   const handleClick = (coin) => {
     history.push(`/details/${coin.coin_id}`)
@@ -69,44 +70,58 @@ function Portfolio() {
     <>
       <Slide direction="up" in="open" mountOnEnter unmountOnExit>
         <Container maxWidth="sm" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw' }}>
-          <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
-            Portfolio Value: ${getSum()}
-          </Typography>
-          <PieChart />
-          <Typography variant="h6" sx={{mt: 1}}>
-            Portfolio Summary
-          </Typography>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 300, p: 0, width: '100%' }} aria-label="portfolio">
-              <TableHead>
-                <TableRow sx={{ backgroundColor: "#67ced4" }}>
-                  <StyledTableCell align="center">Name</StyledTableCell>
-                  <StyledTableCell align="center">Quantity</StyledTableCell>
-                  <StyledTableCell align="center">Value</StyledTableCell>
-                  <StyledTableCell align="center">Change</StyledTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {assets?.map((coin) => (
-                  <StyledTableRow
-                    key={coin.id}
-                    // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                    onClick={() => handleClick(coin)}
-                  >
-                    <StyledTableCell align="left">{coin?.name}</StyledTableCell>
-                    <StyledTableCell align="left">{coin?.quantity}</StyledTableCell>
-                    <StyledTableCell align="left">${(coin?.quantity * coin?.current_price).toLocaleString(undefined, { maximumFractionDigits: 2 })}</StyledTableCell>
-                    <StyledTableCell align="left">{coin?.price_change_percentage_24h > 0
-                      ?
-                      <ArrowDropUpRoundedIcon color="success" />
-                      :
-                      <ArrowDropDownRoundedIcon color="error" />}
-                      {coin.price_change_percentage_24h.toFixed(2)}%</StyledTableCell>
-                  </StyledTableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          {assets?.length === 0
+            ?
+            <>
+              <Typography variant="h5" sx={{ mt: 6, textAlign: 'center' }}>
+                Hello, {user.firstname}.
+              </Typography>
+              <Typography variant="h5" sx={{ mt: 10, textAlign: 'center' }}>
+                Your portfolio looks empty.  Head over to the market to add some assets.
+              </Typography>
+            </>
+            :
+            <>
+              <Typography variant="h5" sx={{ mt: 2, mb: 2 }}>
+                Portfolio Value: ${getSum()}
+              </Typography>
+              <PieChart />
+              <Typography variant="h6" sx={{ mt: 1 }}>
+                Portfolio Summary
+              </Typography>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 300, p: 0, width: '100%' }} aria-label="portfolio">
+                  <TableHead>
+                    <TableRow sx={{ backgroundColor: "#67ced4" }}>
+                      <StyledTableCell align="center">Name</StyledTableCell>
+                      <StyledTableCell align="center">Quantity</StyledTableCell>
+                      <StyledTableCell align="center">Value</StyledTableCell>
+                      <StyledTableCell align="center">Change</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {assets?.map((coin) => (
+                      <StyledTableRow
+                        key={coin.id}
+                        // sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        onClick={() => handleClick(coin)}
+                      >
+                        <StyledTableCell align="left">{coin?.name}</StyledTableCell>
+                        <StyledTableCell align="left">{coin?.quantity}</StyledTableCell>
+                        <StyledTableCell align="left">${(coin?.quantity * coin?.current_price).toLocaleString(undefined, { maximumFractionDigits: 2 })}</StyledTableCell>
+                        <StyledTableCell align="left">{coin?.price_change_percentage_24h > 0
+                          ?
+                          <ArrowDropUpRoundedIcon color="success" />
+                          :
+                          <ArrowDropDownRoundedIcon color="error" />}
+                          {coin.price_change_percentage_24h.toFixed(2)}%</StyledTableCell>
+                      </StyledTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </>
+          }
         </Container>
       </Slide>
     </>

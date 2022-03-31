@@ -9,7 +9,7 @@ const currentDate = new Date();
 // '*/30 * * * * *'  30 second cron
 // 00 00 09 * * * Every day run at 9 AM
 // This function handles sending a daily updated calculation on what to sell across multiple assets.
-const job = schedule.scheduleJob('* 08 * * *', async function () {
+const job = schedule.scheduleJob('* * * * *', async function () {
     const orders = await pool.query(`
     SELECT orders.*, "user".firstname, "user".email FROM orders
     JOIN "user" ON orders.user_id = "user".id
@@ -62,17 +62,25 @@ const job = schedule.scheduleJob('* 08 * * *', async function () {
                 })
             }
             console.log('Final Results', splitQuantities);
+            // let transporter = nodemailer.createTransport({
+            //     service: 'gmail',
+            //     auth: {
+            //         type: 'OAuth2',
+            //         user: process.env.MAIL_USERNAME,
+            //         pass: process.env.MAIL_PASSWORD,
+            //         clientId: process.env.OAUTH_CLIENTID,
+            //         clientSecret: process.env.OAUTH_CLIENT_SECRET,
+            //         refreshToken: process.env.OAUTH_REFRESH_TOKEN
+            //     }
+            // });
             let transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: "smtp.mailtrap.io",
+                port: 2525,
                 auth: {
-                    type: 'OAuth2',
-                    user: process.env.MAIL_USERNAME,
-                    pass: process.env.MAIL_PASSWORD,
-                    clientId: process.env.OAUTH_CLIENTID,
-                    clientSecret: process.env.OAUTH_CLIENT_SECRET,
-                    refreshToken: process.env.OAUTH_REFRESH_TOKEN
+                  user: "b51cd96b3e1b35",
+                  pass: "77e5418db37802"
                 }
-            });
+              });
 
             let mailOptions = {
                 from: 'average.out.app@gmail.com',
