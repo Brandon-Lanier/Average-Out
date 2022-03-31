@@ -9,7 +9,7 @@ const currentDate = new Date();
 // '*/30 * * * * *'  30 second cron
 // 00 00 09 * * * Every day run at 9 AM
 // This function handles sending a daily updated calculation on what to sell across multiple assets.
-const job = schedule.scheduleJob('* * * * *', async function () {
+const job = schedule.scheduleJob('* 08 * * *', async function () {
     const orders = await pool.query(`
     SELECT orders.*, "user".firstname, "user".email FROM orders
     JOIN "user" ON orders.user_id = "user".id
