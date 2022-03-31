@@ -84,7 +84,7 @@ async function runDaily() {
                 <h3>Hello, ${order.firstname}!
                 <h3>Target Return: $${splitQuantities[0].target}.</h3>
                 <h4>Days Remaining: ${splitQuantities[0].days_left}.</h4>
-                <h4><a href="http://localhost:3000/#/orders/details/${orderid}" style="color: black;">Click To View Your Daily Summary</a></h4>
+                <h4><a href="https://average-out.herokuapp.com/#/orders/details/${orderid}" style="color: black;">Click To View Your Daily Summary</a></h4>
              </div>`
 
             };
