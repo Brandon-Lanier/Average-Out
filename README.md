@@ -21,6 +21,9 @@ Please note that Average Out is a work in progress and features are being added 
 
 ## Screen Capture
 
+### Watch a full demo of the app on YouTube!
+[![YouTube Demo](https://img.youtube.com/vi/a-fRA8aNMMo/0.jpg)](https://youtu.be/a-fRA8aNMMo)
+
 ![screen-recording](./public/images/screenrecording.gif)
 ### Prerequisites
 

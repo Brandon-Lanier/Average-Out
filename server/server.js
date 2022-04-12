@@ -13,7 +13,7 @@ const marketRouter = require('./routes/market.router');
 const assetRouter = require('./routes/assets.router');
 const calcRouter = require('./routes/calculate.router');
 const ordersRouter = require('./routes/orders.router');
-const calcCron = require('./routes/calculatecron')
+// const calcCron = require('./routes/calculatecron')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,7 +32,7 @@ app.use('/api/market', marketRouter);
 app.use('/api/assets', assetRouter);
 app.use('/api/calculate', calcRouter);
 app.use('/api/orders', ordersRouter);
-app.use('/api/calculatecron', calcCron)
+// app.use('/api/calculatecron', calcCron)
 
 // Serve static files
 app.use(express.static('build'));
