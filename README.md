@@ -45,8 +45,7 @@ Please note that Average Out is a work in progress and features are being added 
 
 - Run npm install --yes in terminal to install all necessary dependencies.
 - To setup the database locally, please see the database.sql file for instructions.
-
-## Usage
+<!-- ## Usage
 
 1. Scroll through the movie list on the home page.
 2. If a movie interests you, click on it for more details!
@@ -54,7 +53,7 @@ Please note that Average Out is a work in progress and features are being added 
 4. Click the "Add To Watchlist" button to save the movie to your watchlist.
 5. Click on a specific genre in the movie details view to see other movies that share that genre.
 6. Add a movie by clicking on the plus button at the bottom of the app.
-7. View your watchlist by clicking on the watchlist icon at the bottom of the app.
+7. View your watchlist by clicking on the watchlist icon at the bottom of the app. -->
 
 ## Built With
 
